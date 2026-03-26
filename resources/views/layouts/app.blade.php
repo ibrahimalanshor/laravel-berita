@@ -11,6 +11,19 @@
         @livewireStyles
     </head>
     <body>
+        <nav>
+            <a href="">
+                <img src="{{ asset('logo.png') }}" alt="">
+            </a>
+
+            <input type="search" name="Pencarian Berita" id="top-search" placeholder="Pencarian">
+
+            <button>Berlangganan</button>
+            <button>Masuk</button>
+        </nav>
+
+        <livewire:includes::navtag />
+
         {{ $slot }}
 
         @livewireScripts
