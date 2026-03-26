@@ -22,7 +22,8 @@
             <button>Masuk</button>
         </nav>
 
-        <livewire:includes::navtag />
+        <livewire:includes::nav-tag />
+        <livewire:includes::nav-trending />
 
         {{ $slot }}
 
