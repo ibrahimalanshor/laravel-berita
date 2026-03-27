@@ -9,5 +9,5 @@ new class extends Component
 ?>
 
 <div>
-    {{-- An unexamined life is not worth living. - Socrates --}}
+    <livewire:article.highlight />
 </div>
