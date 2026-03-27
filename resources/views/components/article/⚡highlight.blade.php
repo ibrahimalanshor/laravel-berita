@@ -56,7 +56,7 @@ new class extends Component
             <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}">
             <a href="">{{ $article['category'] }}</a>
             <time>{{ $article['date'] }}</time>
-            <h2>{{ $article['title'] }}</h2>
+            <h3>{{ $article['title'] }}</h3>
             @if ($article['featured'])
                 <p>{{ $article['summary'] }}</p>
             @endif
