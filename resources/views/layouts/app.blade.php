@@ -11,17 +11,9 @@
         @livewireStyles
     </head>
     <body>
-        <nav>
-            <a href="">
-                <img src="{{ asset('logo.png') }}" alt="">
-            </a>
-
-            <input type="search" name="Pencarian Berita" id="top-search" placeholder="Pencarian">
-
-            <button>Berlangganan</button>
-            <button>Masuk</button>
-        </nav>
-
+        <div class="fixed inset-0 bg-black/50 hidden z-10" id="app-overlay"></div>
+        
+        <livewire:includes::nav />
         <livewire:includes::nav-tag />
         <livewire:includes::nav-trending />
 
