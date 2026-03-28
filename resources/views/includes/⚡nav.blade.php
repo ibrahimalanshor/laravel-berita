@@ -22,7 +22,7 @@ new class extends Component
 <nav class="bg-neutral-900 h-14 text-white">
     <livewire:base::container class="h-full flex items-center justify-between">
         <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>
-        <button id="open-mobile-menu" class="flex items-center" aria-label="Buka Menu Navigasi">
+        <button id="open-mobile-nav" class="flex items-center" aria-label="Buka Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
             <span class="icon-[tabler--menu-2] size-5"></span>
         </button>
 
@@ -34,8 +34,8 @@ new class extends Component
             <span class="icon-[tabler--search] size-5"></span>
         </button>
 
-        <div class="fixed top-0 left-0 w-64 h-screen bg-white text-neutral-900 p-4 space-y-4 hidden z-20" id="nav-menu">
-            <button id="close-mobile-menu" class="flex items-center ml-auto" aria-label="Tutup Menu Navigasi">
+        <div class="fixed top-0 left-0 w-64 h-screen bg-white text-neutral-900 p-4 space-y-4 hidden z-20" id="nav-menu" data-click-outside-close="drawer" data-ignore="#open-mobile-nav">
+            <button class="flex items-center ml-auto" aria-label="Tutup Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
 
@@ -69,7 +69,7 @@ new class extends Component
     </livewire:base::container>
 </nav>
 
-<script>
+{{-- <script>
     const appOverlay = document.querySelector('#app-overlay')
     const navMenu = document.querySelector('#nav-menu')
 
@@ -112,4 +112,4 @@ new class extends Component
 
         document.removeEventListener('click', checkClickOutsideNavMenu)
     }
-</script>
+</script> --}}
