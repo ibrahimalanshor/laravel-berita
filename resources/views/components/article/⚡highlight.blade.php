@@ -57,13 +57,13 @@ new class extends Component
             <ul class="splide__list article-highlight-slide sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                 @foreach ($this->articles as $article)
                     <article @class(['splide__slide relative sm:space-y-2', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']])>
-                        <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}" class="rounded-lg h-[225px] object-cover sm:h-auto sm:rounded-none">
+                        <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}" class="rounded-lg w-full h-[225px] object-cover sm:h-auto sm:rounded-none">
                         <div class="
                             absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white
                             sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none
                         ">
-                            <h3 @class(['font-bold text-lg/6', 'sm:text-base/5' => !$article['featured'], 'sm:text-xl' => $article['featured']])>{{ $article['title'] }}</h3>
-                            <div class="text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700">
+                            <h3 @class(['font-bold text-lg/6', 'sm:text-base/5' => !$article['featured'], 'sm:text-xl lg:text-2xl' => $article['featured']])>{{ $article['title'] }}</h3>
+                            <div class="text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm">
                                 <a href="" class="sm:text-sky-700 sm:font-medium">{{ $article['category'] }}</a>
                                 <span>|</span>
                                 <time>{{ $article['date'] }}</time>
