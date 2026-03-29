@@ -1,4 +1,8 @@
 import './bootstrap';
+import Splide from '@splidejs/splide';
+import '@splidejs/splide/css';
+
+window.Splide = Splide
 
 const appOverlay = document.querySelector('#app-overlay')
 const toggles = document.querySelectorAll('[data-toggle]')

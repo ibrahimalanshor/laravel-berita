@@ -50,16 +50,44 @@ new class extends Component
 };
 ?>
 
-<div>
-    @foreach ($this->articles as $article)
-        <article>
-            <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}">
-            <a href="">{{ $article['category'] }}</a>
-            <time>{{ $article['date'] }}</time>
-            <h3>{{ $article['title'] }}</h3>
-            @if ($article['featured'])
-                <p>{{ $article['summary'] }}</p>
-            @endif
-        </article>
-    @endforeach
-</div>
+<livewire:base::container :paddless="true">
+    <section class="splide py-4" aria-label="Rekomendasi Artikel">
+        <h2 class="sr-only">Rekomendasi Artikel</h2>
+        <div class="splide__track">
+            <ul class="splide__list">
+                @foreach ($this->articles as $article)
+                    <article class="splide__slide relative">
+                        <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}" class="rounded-lg h-[225px] object-cover">
+                        <div class="absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white">
+                            <h3 class="font-bold text-lg/6">{{ $article['title'] }}</h3>
+                            <div class="text-sm flex items-center gap-2">
+                                <a href="">{{ $article['category'] }}</a>
+                                <span>|</span>
+                                <time>{{ $article['date'] }}</time>
+                            </div>
+                            @if ($article['featured'])
+                                <p class="hidden sm:block">{{ $article['summary'] }}</p>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+            </ul>
+        </div>
+    </section>
+</livewire:base::container>
+
+<script>
+new Splide('.splide', {
+    mediaQuery: 'min',
+    breakpoints: {
+        640: {
+            destroy: true
+        }
+    },
+    pagination: false,
+    arrows: false,
+    padding: '2rem',
+    gap: '1rem',
+    type: 'loop'
+}).mount();
+</script>
