@@ -30,7 +30,7 @@ new class extends Component
             <img src="{{ asset('logo.png') }}" alt="{{ $title ?? config('app.name') }}" class="size-12 shrink-0">
         </a>
 
-        <button class="flex items-center">
+        <button class="flex items-center" data-toggle="grid" data-target="#nav-action">
             <span class="icon-[tabler--search] size-5"></span>
         </button>
 
@@ -60,56 +60,19 @@ new class extends Component
             <p class="text-sm text-neutral-700">Dengan berlangganan ke {{ $title ?? config('app.name') }}, Anda akan mendapatkan notifikasi langsung ke email Anda ketika ada artikel baru dari kami.</p>
         </div>
 
-        <div class="hidden flex gap-4">
-            <livewire:base::input size="sm" color="custom" type="search" name="Pencarian Berita" id="top-search" placeholder="Pencarian" class="bg-neutral-800 border-neutral-800 focus:border-neutral-400" />
+        <div id="nav-action" class="absolute top-14 bg-neutral-900 left-0 p-4 w-full hidden">
+            <livewire:base::input
+                size="custom"
+                color="custom"
+                type="search"
+                name="Pencarian Berita"
+                id="top-search" 
+                placeholder="Pencarian"
+                class="bg-white text-neutral-900 border-neutral-900 h-10 px-3 rounded-lg focus:border-neutral-900 bg-neutral-800 border-neutral-800 focus:border-neutral-400"
+            />
 
-            <button class="">Berlangganan</button>
-            <button>Masuk</button>
+            <button class="hidden">Berlangganan</button>
+            <button class="hidden">Masuk</button>
         </div>
     </livewire:base::container>
 </nav>
-
-{{-- <script>
-    const appOverlay = document.querySelector('#app-overlay')
-    const navMenu = document.querySelector('#nav-menu')
-
-    document.querySelector('#open-mobile-menu')
-        .addEventListener('click', () => {
-            appOverlay.classList.remove('hidden')
-            appOverlay.classList.add('animate-fade-in')
-
-            navMenu.classList.remove('hidden')
-            navMenu.classList.add('animate-slide-in')
-
-            setTimeout(() => {
-                appOverlay.classList.remove('animate-fade-in')
-                navMenu.classList.remove('animate-slide-in')
-
-                document.addEventListener('click', checkClickOutsideNavMenu)
-            }, 1000);
-        })
-
-    document.querySelector('#close-mobile-menu')
-        .addEventListener('click', () => {
-            closeNavMenu()
-        })
-
-    function checkClickOutsideNavMenu(e) {
-        if (!navMenu.contains(e.target)) {
-            closeNavMenu()
-        }
-    }
-    function closeNavMenu() {
-        appOverlay.classList.add('animate-fade-out')
-        navMenu.classList.add('animate-slide-out')
-
-        setTimeout(() => {
-            appOverlay.classList.add('hidden')
-            navMenu.classList.add('hidden')
-            appOverlay.classList.remove('animate-fade-out')
-            navMenu.classList.remove('animate-slide-out')
-        }, 1000);
-
-        document.removeEventListener('click', checkClickOutsideNavMenu)
-    }
-</script> --}}

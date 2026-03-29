@@ -36,6 +36,9 @@ toggles.forEach(toggle => {
             } else {
                 closeEl(target)
             }
+        } else if (toggleType === 'grid') {
+            target.classList.toggle('hidden')
+            target.classList.toggle('grid')
         }
     })
 })
@@ -47,7 +50,7 @@ clickOutsideCloses.forEach(el => {
         const ignore = document.querySelector(el.dataset.ignore)
 
         document.addEventListener('click', e => {
-            if (!el.contains(e.target) && !ignore.contains(e.target)) {
+            if (!el.classList.contains('hidden') && !el.contains(e.target) && !ignore.contains(e.target)) {
                 closeEl(el)
             }
         })

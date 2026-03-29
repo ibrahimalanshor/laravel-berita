@@ -13,7 +13,8 @@ new class extends Component
     {
         $sizeClass = match ($this->size) {
             'sm' => 'h-9 px-3 rounded-md',
-            'md' => ''
+            'md' => '',
+            'custom' => ''
         };
 
         $colorClass = match ($this->color) {
@@ -21,7 +22,7 @@ new class extends Component
             'custom' => ''
         };
 
-        return "$sizeClass $colorClass border transition-border focus:outline-0";
+        return "$sizeClass $colorClass placeholder-neutral-400 border transition-border focus:outline-0";
     }
 };
 ?>
