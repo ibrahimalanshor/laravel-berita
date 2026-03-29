@@ -19,7 +19,7 @@ new class extends Component
 };
 ?>
 
-<nav class="bg-neutral-900 h-14 text-white">
+<nav class="bg-neutral-900 h-14 text-white lg:h-15 sticky top-0 z-10">
     <livewire:base::container class="h-full flex items-center justify-between">
         <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>
         <button class="open-nav-menu flex items-center sm:hidden" aria-label="Buka Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
@@ -27,7 +27,7 @@ new class extends Component
         </button>
 
         <div class="flex items-center gap-4">
-            <button class="open-nav-menu hidden sm:flex sm:items-center" aria-label="Buka Menu Navigasi" data-toggle="dropdown" data-target="#nav-menu">
+            <button class="open-nav-menu hidden sm:flex sm:items-center lg:hidden" aria-label="Buka Menu Navigasi" data-toggle="dropdown" data-target="#nav-menu">
                 <span class="icon-[tabler--menu-2] size-5"></span>
             </button>
             <a href="">
@@ -39,7 +39,11 @@ new class extends Component
             <span class="icon-[tabler--search] size-5"></span>
         </button>
 
-        <div class="fixed top-0 left-0 w-64 h-screen bg-white text-neutral-900 p-4 space-y-4 hidden z-20 sm:absolute sm:top-16 sm:rounded-md sm:left-4 sm:h-auto sm:border sm:border-neutral-300 sm:shadow-lg sm:shadow-black/50 sm:space-y-0" id="nav-menu" data-click-outside-close="drawer" data-ignore=".open-nav-menu">
+        <div class="
+            fixed top-0 left-0 w-64 h-screen bg-white text-neutral-900 p-4 space-y-4 hidden z-20
+            sm:absolute sm:top-16 sm:rounded-md sm:left-4 sm:h-auto sm:border sm:border-neutral-300 sm:shadow-lg sm:shadow-black/50 sm:space-y-0
+            lg:static lg:flex lg:top-0 lg:left-0 lg:w-auto lg:bg-transparent lg:text-white lg:border-0 lg:shadow-none
+        " id="nav-menu" data-click-outside-close="drawer" data-ignore=".open-nav-menu">
             <button class="flex items-center ml-auto sm:hidden" aria-label="Tutup Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
@@ -54,9 +58,9 @@ new class extends Component
 
             <hr class="border-neutral-300 sm:hidden">
 
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
                 @foreach ($this->menus as $menu)
-                    <a href="">{{ $menu }}</a>
+                    <a href="" class="lg:hover:text-neutral-400">{{ $menu }}</a>
                 @endforeach
             </div>
 
