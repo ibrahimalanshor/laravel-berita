@@ -60,3 +60,7 @@
         }
     }
 }
+
+.splide.is-initialized:not(.is-active) .splide__list.article-highlight-slide {
+    display: grid;
+}
