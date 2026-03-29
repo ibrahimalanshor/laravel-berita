@@ -35,7 +35,7 @@ new class extends Component
             </a>
         </div>
 
-        <button class="flex items-center sm:hidden" data-toggle="grid" data-target="#nav-action">
+        <button class="flex items-center sm:hidden" data-toggle="grid" aria-label="Buka Pencarian" data-target="#nav-action">
             <span class="icon-[tabler--search] size-5"></span>
         </button>
 
