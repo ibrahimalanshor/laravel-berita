@@ -4,16 +4,22 @@ const appOverlay = document.querySelector('#app-overlay')
 const toggles = document.querySelectorAll('[data-toggle]')
 const clickOutsideCloses = document.querySelectorAll('[data-click-outside-close]')
 
-function closeEl(target) {
-    appOverlay.classList.add('animate-fade-out')
-    target.classList.add('animate-slide-out')
+function closeEl(target, type) {
+    target.classList.add(type === 'drawer' ? 'animate-slide-out' : 'animate-fade-out')
+
+    if (type === 'drawer') {
+        appOverlay.classList.add('animate-fade-out')
+    }
 
     setTimeout(() => {
-        appOverlay.classList.add('hidden')
+        if (type === 'drawer') {
+            appOverlay.classList.add('hidden')
+            appOverlay.classList.remove('animate-fade-out')
+        }
+
         target.classList.add('hidden')
-        appOverlay.classList.remove('animate-fade-out')
-        target.classList.remove('animate-slide-out')
-    }, 1000);
+        target.classList.remove(type === 'drawer' ? 'animate-slide-out' : 'animate-fade-out')
+    }, type === 'drawer' ? 1000 : 500);
 }
 
 toggles.forEach(toggle => {
@@ -28,13 +34,26 @@ toggles.forEach(toggle => {
 
                 target.classList.remove('hidden')
                 target.classList.add('animate-slide-in')
+                target.dataset.closeType = 'drawer'
 
                 setTimeout(() => {
                     appOverlay.classList.remove('animate-fade-in')
                     target.classList.remove('animate-slide-in')
                 }, 1000);
             } else {
-                closeEl(target)
+                closeEl(target, 'drawer')
+            }
+        } else if (toggleType === 'dropdown') {
+            if (target.classList.contains('hidden')) {
+                target.classList.remove('hidden')
+                target.classList.add('animate-fade-in')
+                target.dataset.closeType = 'dropdown'
+
+                setTimeout(() => {
+                    target.classList.remove('animate-fade-in')
+                }, 500);
+            } else {
+                closeEl(target, 'dropdown')
             }
         } else if (toggleType === 'grid') {
             target.classList.toggle('hidden')
@@ -47,11 +66,11 @@ clickOutsideCloses.forEach(el => {
     const type = el.dataset.clickOutsideClose
     
     if (type === 'drawer') {
-        const ignore = document.querySelector(el.dataset.ignore)
+        const ignores = Array.from(document.querySelectorAll(el.dataset.ignore))
 
         document.addEventListener('click', e => {
-            if (!el.classList.contains('hidden') && !el.contains(e.target) && !ignore.contains(e.target)) {
-                closeEl(el)
+            if (!el.classList.contains('hidden') && !el.contains(e.target) && !ignores.some(ignore => ignore.contains(e.target))) {
+                closeEl(el, el.dataset.closeType)
             }
         })
     }
