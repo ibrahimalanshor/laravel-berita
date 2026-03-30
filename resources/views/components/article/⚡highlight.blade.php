@@ -51,28 +51,12 @@ new class extends Component
 ?>
 
 <livewire:base::container :paddless="true" class="sm:px-4">
-    <section class="splide py-4" aria-label="Rekomendasi Artikel">
+    <section id="highlight-article" class="splide py-4" aria-label="Rekomendasi Artikel">
         <h2 class="sr-only">Rekomendasi Artikel</h2>
         <div class="splide__track">
-            <ul class="splide__list article-highlight-slide sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
+            <ul class="splide__list highlight-article-slide-list sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                 @foreach ($this->articles as $article)
-                    <article @class(['splide__slide relative sm:space-y-2', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']])>
-                        <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}" class="rounded-lg w-full h-[225px] object-cover sm:h-auto sm:rounded-none">
-                        <div class="
-                            absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white
-                            sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none
-                        ">
-                            <h3 @class(['font-bold text-lg/6', 'sm:text-base/5' => !$article['featured'], 'sm:text-xl lg:text-2xl' => $article['featured']])>{{ $article['title'] }}</h3>
-                            <div class="text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm">
-                                <a href="" class="sm:text-sky-700 sm:font-medium">{{ $article['category'] }}</a>
-                                <span>|</span>
-                                <time>{{ $article['date'] }}</time>
-                            </div>
-                            @if ($article['featured'])
-                                <p class="hidden sm:block sm:text-neutral-700">{{ $article['summary'] }}</p>
-                            @endif
-                        </div>
-                    </article>
+                    <livewire:article.card :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
                 @endforeach
             </ul>
         </div>
@@ -80,7 +64,7 @@ new class extends Component
 </livewire:base::container>
 
 <script>
-new Splide('.splide', {
+new Splide('#highlight-article', {
     mediaQuery: 'min',
     breakpoints: {
         640: {

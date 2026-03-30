@@ -61,6 +61,6 @@
     }
 }
 
-.splide.is-initialized:not(.is-active) .splide__list.article-highlight-slide {
+.splide.is-initialized:not(.is-active) .splide__list.highlight-article-slide-list {
     display: grid;
 }
