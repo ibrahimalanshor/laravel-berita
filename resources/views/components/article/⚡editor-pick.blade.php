@@ -49,13 +49,13 @@ new class extends Component
 };
 ?>
 
-<livewire:base::container :paddless="true" class="sm:px-4">
+<livewire:base::container :paddless="true">
     <section id="editor-pick-article" class="splide space-y-2 border-t border-neutral-300 py-4">
         <div class="px-4">
             <h2 class="font-bold text-lg">Pilihan Editor</h2>
         </div>
-        <div class="splide__track">
-            <ul class="splide__list">
+        <div class="splide__track sm:px-4">
+            <ul class="splide__list editor-pick-article-slide-list sm:grid-cols-5 sm:gap-4">
                 @foreach ($this->articles as $article)
                     <livewire:article.card :article="$article" :enable-featured="false" @class(['splide__slide']) />
                 @endforeach

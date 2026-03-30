@@ -46,11 +46,12 @@ new class extends Component
         ])>{{ $article['title'] }}</h3>
         <div class="{{ $this->classList['meta'] }}">
             <a href="" @class([
+                'truncate',
                 'sm:text-sky-700 sm:font-medium' => $slideOnMobile,
                 'text-sky-700 font-medium' => !$slideOnMobile
             ])>{{ $article['category'] }}</a>
             <span>|</span>
-            <time>{{ $article['date'] }}</time>
+            <time class="truncate">{{ $article['date'] }}</time>
         </div>
         @if ($enableFeatured && $article['featured'])
             <p class="hidden sm:block sm:text-neutral-700">{{ $article['summary'] }}</p>
