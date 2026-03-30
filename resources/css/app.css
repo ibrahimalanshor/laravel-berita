@@ -64,3 +64,7 @@
 .splide.is-initialized:not(.is-active) .splide__list.highlight-article-slide-list, .splide.is-initialized:not(.is-active) .splide__list.editor-pick-article-slide-list {
     display: grid;
 }
+
+.section-title {
+    border-bottom-style: dashed;
+}
