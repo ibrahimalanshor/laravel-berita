@@ -71,6 +71,19 @@ class Card extends Component
             ];
         }
 
+        if ($type === 'category') {
+            return [
+                'container' => 'flex items-start justify-between flex-row-reverse gap-4 border border-neutral-300 rounded-md p-3 sm:border-0 sm:p-0 sm:rounded-none sm:flex-col sm:gap-2 sm:justify-start',
+                'title' => 'text-sm sm:text-base/5',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'w-21 h-21 object-cover rounded sm:w-full sm:h-auto sm:rounded-none',
+                'content' => 'flex flex-col-reverse gap-1',
+                'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
+                'category' => 'text-sky-700 font-medium'
+            ];
+        }
+
         return [
             'container' => 'space-y-2',
             'title' => 'text-base/5',
