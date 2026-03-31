@@ -119,11 +119,11 @@ new class extends Component
 };
 ?>
 
-<section class="border-t border-neutral-300 py-3">
-    <livewire:base::container class="space-y-2">
-        <h2 class="font-bold text-neutral-900 text-lg">Berita Terbaru</h2>
+<section {{ $attributes->class('border-t border-neutral-300 py-3 md:border-neutral-900 lg:border-0') }}>
+    <livewire:base::container class="space-y-2 lg:space-y-4">
+        <h2 class="section-title font-bold text-neutral-900 text-lg lg:border-t lg:pt-2 lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300">Berita Terbaru</h2>
 
-        <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
             @foreach ($this->articles as $article)
                 <livewire:article.card type="flash" :article="$article" />
             @endforeach

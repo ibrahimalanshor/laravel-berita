@@ -49,7 +49,7 @@ new class extends Component
 };
 ?>
 
-<div class="border-t border-neutral-300 md:border-neutral-900 lg:border-0">
+<div {{ $attributes->class('border-t border-neutral-300 md:border-neutral-900 lg:border-0') }}>
     <livewire:base::container :paddless="true" class="py-4">
         <section id="editor-pick-article" class="splide space-y-4">
             <div class="px-4">

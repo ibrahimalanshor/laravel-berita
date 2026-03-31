@@ -29,13 +29,13 @@ new class extends Component
 
         if ($this->type === 'flash') {
             return [
-                'container' => 'flex items-start flex-row-reverse gap-4',
+                'container' => 'flex items-start justify-between flex-row-reverse gap-4',
                 'title' => 'text-base/5',
                 'title-normal' => '',
                 'title-featured' => '',
                 'thumbnail' => 'w-21 h-21 object-cover',
                 'content' => 'flex flex-col-reverse gap-1',
-                'meta' => 'text-xs flex items-center gap-2 text-neutral-700',
+                'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
                 'category' => 'text-sky-700 font-medium'
             ];
         }
