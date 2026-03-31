@@ -49,24 +49,22 @@ new class extends Component
 };
 ?>
 
-<div {{ $attributes->class('border-t border-neutral-300 md:border-neutral-900 lg:border-0') }}>
-    <livewire:base::container :paddless="true" class="py-4">
-        <section id="editor-pick-article" class="splide space-y-4">
+<x-article.section {{ $attributes }}>
+    <x-base.container :paddless="true">
+        <div id="editor-pick-article" class="splide space-y-4">
             <div class="px-4">
-                <div class="section-title lg:border-t lg:pt-2 lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300">
-                    <h2 class="font-bold text-lg">Pilihan Editor</h2>
-                </div>
+                <x-article.section-title>Pilihan Editor</x-article.section-title>
             </div>
             <div class="splide__track px-4 ">
-                <ul class="splide__list editor-pick-article-slide-list sm:grid-cols-5 sm:gap-4">
+                <ul class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
                     @foreach ($this->articles as $article)
-                        <livewire:article.card :article="$article" :enable-featured="false" @class(['splide__slide']) />
+                        <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
                     @endforeach
                 </ul>
             </div>
-        </section>
-    </livewire:base::container>
-</div>
+        </div>
+    </x-base.container>
+</x-article.section>
 
 <script>
 new Splide('#editor-pick-article', {

@@ -1,17 +1,48 @@
 <?php
 
-use Livewire\Attributes\Computed;
-use Livewire\Component;
+namespace App\View\Components\Article;
 
-new class extends Component
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Card extends Component
 {
-    public $article;
-    public $type;
+    /**
+     * classList
+     *
+     * @var mixed
+     */
+    public $classList;
 
-    #[Computed]
-    public function classList()
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        public $article,
+        public $type
+    )
     {
-        if ($this->type === 'highlight') {
+        $this->classList = $this->getClassList($type);
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.article.card');
+    }
+    
+    /**
+     * getClassList
+     *
+     * @param  mixed $type
+     * @return array
+     */
+    private function getClassList(string $type) : array
+    {
+        if ($type === 'highlight') {
             return [
                 'container' => 'relative sm:space-y-2',
                 'title' => 'text-lg/6',
@@ -27,7 +58,7 @@ new class extends Component
             ];
         }
 
-        if ($this->type === 'flash') {
+        if ($type === 'flash') {
             return [
                 'container' => 'flex items-start justify-between flex-row-reverse gap-4',
                 'title' => 'text-base/5',
@@ -51,28 +82,4 @@ new class extends Component
             'category' => 'text-sky-700 font-medium'
         ];
     }
-};
-?>
-
-<article {{ $attributes->class($this->classList['container']) }}>
-    <img src="{{ $article['thumbnail'] }}" alt="{{ $article['title'] }}" class="{{ $this->classList['thumbnail'] }}">
-    <div class="{{ $this->classList['content'] }}">
-        <h3 @class([
-            'font-bold',
-            $this->classList['title'],
-            $this->classList['title-featured'] => $article['featured'],
-            $this->classList['title-normal'] => !$article['featured'],
-        ])>{{ $article['title'] }}</h3>
-        <div class="{{ $this->classList['meta'] }}">
-            <a href="" @class([
-                'truncate',
-                $this->classList['category'],
-            ])>{{ $article['category'] }}</a>
-            <span>|</span>
-            <time class="truncate">{{ $article['date'] }}</time>
-        </div>
-        @if ($type === 'highlight' && $article['featured'])
-            <p class="hidden sm:block sm:text-neutral-700">{{ $article['summary'] }}</p>
-        @endif
-    </div>
-</article>
+}

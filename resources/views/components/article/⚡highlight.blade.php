@@ -50,18 +50,18 @@ new class extends Component
 };
 ?>
 
-<livewire:base::container :paddless="true" class="sm:px-4">
+<x-base.container :paddless="true" class="sm:px-4">
     <section id="highlight-article" class="splide py-4" aria-label="Rekomendasi Artikel">
         <h2 class="sr-only">Rekomendasi Artikel</h2>
         <div class="splide__track">
-            <ul class="splide__list highlight-article-slide-list sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
+            <ul class="splide__list splide__list__grid sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                 @foreach ($this->articles as $article)
-                    <livewire:article.card type="highlight" :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
+                    <x-article.card type="highlight" :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
                 @endforeach
             </ul>
         </div>
     </section>
-</livewire:base::container>
+</x-base.container>
 
 <script>
 new Splide('#highlight-article', {

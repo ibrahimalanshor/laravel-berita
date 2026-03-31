@@ -1,26 +1,5 @@
-<?php
-
-use Livewire\Attributes\Computed;
-use Livewire\Component;
-
-new class extends Component
-{
-    #[Computed]
-    public function menus()
-    {
-        return [
-            'News',
-            'Bisnis',
-            'Ekonomi',
-            'Olahraga',
-            'Pendidikan'
-        ];
-    }
-};
-?>
-
 <nav class="bg-neutral-900 h-14 text-white lg:h-15 sticky top-0 z-10">
-    <livewire:base::container class="h-full flex items-center justify-between">
+    <x-base.container class="h-full flex items-center justify-between">
         <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>
         <button class="open-nav-menu flex items-center sm:hidden" aria-label="Buka Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
             <span class="icon-[tabler--menu-2] size-5"></span>
@@ -48,18 +27,18 @@ new class extends Component
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
 
-            <livewire:base::button icon="icon-[tabler--brand-google-filled]" color="bordered" class="w-full sm:hidden">
+            <x-base.button icon="icon-[tabler--brand-google-filled]" color="bordered" class="w-full sm:hidden">
                 <p>Masuk dengan Google</p>
-            </livewire:base::button>
+            </x-base.button>
 
-            <livewire:base::button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="w-full sm:hidden">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="w-full sm:hidden">
                 <p>Berlangganan</p>
-            </livewire:base::button>
+            </x-base.button>
 
             <hr class="border-neutral-300 sm:hidden">
 
             <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
-                @foreach ($this->menus as $menu)
+                @foreach ($menus as $menu)
                     <a href="" class="lg:hover:text-neutral-400">{{ $menu }}</a>
                 @endforeach
             </div>
@@ -70,7 +49,7 @@ new class extends Component
         </div>
 
         <div id="nav-action" class="absolute top-14 bg-neutral-900 left-0 p-4 w-full hidden sm:static sm:p-0 sm:bg-transparent sm:w-auto sm:flex sm:gap-2">
-            <livewire:base::input
+            <x-base.input
                 size="custom"
                 color="custom"
                 type="search"
@@ -80,13 +59,25 @@ new class extends Component
                 class="bg-white text-neutral-900 border-neutral-900 h-10 px-3 rounded-lg focus:border-neutral-900 sm:h-9 sm:rounded-md sm:bg-neutral-800 sm:border-neutral-800 sm:focus:border-neutral-400"
             />
 
-            <livewire:base::button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
                 <p>Berlangganan</p>
-            </livewire:base::button>
+            </x-base.button>
 
-            <livewire:base::button icon="icon-[tabler--brand-google-filled]" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
+            <x-base.button icon="icon-[tabler--brand-google-filled]" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
                 <p>Masuk</p>
-            </livewire:base::button>
+            </x-base.button>
         </div>
-    </livewire:base::container>
+    </x-base.container>
+</nav>
+
+<nav class="border-b border-gray-300">
+    <x-base.container :paddless="true">
+        <div class="flex gap-2 py-3 overflow-x-auto">
+            <div class="w-2 shrink-0"></div>
+            @foreach ($tags as $tag)
+                <a href="" class="whitespace-nowrap inline-flex items-center h-8 border border-neutral-300 px-3 rounded-md font-medium lg:hover:bg-neutral-100">#{{ $tag }}</a>
+            @endforeach
+            <div class="w-2 shrink-0"></div>
+        </div>
+    </x-base.container>
 </nav>
