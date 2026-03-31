@@ -56,7 +56,7 @@ new class extends Component
         <div class="splide__track">
             <ul class="splide__list highlight-article-slide-list sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                 @foreach ($this->articles as $article)
-                    <livewire:article.card :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
+                    <livewire:article.card type="highlight" :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
                 @endforeach
             </ul>
         </div>

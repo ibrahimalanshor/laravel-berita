@@ -10,6 +10,7 @@ new class extends Component
 
 <div>
     <livewire:article.highlight />
+    <livewire:article.flash />
     <livewire:article.editor-pick />
     <livewire:article.top-category category="Otomotif" />
     <livewire:article.top-category category="Pendidikan" />
