@@ -15,8 +15,10 @@
         
         <x-includes.navbar />
 
-        @yield('content')
-        
+        <div class="pb-4">
+            @yield('content')
+        </div>
+
         <x-includes.footer />
 
         @livewireScripts
