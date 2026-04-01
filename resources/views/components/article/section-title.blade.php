@@ -1,3 +1,10 @@
-<h2 class="section-title font-bold text-neutral-900 text-lg lg:border-t lg:pt-2 lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300">
-    {{ $slot }}
-</h2>
+<div class="section-title flex items-center justify-between lg:border-t lg:pt-2 lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300">
+    <h2 class="font-bold text-neutral-900 text-lg">
+        {{ $slot }}
+    </h2>
+
+    <a href="" class="text-sky-700 font-medium text-sm inline-flex items-center gap-1">
+        Lebih Banyak
+        <span class="icon-[tabler--arrow-right]"></span>
+    </a>
+</div>
