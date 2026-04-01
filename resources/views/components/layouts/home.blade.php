@@ -16,6 +16,8 @@
         <x-includes.navbar />
 
         @yield('content')
+        
+        <x-includes.footer />
 
         @livewireScripts
 
