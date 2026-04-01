@@ -32,7 +32,6 @@ class Navbar extends Component
             'Bisnis',
             'Ekonomi',
             'Olahraga',
-            'Pendidikan'
         ];
 
         $this->tags = [

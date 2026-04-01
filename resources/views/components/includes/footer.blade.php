@@ -27,7 +27,7 @@
 
         <hr class="border-neutral-800 sm:hidden">
 
-        <ul class="flex items-center gap-4 sm:absolute sm:bottom-7 sm:left-1/2 sm:-translate-x-1/2 sm:m-0 lg:bottom-9">
+        <ul class="flex items-center gap-4 sm:absolute sm:bottom-8 sm:left-1/2 sm:-translate-x-1/2 sm:m-0 lg:bottom-10">
             <li>
                 <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
                     <span class="icon-[tabler--brand-instagram-filled]"></span>
@@ -55,10 +55,8 @@
             </li>
         </ul>
 
-        <hr class="border-neutral-800">
-
-        <div class="flex items-center justify-between lg:col-span-full">
-            <img src="{{ asset('logo.png') }}" alt="{{ $title ?? config('app.name') }}" class="w-12">
+        <div class="flex items-center justify-between border-t border-neutral-800 pt-4 sm:p-0 sm:h-16 lg:col-span-full">
+            <x-includes.logo class="max-h-6" />
             <p class="text-sm text-neutral-500">Copyright &copy; 2025</p>
         </div>
     </x-base.container>

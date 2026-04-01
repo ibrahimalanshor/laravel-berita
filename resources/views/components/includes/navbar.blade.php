@@ -10,7 +10,7 @@
                 <span class="icon-[tabler--menu-2] size-5"></span>
             </button>
             <a href="">
-                <img src="{{ asset('logo.png') }}" alt="{{ $title ?? config('app.name') }}" class="size-12 shrink-0">
+                <x-includes.logo class="max-h-6" />
             </a>
         </div>
 

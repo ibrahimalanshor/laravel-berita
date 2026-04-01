@@ -303,6 +303,7 @@ Route::get('/', function () {
     ]);
 
     return view('index', [
+        'title' => 'Lararita - Berita Terkini, Trending dan Terpercaya',
         'highlights' => $highlights,
         'flash' => $flash,
         'editors' => $editors,
