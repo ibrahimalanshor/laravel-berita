@@ -1,1 +1,1 @@
-<img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" {{ $attributes->class('shrink-0') }}>
+<img src="{{ setting('logo_url') }}" alt="{{ setting('name') }}" {{ $attributes->class('shrink-0') }}>
