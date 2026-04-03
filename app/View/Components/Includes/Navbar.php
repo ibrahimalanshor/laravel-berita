@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Includes;
 
+use App\Models\Menu;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -27,12 +28,8 @@ class Navbar extends Component
      */
     public function __construct()
     {
-        $this->menus = [
-            'News',
-            'Bisnis',
-            'Ekonomi',
-            'Olahraga',
-        ];
+        $this->menus = Menu::where('type', 'navbar')
+            ->get();
 
         $this->tags = [
             'AS-Israel Serang Iran',

@@ -39,7 +39,7 @@
 
             <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
                 @foreach ($menus as $menu)
-                    <a href="" class="lg:hover:text-neutral-400">{{ $menu }}</a>
+                    <a href="{{ $menu->url }}" class="lg:hover:text-neutral-400">{{ $menu->name }}</a>
                 @endforeach
             </div>
 
