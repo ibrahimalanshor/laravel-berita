@@ -77,7 +77,7 @@
         <div class="flex gap-2 py-3 overflow-x-auto">
             <div class="w-2 shrink-0"></div>
             @foreach ($tags as $tag)
-                <a href="" class="whitespace-nowrap inline-flex items-center h-8 border border-neutral-300 px-3 rounded-md font-medium lg:hover:bg-neutral-100">#{{ $tag }}</a>
+                <a href="{{ route('tag.detail', ['slug' => $tag->slug]) }}" class="whitespace-nowrap inline-flex items-center h-8 border border-neutral-300 px-3 rounded-md font-medium lg:hover:bg-neutral-100">#{{ $tag->name }}</a>
             @endforeach
             <div class="w-2 shrink-0"></div>
         </div>

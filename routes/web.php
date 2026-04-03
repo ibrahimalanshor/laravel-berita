@@ -320,3 +320,5 @@ Route::view('subscribe', 'subscribe')
     ->name('subscribe');
 Route::view('search', 'search')
     ->name('search');
+Route::view('tag/{slug}', 'tag.detail')
+    ->name('tag.detail');

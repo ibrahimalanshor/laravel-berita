@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Tag;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+class TagSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $tags = [
+            'AS-Israel Serang Iran',
+            'Board of Peace',
+            'Serangan ke Aktivis KontraS',
+        ];
+
+        foreach ($tags as $tag) {
+            Tag::create([
+                'slug' => Str::slug($tag),
+                'name' => $tag
+            ]);
+        }
+    }
+}

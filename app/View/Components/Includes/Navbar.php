@@ -3,6 +3,7 @@
 namespace App\View\Components\Includes;
 
 use App\Models\Menu;
+use App\Models\Tag;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -31,11 +32,7 @@ class Navbar extends Component
         $this->menus = Menu::where('type', 'navbar')
             ->get();
 
-        $this->tags = [
-            'AS-Israel Serang Iran',
-            'Board of Peace',
-            'Serangan ke Aktivis KontraS',
-        ];
+        $this->tags = Tag::get();
     }
 
     /**
