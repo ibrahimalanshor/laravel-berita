@@ -20,7 +20,7 @@ class Setting extends Model
     protected static function booted(): void
     {
         static::saved(function (Setting $setting) {
-            Cache::forget('settiing');
+            Cache::forget('setting');
             Cache::rememberForever('setting', function () {
                 $setting = Setting::first();
 
