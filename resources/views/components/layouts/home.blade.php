@@ -6,6 +6,8 @@
 
         <title>{{ $title ?? config('app.name') }}</title>
 
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @livewireStyles
