@@ -318,3 +318,5 @@ Route::view('login', 'login')
     ->name('login');
 Route::view('subscribe', 'subscribe')
     ->name('subscribe');
+Route::view('search', 'search')
+    ->name('search');

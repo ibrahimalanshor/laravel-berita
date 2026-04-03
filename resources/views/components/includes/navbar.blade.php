@@ -49,15 +49,17 @@
         </div>
 
         <div id="nav-action" class="absolute top-14 bg-neutral-900 left-0 p-4 w-full hidden sm:static sm:p-0 sm:bg-transparent sm:w-auto sm:flex sm:gap-2">
-            <x-base.input
-                size="custom"
-                color="custom"
-                type="search"
-                name="Pencarian Berita"
-                id="top-search" 
-                placeholder="Pencarian"
-                class="bg-white text-neutral-900 border-neutral-900 h-10 px-3 rounded-lg focus:border-neutral-900 sm:h-9 sm:rounded-md sm:bg-neutral-800 sm:border-neutral-800 sm:focus:border-neutral-400"
-            />
+            <form action="{{ route('search') }}">
+                <x-base.input
+                    size="custom"
+                    color="custom"
+                    type="search"
+                    name="q"
+                    id="top-search" 
+                    placeholder="Pencarian"
+                    class="w-full bg-white text-neutral-900 border-neutral-900 h-10 px-3 rounded-lg focus:border-neutral-900 sm:h-9 sm:rounded-md sm:bg-neutral-800 sm:text-white sm:border-neutral-800 sm:focus:border-neutral-400"
+                />
+            </form>
 
             <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe') }}">
                 <p>Berlangganan</p>
