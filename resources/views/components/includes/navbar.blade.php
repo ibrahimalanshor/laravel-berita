@@ -9,7 +9,7 @@
             <button class="open-nav-menu hidden sm:flex sm:items-center lg:hidden" aria-label="Buka Menu Navigasi" data-toggle="dropdown" data-target="#nav-menu">
                 <span class="icon-[tabler--menu-2] size-5"></span>
             </button>
-            <a href="">
+            <a href="{{ route('home') }}">
                 <x-includes.logo class="max-h-6" />
             </a>
         </div>
@@ -27,11 +27,11 @@
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" color="bordered" class="w-full sm:hidden">
-                <p>Masuk dengan Google</p>
+            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('login') }}">
+                <p>Masuk</p>
             </x-base.button>
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="w-full sm:hidden">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe') }}">
                 <p>Berlangganan</p>
             </x-base.button>
 
@@ -59,11 +59,11 @@
                 class="bg-white text-neutral-900 border-neutral-900 h-10 px-3 rounded-lg focus:border-neutral-900 sm:h-9 sm:rounded-md sm:bg-neutral-800 sm:border-neutral-800 sm:focus:border-neutral-400"
             />
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe') }}">
                 <p>Berlangganan</p>
             </x-base.button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true">
+            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('login') }}">
                 <p>Masuk</p>
             </x-base.button>
         </div>

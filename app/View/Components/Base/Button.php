@@ -14,6 +14,7 @@ class Button extends Component
      * @var mixed
      */
     public $classList;
+    
 
     /**
      * Create a new component instance.
@@ -22,7 +23,8 @@ class Button extends Component
         public $icon = null,
         public $color = 'light',
         public $size = 'md',
-        public $ignoreDisplay = false
+        public $ignoreDisplay = false,
+        public $tagName = 'button'
     )
     {
         $this->setClassList();
