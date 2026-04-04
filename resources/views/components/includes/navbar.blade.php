@@ -72,7 +72,7 @@
     </x-base.container>
 </nav>
 
-<nav class="border-b border-gray-300">
+<div class="border-b border-gray-300">
     <x-base.container :paddless="true">
         <div class="flex gap-2 py-3 overflow-x-auto">
             <div class="w-2 shrink-0"></div>
@@ -82,4 +82,4 @@
             <div class="w-2 shrink-0"></div>
         </div>
     </x-base.container>
-</nav>
+</div>

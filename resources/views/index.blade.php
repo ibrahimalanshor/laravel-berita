@@ -7,21 +7,21 @@
             <div class="splide__track">
                 <ul class="splide__list splide__list__grid sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                     @foreach ($highlights as $article)
-                        <x-article.card type="highlight" :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $article['featured']]) />
+                        <x-article.card type="highlight" :featured="$loop->first" :article="$article" :slide-on-mobile="true" @class(['splide__slide', 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-2' => $loop->first]) />
                     @endforeach
                 </ul>
             </div>
         </section>
     </x-base.container>
 
-    <div class="flex flex-col">
+    {{-- <div class="flex flex-col">
         <x-article.section class="lg:order-last">
             <x-base.container class="space-y-2 lg:space-y-4">
                 <x-article.section-title>Berita Terbaru</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
                     @foreach ($flash as $article)
-                        <x-article.card type="flash" :article="$article" />
+                        <x-article.card type="flash" :article="(object) $article" />
                     @endforeach
                 </div>
             </x-base.container>
@@ -36,7 +36,7 @@
                     <div class="splide__track px-4">
                         <ul class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
                             @foreach ($editors as $article)
-                                <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
+                                <x-article.card :article="(object) $article" type="editor" @class(['splide__slide']) />
                             @endforeach
                         </ul>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="splide__track px-4 sm:px-0">
                         <ul class="splide__list splide__list__grid sm:grid-cols-4 sm:gap-4">
                             @foreach ($otomotif->skip(1) as $article)
-                                <x-article.card :article="$article" type="category" @class(['splide__slide']) />
+                                <x-article.card :article="(object) $article" type="category" @class(['splide__slide']) />
                             @endforeach
                         </ul>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="splide__track px-4 sm:px-0">
                         <ul class="splide__list splide__list__grid sm:grid-cols-4 sm:gap-4">
                             @foreach ($pendidikan->skip(1) as $article)
-                                <x-article.card :article="$article" type="category" @class(['splide__slide']) />
+                                <x-article.card :article="(object) $article" type="category" @class(['splide__slide']) />
                             @endforeach
                         </ul>
                     </div>
@@ -102,14 +102,14 @@
                     <div class="splide__track px-4 sm:px-0">
                         <ul class="splide__list splide__list__grid sm:grid-cols-4 sm:gap-4">
                             @foreach ($teknologi->skip(1) as $article)
-                                <x-article.card :article="$article" type="category" @class(['splide__slide']) />
+                                <x-article.card :article="(object) $article" type="category" @class(['splide__slide']) />
                             @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
         </x-base.container>
-    </x-article.section>
+    </x-article.section> --}}
 @endsection
 
 @push('scripts')
@@ -132,10 +132,10 @@ window.onload = function () {
     }
 
     createSlider('#highlight-article').mount();
-    createSlider('#editor-pick-article').mount();
-    createSlider('#otomotif-article').mount();
-    createSlider('#pendidikan-article').mount();
-    createSlider('#teknologi-article').mount();
+    // createSlider('#editor-pick-article').mount();
+    // createSlider('#otomotif-article').mount();
+    // createSlider('#pendidikan-article').mount();
+    // createSlider('#teknologi-article').mount();
 }
 </script>
 @endpush

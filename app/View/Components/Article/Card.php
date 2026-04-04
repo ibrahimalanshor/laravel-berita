@@ -20,7 +20,8 @@ class Card extends Component
      */
     public function __construct(
         public $article,
-        public $type
+        public $type,
+        public bool $featured = false
     )
     {
         $this->classList = $this->getClassList($type);

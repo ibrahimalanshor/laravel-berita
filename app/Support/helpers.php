@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 function setting(string $key) : string | null
 {
     $setting = cache('setting');
@@ -13,4 +15,9 @@ function setting(string $key) : string | null
     }
 
     return $setting[$key];
+}
+
+function formatDate(string $date) : string
+{
+    return Carbon::parse($date)->format('l, d M Y');
 }
