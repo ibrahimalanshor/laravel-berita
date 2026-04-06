@@ -14,6 +14,18 @@
         </section>
     </x-base.container>
 
+    <x-article.section class="lg:order-last">
+        <x-base.container class="space-y-2 lg:space-y-4">
+            <x-article.section-title>Berita Terbaru</x-article.section-title>
+
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+                @foreach ($flash as $article)
+                    <x-article.card type="flash" :article="(object) $article" />
+                @endforeach
+            </div>
+        </x-base.container>
+    </x-article.section>
+
     {{-- <div class="flex flex-col">
         <x-article.section class="lg:order-last">
             <x-base.container class="space-y-2 lg:space-y-4">
