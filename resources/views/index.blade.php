@@ -14,17 +14,36 @@
         </section>
     </x-base.container>
 
-    <x-article.section class="lg:order-last">
-        <x-base.container class="space-y-2 lg:space-y-4">
-            <x-article.section-title>Berita Terbaru</x-article.section-title>
+    <div class="flex flex-col">
+        <x-article.section class="lg:order-last">
+            <x-base.container class="space-y-2 lg:space-y-4">
+                <x-article.section-title>Berita Terbaru</x-article.section-title>
 
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
-                @foreach ($flash as $article)
-                    <x-article.card type="flash" :article="(object) $article" />
-                @endforeach
-            </div>
-        </x-base.container>
-    </x-article.section>
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+                    @foreach ($flash as $article)
+                        <x-article.card type="flash" :article="(object) $article" />
+                    @endforeach
+                </div>
+            </x-base.container>
+        </x-article.section>
+
+        <x-article.section>
+            <x-base.container :paddless="true">
+                <div id="editor-pick-article" class="splide space-y-4">
+                    <div class="px-4">
+                        <x-article.section-title>Pilihan Editor</x-article.section-title>
+                    </div>
+                    <div class="splide__track px-4">
+                        <ul class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
+                            @foreach ($editors as $article)
+                                <x-article.card :article="(object) $article" type="editor" @class(['splide__slide']) />
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </x-base.container>
+        </x-article.section>
+    </div>
 
     {{-- <div class="flex flex-col">
         <x-article.section class="lg:order-last">
@@ -144,7 +163,7 @@ window.onload = function () {
     }
 
     createSlider('#highlight-article').mount();
-    // createSlider('#editor-pick-article').mount();
+    createSlider('#editor-pick-article').mount();
     // createSlider('#otomotif-article').mount();
     // createSlider('#pendidikan-article').mount();
     // createSlider('#teknologi-article').mount();

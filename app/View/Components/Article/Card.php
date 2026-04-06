@@ -51,7 +51,7 @@ class Card extends Component
                 'title-featured' => 'sm:text-xl lg:text-2xl',
                 'thumbnail' => 'rounded-lg w-full h-[225px] object-cover sm:rounded-none',
                 'thumbnail-normal' => 'sm:h-[100px] lg:h-[125px]',
-                'thumbnail-featured' => 'sm:h-[300px]',
+                'thumbnail-featured' => 'sm:h-[260px]',
                 'content' => '
                     absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white
                     sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none
@@ -94,7 +94,9 @@ class Card extends Component
             'title' => 'text-base/5',
             'title-normal' => '',
             'title-featured' => '',
-            'thumbnail' => 'w-full object-cover',
+            'thumbnail' => 'h-[175px] w-full object-cover sm:h-[75px] lg:h-[105px]',
+            'thumbnail-normal' => '',
+            'thumbnail-featured' => '',
             'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
             'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
             'category' => 'text-sky-700 font-medium'
