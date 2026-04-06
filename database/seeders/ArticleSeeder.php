@@ -212,6 +212,110 @@ class ArticleSeeder extends Seeder
                 'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
                 'featured' => true
             ],
+            [
+                'category' => 'Otomotif',
+                'date' => 'Jumat, 13 Mar',
+                'title' => 'Made Like A Gun: Tak Sekadar Slogan, Inilah DNA Royal Enfield',
+                'thumbnail' => 'articles/istock-1288603585_020_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Otomotif',
+                'date' => 'Rabu, 11 Mar',
+                'title' => 'Legenda Suzuki Truntung Bermula dari Kebun Cengkih di Manado',
+                'thumbnail' => 'articles/suzuki-truntung-1_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Otomotif',
+                'date' => 'Jumat, 06 Mar',
+                'title' => 'Kisah Yamaha RX-King, Sang Raja Ngebut yang Menggelegar',
+                'thumbnail' => 'articles/motor-rx-king-istockphoto_ratio-16x9.jpg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Otomotif',
+                'date' => 'Kamis, 05 Mar',
+                'title' => 'Opel Blazer di Indonesia: Cepat Bersinar, Cepat Pula Meredup',
+                'thumbnail' => 'articles/opel-blazer-_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Pendidikan',
+                'date' => 'Selasa, 24 Mar',
+                'title' => 'Masuk Sekolah Setelah Lebaran 2026 Kapan & Mulai Tanggal Berapa?',
+                'thumbnail' => 'articles/istock-1061085192_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Pendidikan',
+                'date' => 'Selasa, 06 Des',
+                'title' => 'Jalur Migrasi Deutro Melayu dan Persebarannya di Indonesia',
+                'thumbnail' => 'articles/peta-indonesia-dan-malaysia-istock--2_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Pendidikan',
+                'date' => 'Senin, 31 Mar',
+                'title' => 'Hikmah Halal Bihalal dan Dalilnya dalam Islam',
+                'thumbnail' => 'articles/halal-bihalal-lebaran--3_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Pendidikan',
+                'date' => 'Kamis, 26 Mar',
+                'title' => 'Panduan Lengkap & Tata Cara Daftar KIP Kuliah Jalur SNBT 2026',
+                'thumbnail' => 'articles/ilustrasi-kip-kuliah-2_ratio-16x9.webp',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Pendidikan',
+                'date' => 'Kamis, 26 Mar',
+                'title' => 'Mengenal Mosaic Defence dan Strategi Iran Melawan AS-Israel',
+                'thumbnail' => 'articles/tehran-itockphoto-3_ratio-16x9.jpg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Teknologi',
+                'date' => '8 jam lalu',
+                'title' => 'Mengintip Vivo X300 Ultra, Ini Spesifikasi & Perkiraan Harganya',
+                'thumbnail' => 'articles/vivo-x300-ultra_ratio-16x9.jpg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Teknologi',
+                'date' => 'Kamis, 26 Mar',
+                'title' => 'Mengenal Tap to Pay Apple, Saat iPhone Bisa Jadi Alat Pembayaran',
+                'thumbnail' => 'articles/apple_apple-pay_transaction_big.jpg.large-copy_ratio-16x9.jpg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Teknologi',
+                'date' => 'Jumat, 13 Mar',
+                'title' => 'Upaya Meta Melawan Penipuan dan Melindungi Pengguna',
+                'thumbnail' => 'articles/ilustrasi-penipuan-digital-fgoahj.1773384854029_ratio-16x9.jpg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ],
+            [
+                'category' => 'Teknologi',
+                'date' => 'Kamis, 02 Jan',
+                'title' => 'Mengapa Banyak Hacker Berasal dari Rusia?',
+                'thumbnail' => 'articles/deface-istock2_ratio-16x9.jpeg',
+                'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
+                'featured' => false
+            ]
         ];
 
         foreach ($articles as $highlight) {
@@ -232,5 +336,12 @@ class ArticleSeeder extends Seeder
                 'thumbnail_url' => Storage::url($highlight['thumbnail'])
             ]);
         }
+
+        ArticleCategory::has('articles', '>=', 5)
+            ->inRandomOrder()
+            ->limit(3)
+            ->update([
+                'featured' => true
+            ]);
     }
 }

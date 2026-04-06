@@ -1,5 +1,5 @@
 <article {{ $attributes->class($classList['container']) }}>
-    <a class="block shrink-0" href="{{ route('article.detail', ['slug' => $article->slug]) }}">
+    <a @class(['block shrink-0', $classList['thumbnail-link']]) href="{{ route('article.detail', ['slug' => $article->slug]) }}">
         <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" @class([$classList['thumbnail'], $classList['thumbnail-normal'] => !$featured, $classList['thumbnail-featured'] => $featured])>
     </a>
     <div class="{{ $classList['content'] }}">
