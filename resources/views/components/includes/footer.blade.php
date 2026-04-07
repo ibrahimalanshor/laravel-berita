@@ -5,7 +5,7 @@
             <ul class="grid grid-cols-2 gap-4 font-medium">
                 @foreach ($menus as $menu)
                     <li>
-                        <a href="">{{ $menu }}</a>
+                        <a href="{{ $menu->url }}" class="hover:text-neutral-400">{{ $menu->name }}</a>
                     </li>
                 @endforeach
             </ul>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ArticleCategory;
 use App\Models\Menu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -32,10 +33,21 @@ class MenuSeeder extends Seeder
             ],
         ];
 
+        $footerCategoryMenus = ArticleCategory::take(10)
+            ->get();
+
         foreach ($navbarMenus as $menu) {
             Menu::create([
                 'type' => 'navbar',
                 ...$menu
+            ]);
+        }
+
+        foreach ($footerCategoryMenus as $category) {
+            Menu::create([
+                'type' => 'footer_category',
+                'name' => $category->name,
+                'url' => route('category.detail', ['slug' => $category->slug])
             ]);
         }
     }

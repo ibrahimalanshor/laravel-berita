@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SettingSeeder::class,
-            MenuSeeder::class,
             TagSeeder::class,
-            ArticleSeeder::class
+            ArticleSeeder::class,
+            MenuSeeder::class
         ]);
     }
 }

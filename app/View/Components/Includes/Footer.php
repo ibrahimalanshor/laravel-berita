@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Includes;
 
+use App\Models\Menu;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -13,7 +14,7 @@ class Footer extends Component
      *
      * @var mixed
      */
-    public array $menus;
+    public $menus;
 
     /**
      * navs
@@ -27,18 +28,8 @@ class Footer extends Component
      */
     public function __construct()
     {
-        $this->menus = [
-            'Nasional',
-            'Teknologi',
-            'Otomotif',
-            'Internasional',
-            'Hiburan',
-            'Ekonomi',
-            'Gaya Hidup',
-            'Olahraga',
-            'Download Apps',
-            'berbuatbaik.id',
-        ];
+        $this->menus = Menu::where('type', 'footer_category')
+            ->get();
 
         $this->navs = [
             'Redaksi',
