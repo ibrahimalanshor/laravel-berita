@@ -47,13 +47,6 @@ class MenuSeeder extends Seeder
         $footerPageMenus = Page::take(10)
             ->get();
 
-        foreach ($navbarMenus as $menu) {
-            Menu::create([
-                'type' => 'navbar',
-                ...$menu
-            ]);
-        }
-
         foreach ($footerCategoryMenus as $category) {
             Menu::create([
                 'type' => 'footer_category',

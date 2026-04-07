@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Tag;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class Navbar extends Component
@@ -23,6 +24,13 @@ class Navbar extends Component
      * @var mixed
      */
     public $tags;
+    
+    /**
+     * displayTag
+     *
+     * @var mixed
+     */
+    public bool $displayTag;
 
     /**
      * Create a new component instance.
@@ -30,9 +38,14 @@ class Navbar extends Component
     public function __construct()
     {
         $this->menus = Menu::where('type', 'navbar')
+            ->take(4)
             ->get();
 
-        $this->tags = Tag::get();
+        $this->displayTag = Route::currentRouteName() === 'home';
+
+        if ($this->displayTag) {
+            $this->tags = Tag::get();
+        }
     }
 
     /**

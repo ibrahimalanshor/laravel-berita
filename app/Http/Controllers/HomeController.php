@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    
+        
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index()
     {
         $highlights = Article::inRandomOrder()
@@ -41,6 +46,20 @@ class HomeController extends Controller
             'flash' => $flash,
             'editors' => $editors,
             'categories' => $categories
+        ]);
+    }
+    
+    /**
+     * article
+     *
+     * @return void
+     */
+    public function article(Article $article)
+    {
+        return view('article', [
+            'title' => $article->title,
+            'description' => $article->summary,
+            'article' => $article
         ]);
     }
 
