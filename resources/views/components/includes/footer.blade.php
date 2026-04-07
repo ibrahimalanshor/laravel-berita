@@ -19,7 +19,7 @@
             <ul class="grid grid-cols-2 gap-4 font-medium">
                 @foreach ($navs as $nav)
                     <li>
-                        <a href="">{{ $nav }}</a>
+                        <a href="{{ $nav->url }}" class="hover:text-neutral-400">{{ $nav->name }}</a>
                     </li>
                 @endforeach
             </ul>

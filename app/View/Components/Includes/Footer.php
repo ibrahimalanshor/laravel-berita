@@ -21,7 +21,7 @@ class Footer extends Component
      *
      * @var mixed
      */
-    public array $navs;
+    public $navs;
 
     /**
      * Create a new component instance.
@@ -29,20 +29,12 @@ class Footer extends Component
     public function __construct()
     {
         $this->menus = Menu::where('type', 'footer_category')
+            ->take(10)
             ->get();
 
-        $this->navs = [
-            'Redaksi',
-            'Ketentuan Penggunaan',
-            'Kebijakan Privasi',
-            'Kebijakan Cookie',
-            'Pedoman Media Siber',
-            'ANTARA Foto',
-            'Kabarin.com',
-            'BrandA',
-            'Korporat',
-            'PPID',
-        ];
+        $this->navs = Menu::where('type', 'footer_page')
+            ->take(10)
+            ->get();
     }
 
     /**

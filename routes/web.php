@@ -20,5 +20,7 @@ Route::view('tag/{slug}', 'tag.detail')
     ->name('tag.detail');
 Route::view('kategori/{slug}', 'category.detail')
     ->name('category.detail');
+Route::view('halaman/{slug}', 'page.detail')
+    ->name('page.detail');
 Route::view('{slug}', 'article.detail')
     ->name('article.detail');
