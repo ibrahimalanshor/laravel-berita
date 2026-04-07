@@ -48,7 +48,9 @@
         </ul>
 
         <div class="flex items-center justify-between border-t border-neutral-800 pt-4 sm:p-0 sm:h-16 lg:col-span-full">
-            <x-includes.logo class="max-h-6" />
+            <a href="{{ route('home') }}">
+                <x-includes.logo class="max-h-6" />
+            </a>
             <p class="text-sm text-neutral-500">Copyright &copy; 2025</p>
         </div>
     </x-base.container>

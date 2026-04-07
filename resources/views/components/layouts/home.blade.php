@@ -6,6 +6,10 @@
 
         <title>{{ $title ?? config('app.name') }}</title>
 
+        @if (isset($description))
+            <meta name="description" content="{{ $description }}">
+        @endif
+
         <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,9 +21,9 @@
         
         <x-includes.navbar />
 
-        <div class="pb-4">
+        <main class="pb-4">
             @yield('content')
-        </div>
+        </main>
 
         <x-includes.footer />
 
