@@ -3,6 +3,7 @@
 namespace App\View\Components\Includes;
 
 use App\Models\Menu;
+use App\Models\SocialLink;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -22,6 +23,13 @@ class Footer extends Component
      * @var mixed
      */
     public $navs;
+    
+    /**
+     * socials
+     *
+     * @var mixed
+     */
+    public $socials;
 
     /**
      * Create a new component instance.
@@ -35,6 +43,8 @@ class Footer extends Component
         $this->navs = Menu::where('type', 'footer_page')
             ->take(10)
             ->get();
+
+        $this->socials = SocialLink::get();
     }
 
     /**

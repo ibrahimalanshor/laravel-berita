@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             ArticleSeeder::class,
             PageSeeder::class,
-            MenuSeeder::class
+            MenuSeeder::class,
+            SocialLinkSeeder::class
         ]);
     }
 }

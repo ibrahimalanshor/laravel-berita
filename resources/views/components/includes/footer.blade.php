@@ -1,3 +1,13 @@
+@php
+    $socialIcons = [
+        'instagram' => 'icon-[tabler--brand-instagram-filled]',
+        'facebook' => 'icon-[tabler--brand-facebook-filled]',
+        'twitter' => 'icon-[tabler--brand-twitter-filled]',
+        'tiktok' => 'icon-[tabler--brand-tiktok-filled]',
+        'youtube' => 'icon-[tabler--brand-youtube-filled]'
+    ];
+@endphp
+
 <footer class="bg-neutral-900 text-white py-4 relative sm:py-6 lg:py-8">
     <x-base.container class="space-y-4 lg:grid grid-cols-2 lg:space-y-0 lg:gap-4">
         <div class="space-y-4">
@@ -28,31 +38,13 @@
         <hr class="border-neutral-800 sm:hidden">
 
         <ul class="flex items-center gap-4 sm:absolute sm:bottom-8 sm:left-1/2 sm:-translate-x-1/2 sm:m-0 lg:bottom-10">
-            <li>
-                <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
-                    <span class="icon-[tabler--brand-instagram-filled]"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
-                    <span class="icon-[tabler--brand-facebook-filled]"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
-                    <span class="icon-[tabler--brand-twitter-filled]"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
-                    <span class="icon-[tabler--brand-tiktok-filled]"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md">
-                    <span class="icon-[tabler--brand-youtube-filled]"></span>
-                </a>
-            </li>
+            @foreach ($socials as $social)
+                <li>
+                    <a href="{{ $social->url }}" class="w-10 h-10 bg-neutral-800 flex items-center justify-center rounded-md hover:bg-neutral-700" aria-label="{{ $social->name }}">
+                        <span class="{{ $socialIcons[$social->type] }}"></span>
+                    </a>
+                </li>
+            @endforeach
         </ul>
 
         <div class="flex items-center justify-between border-t border-neutral-800 pt-4 sm:p-0 sm:h-16 lg:col-span-full">
