@@ -21,7 +21,46 @@
                 <span class="icon-[tabler--share-3]"></span>
             </button>
         </div>
+
+        <figure>
+            <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}">
+
+            <figcaption>{{ $article->thumbnail_caption }}</figcaption>
+        </figure>
+
+        <div>
+            {!! $article->content !!}
+        </div>
     </article>
+
+    <section>
+        <h2>Topik Terkait</h2>
+
+        <ul>
+            <li><a href="">harga minyak</a></li>
+            <li><a href="">donald trump</a></li>
+            <li><a href="">iran</a></li>
+            <li><a href="">selat hormuz</a></li>
+            <li><a href="">guncatan senjata</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>{{ $article->category->name }}</h2>
+    </section>
+
+    <section>
+        <h2>Artikel Terkait</h2>
+    </section>
+
+    <aside>
+        <section>
+            <h2>Berita Utama</h2>
+        </section>
+        <section>
+            <h2>Pilihan Editor</h2>
+        </section>
+    </aside>
 </x-base.container>
 
 @endsection
