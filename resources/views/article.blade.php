@@ -2,16 +2,16 @@
 
 @section('content')
 
-<x-base.container class="py-4 space-y-2 sm:space-y-6">
-    <nav class="pb-2 flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:border-neutral-200">
+<x-base.container class="py-4 space-y-4 ">
+    <nav class="flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:pb-2 sm:border-neutral-200">
         <a class="hover:underline" href="{{ route('home') }}">Beranda</a>
         <span class="icon-[tabler--chevron-right] text-neutral-400"></span>
         <a class="hover:underline" href="{{ route('category.detail', ['slug' => $article->category->slug]) }}">{{ $article->category->name }}</a>
     </nav>
 
-    <div class="grid grid-cols-1 sm:grid-cols-5 lg:grid-cols-6">
-        <div class="sm:col-span-3 lg:col-span-4 divide-y divide-neutral-200 space-y-4">
-            <article class="space-y-4 pb-4">
+    <div class="grid grid-cols-1 divide-y divide-neutral-200 gap-6 sm:grid-cols-5 sm:divide-y-0 lg:grid-cols-6">
+        <div class="sm:col-span-3 lg:col-span-4 space-y-6 pb-6 sm:pb-0">
+            <article class="space-y-4">
                 <header class="space-y-2">
                     <h1 class="font-bold text-neutral-900 text-3xl/8 sm:text-4xl">{{ $article->title }}</h1>
                     <p class="text-lg/6 text-neutral-700">{{ $article->summary }}</p>
@@ -39,7 +39,9 @@
                 </div>
             </article>
 
-            <section class="pb-6 space-y-2 lg:border-b-0 lg:pb-2">
+            <hr class="border-neutral-200">
+
+            <section class="space-y-2 lg:border-b-0">
                 <h2 class="font-bold text-neutral-900 text-lg">Topik Terkait</h2>
 
                 <ul class="flex flex-wrap gap-2">
@@ -49,7 +51,9 @@
                 </ul>
             </section>
 
-            <section class="pb-6 space-y-4 lg:border-b-0 lg:pb-2">
+            <hr class="border-neutral-200 sm:hidden">
+
+            <section class="space-y-4 lg:border-b-0">
                 <x-article.section-title>{{ $article->category->name }}</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
@@ -59,7 +63,9 @@
                 </div>
             </section>
 
-            <section class="pb-6 space-y-4 md:pb-0">
+            <hr class="border-neutral-200 sm:hidden">
+
+            <section class="space-y-4 md:pb-0">
                 <x-article.section-title>Artikel Terkait</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
@@ -71,8 +77,17 @@
         </div>
 
         <aside class="sm:col-span-2">
-            <section>
-                <h2>Berita Utama</h2>
+            <section id="main-article" class="splide space-y-4 -mx-4 sm:m-0" aria-label="Rekomendasi Artikel">
+                <div class="px-4 sm:p-0">
+                    <x-article.section-title>Berita Utama</x-article.section-title>
+                </div>
+                <div class="splide__track">
+                    <div class="splide__list splide__list__grid sm:gap-6">
+                        @foreach ($article->category->articles as $article)
+                            <x-article.card type="highlight-sidebar" :featured="$loop->first" :article="$article" :slide-on-mobile="true" @class(['splide__slide']) />
+                        @endforeach
+                    </div>
+                </div>
             </section>
             <section>
                 <h2>Pilihan Editor</h2>
@@ -82,3 +97,27 @@
 </x-base.container>
 
 @endsection
+
+@push('scripts')
+<script>
+window.onload = function () {
+    function createSlider(el) {
+        return new Splide(el, {
+            mediaQuery: 'min',
+            breakpoints: {
+                640: {
+                    destroy: 'completely'
+                }
+            },
+            pagination: false,
+            arrows: false,
+            padding: '2rem',
+            gap: '1rem',
+            type: 'loop'
+        });
+    }
+
+    createSlider('#main-article').mount();
+}
+</script>
+@endpush
