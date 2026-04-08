@@ -3,15 +3,15 @@
 @section('content')
 
 <x-base.container class="py-4 space-y-2 sm:space-y-6">
-    <nav class="pb-2 flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:border-neutral-300">
+    <nav class="pb-2 flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:border-neutral-200">
         <a class="hover:underline" href="{{ route('home') }}">Beranda</a>
-        <span class="icon-[tabler--chevron-right]"></span>
+        <span class="icon-[tabler--chevron-right] text-neutral-400"></span>
         <a class="hover:underline" href="{{ route('category.detail', ['slug' => $article->category->slug]) }}">{{ $article->category->name }}</a>
     </nav>
 
     <div class="grid grid-cols-1 sm:grid-cols-5 lg:grid-cols-6">
-        <div class="sm:col-span-4">
-            <article class="space-y-4">
+        <div class="sm:col-span-3 lg:col-span-4 divide-y divide-neutral-200 space-y-4">
+            <article class="space-y-4 pb-4">
                 <header class="space-y-2">
                     <h1 class="font-bold text-neutral-900 text-3xl/8 sm:text-4xl">{{ $article->title }}</h1>
                     <p class="text-lg/6 text-neutral-700">{{ $article->summary }}</p>
@@ -39,24 +39,34 @@
                 </div>
             </article>
 
-            <section>
-                <h2>Topik Terkait</h2>
+            <section class="pb-6 space-y-2 lg:border-b-0 lg:pb-2">
+                <h2 class="font-bold text-neutral-900 text-lg">Topik Terkait</h2>
 
-                <ul>
-                    <li><a href="">harga minyak</a></li>
-                    <li><a href="">donald trump</a></li>
-                    <li><a href="">iran</a></li>
-                    <li><a href="">selat hormuz</a></li>
-                    <li><a href="">guncatan senjata</a></li>
+                <ul class="flex flex-wrap gap-2">
+                    @foreach ($tags as $tag)
+                        <x-tag.link :tag="$tag" />
+                    @endforeach
                 </ul>
             </section>
 
-            <section>
-                <h2>{{ $article->category->name }}</h2>
+            <section class="pb-6 space-y-4 lg:border-b-0 lg:pb-2">
+                <x-article.section-title>{{ $article->category->name }}</x-article.section-title>
+
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+                    @foreach ($article->category->articles as $article)
+                        <x-article.card :article="$article" type="article-category" />
+                    @endforeach
+                </div>
             </section>
 
-            <section>
-                <h2>Artikel Terkait</h2>
+            <section class="pb-6 space-y-4 md:pb-0">
+                <x-article.section-title>Artikel Terkait</x-article.section-title>
+
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+                    @foreach ($article->category->articles as $article)
+                        <x-article.card :article="$article" type="related-article" />
+                    @endforeach
+                </div>
             </section>
         </div>
 

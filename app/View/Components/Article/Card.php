@@ -94,6 +94,38 @@ class Card extends Component
             ];
         }
 
+        if ($type === 'article-category') {
+            return [
+                'container' => 'flex items-start justify-between flex-row-reverse gap-4',
+                'title' => 'text-base/5',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'w-21 h-21 shrink-0 object-cover',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
+                'thumbnail-link' => '',
+                'content' => 'flex flex-col-reverse gap-1 min-w-0',
+                'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
+                'category' => 'text-sky-700 font-medium'
+            ];
+        }
+
+        if ($type === 'related-article') {
+            return [
+                'container' => 'space-y-2',
+                'title' => 'text-base/5',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'h-[175px] w-full object-cover sm:h-[100px] lg:h-[150px]',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
+                'thumbnail-link' => '',
+                'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
+                'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
+                'category' => 'text-sky-700 font-medium'
+            ];
+        }
+
         return [
             'container' => 'space-y-2',
             'title' => 'text-base/5',
