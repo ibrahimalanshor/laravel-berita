@@ -61,6 +61,7 @@ class HomeController extends Controller
 
         $categoryArticles = $article->category
             ->articles()
+            ->with('category')
             ->latest('published_at')
             ->take(6)
             ->get();
@@ -72,13 +73,27 @@ class HomeController extends Controller
             ->latest('published_at')
             ->take(6)
             ->get();
+
+            
+        $highlightArticles = Article::inRandomOrder()
+            ->take(5)
+            ->with('category')
+            ->get();
+
+        $editorArticles = Article::latest('published_at')
+            ->take(5)
+            ->with('category')
+            ->where('featured', true)
+            ->get();
         
         return view('article', [
             'title' => $article->title,
             'description' => $article->summary,
             'article' => $article,
             'categoryArticles' => $categoryArticles,
-            'relatedArticles' => $relatedArticles
+            'relatedArticles' => $relatedArticles,
+            'highlightArticles' => $highlightArticles,
+            'editorArticles' => $editorArticles
         ]);
     }
 

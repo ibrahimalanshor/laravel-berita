@@ -83,7 +83,7 @@
                 </div>
                 <div class="splide__track">
                     <div class="splide__list splide__list__grid sm:gap-6">
-                        @foreach ($article->category->articles as $article)
+                        @foreach ($highlightArticles as $article)
                             <x-article.card type="highlight-sidebar" :featured="$loop->first" :article="$article" :slide-on-mobile="true" @class(['splide__slide']) />
                         @endforeach
                     </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="splide__track">
                     <div class="splide__list splide__list__grid sm:gap-6">
-                        @foreach ($article->category->articles as $article)
+                        @foreach ($editorArticles as $article)
                             <x-article.card type="editor-sidebar" :featured="$loop->first" :article="$article" :slide-on-mobile="true" @class(['splide__slide']) />
                         @endforeach
                     </div>
