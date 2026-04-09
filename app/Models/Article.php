@@ -15,4 +15,14 @@ class Article extends Model
     {
         return $this->belongsTo(ArticleCategory::class);
     }
+    
+    /**
+     * tags
+     *
+     * @return void
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

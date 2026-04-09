@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -281,6 +282,7 @@ class ArticleSeeder extends Seeder
         ];
 
         $content = $this->getContent();
+        $tags = Tag::pluck('id')->toArray();
 
         foreach ($articles as $highlight) {
             $category = ArticleCategory::firstOrCreate(
@@ -290,7 +292,7 @@ class ArticleSeeder extends Seeder
 
             Storage::put($highlight['thumbnail'], file_get_contents(storage_path('app/' . $highlight['thumbnail'])));
 
-            Article::create([
+            $article = Article::create([
                 'title' => $highlight['title'],
                 'featured' => $highlight['featured'],
                 'slug' => Str::slug($highlight['title']),
@@ -301,6 +303,8 @@ class ArticleSeeder extends Seeder
                 'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
                 'content' => $content
             ]);
+
+            $article->tags()->attach($tags);
         }
 
         ArticleCategory::has('articles', '>=', 5)

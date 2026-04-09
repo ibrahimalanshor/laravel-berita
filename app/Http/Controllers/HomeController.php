@@ -57,13 +57,12 @@ class HomeController extends Controller
      */
     public function article(Article $article)
     {
-        $article->load('category');
+        $article->load('category', 'tags');
         
         return view('article', [
             'title' => $article->title,
             'description' => $article->summary,
-            'article' => $article,
-            'tags' => Tag::all()
+            'article' => $article
         ]);
     }
 

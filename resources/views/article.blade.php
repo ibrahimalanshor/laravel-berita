@@ -23,7 +23,7 @@
                         </div>
 
                         <button class="text-neutral-700">
-                            <span class="icon-[tabler--share-3]"></span>
+                            <span class="icon-[tabler--share] size-5"></span>
                         </button>
                     </div>
                 </header>
@@ -45,7 +45,7 @@
                 <h2 class="font-bold text-neutral-900 text-lg">Topik Terkait</h2>
 
                 <ul class="flex flex-wrap gap-2">
-                    @foreach ($tags as $tag)
+                    @foreach ($article->tags as $tag)
                         <x-tag.link :tag="$tag" />
                     @endforeach
                 </ul>
