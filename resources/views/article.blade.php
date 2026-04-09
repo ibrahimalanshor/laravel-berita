@@ -18,7 +18,7 @@
 
                     <div class="text-sm flex items-center justify-between">
                         <div>
-                            <a href="" class="text-sky-600 font-medium">Supriyanto</a>
+                            <a href="" class="text-sky-600 font-medium">{{ $article->author->name }}</a>
                             <p class="text-xs text-neutral-700 sm:text-sm">Terbit {{ formatDate($article->published_at) }}</p>
                         </div>
 

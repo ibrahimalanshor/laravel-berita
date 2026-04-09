@@ -25,4 +25,14 @@ class Article extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+    
+    /**
+     * author
+     *
+     * @return void
+     */
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }

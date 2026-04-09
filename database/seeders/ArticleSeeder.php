@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Author;
 use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -283,6 +284,7 @@ class ArticleSeeder extends Seeder
 
         $content = $this->getContent();
         $tags = Tag::pluck('id')->toArray();
+        $authors = Author::pluck('id');
 
         foreach ($articles as $highlight) {
             $category = ArticleCategory::firstOrCreate(
@@ -301,7 +303,8 @@ class ArticleSeeder extends Seeder
                 'thumbnail_url' => Storage::url($highlight['thumbnail']),
                 'thumbnail_caption' => 'Menteri HAM Natalius Pigai menyampaikan paparan saat rapat kerja bersama Komisi XIII DPR di Kompleks Parlemen, Senayan, Jakarta, Selasa (7/4/2026). ANTARA FOTO/Rivan Awal Lingga/sgd',
                 'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
-                'content' => $content
+                'content' => $content,
+                'author_id' => $authors->random()
             ]);
 
             $article->tags()->attach($tags);

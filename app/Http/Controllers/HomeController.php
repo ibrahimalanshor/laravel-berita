@@ -57,7 +57,7 @@ class HomeController extends Controller
      */
     public function article(Article $article)
     {
-        $article->load('category', 'tags');
+        $article->load('category', 'tags', 'author');
 
         $categoryArticles = $article->category
             ->articles()
