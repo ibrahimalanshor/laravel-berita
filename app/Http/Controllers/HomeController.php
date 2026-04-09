@@ -64,12 +64,21 @@ class HomeController extends Controller
             ->latest('published_at')
             ->take(6)
             ->get();
+
+        $relatedArticles = Article::where('id', '!=', $article->id)
+            ->whereHas('tags', function ($query) use ($article) {
+                $query->whereIn('tags.id', $article->tags->pluck('id'));
+            })
+            ->latest('published_at')
+            ->take(6)
+            ->get();
         
         return view('article', [
             'title' => $article->title,
             'description' => $article->summary,
             'article' => $article,
-            'categoryArticles' => $categoryArticles
+            'categoryArticles' => $categoryArticles,
+            'relatedArticles' => $relatedArticles
         ]);
     }
 

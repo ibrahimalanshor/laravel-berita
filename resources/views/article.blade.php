@@ -69,7 +69,7 @@
                 <x-article.section-title>Artikel Terkait</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
-                    @foreach ($article->category->articles as $article)
+                    @foreach ($relatedArticles as $article)
                         <x-article.card :article="$article" type="related-article" />
                     @endforeach
                 </div>
