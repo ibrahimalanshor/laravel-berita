@@ -57,7 +57,7 @@
                 <x-article.section-title>{{ $article->category->name }}</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
-                    @foreach ($article->category->articles as $article)
+                    @foreach ($categoryArticles as $article)
                         <x-article.card :article="$article" type="article-category" />
                     @endforeach
                 </div>

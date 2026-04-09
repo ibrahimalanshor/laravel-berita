@@ -58,11 +58,18 @@ class HomeController extends Controller
     public function article(Article $article)
     {
         $article->load('category', 'tags');
+
+        $categoryArticles = $article->category
+            ->articles()
+            ->latest('published_at')
+            ->take(6)
+            ->get();
         
         return view('article', [
             'title' => $article->title,
             'description' => $article->summary,
-            'article' => $article
+            'article' => $article,
+            'categoryArticles' => $categoryArticles
         ]);
     }
 
