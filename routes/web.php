@@ -22,5 +22,7 @@ Route::view('kategori/{slug}', 'category.detail')
     ->name('category.detail');
 Route::view('halaman/{slug}', 'page.detail')
     ->name('page.detail');
+Route::view('author/{slug}', 'page.detail')
+    ->name('author.detail');
 Route::get('{article:slug}', [HomeController::class, 'article'])
     ->name('article.detail');

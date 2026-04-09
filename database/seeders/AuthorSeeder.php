@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class AuthorSeeder extends Seeder
 {
@@ -28,7 +29,8 @@ class AuthorSeeder extends Seeder
 
         foreach ($authors as $author) {
             Author::create([
-                'name' => $author
+                'name' => $author,
+                'slug' => Str::slug($author)
             ]);
         }
     }
