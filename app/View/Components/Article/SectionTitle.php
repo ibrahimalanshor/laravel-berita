@@ -11,7 +11,7 @@ class SectionTitle extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $readMoreUrl = '')
+    public function __construct(public string $readMoreUrl = '', public bool $borderedTop = true)
     {
         //
     }

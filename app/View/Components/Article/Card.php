@@ -145,6 +145,22 @@ class Card extends Component
             ];
         }
 
+        if ($type === 'editor-sidebar') {
+            return [
+                'container' => 'space-y-2 sm:space-y-0 sm:flex sm:flex-row-reverse sm:gap-4 sm:items-start',
+                'title' => 'text-base/5 sm:text-sm',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'h-[175px] w-full object-cover sm:rounded-none sm:w-18 sm:h-18',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
+                'thumbnail-link' => '',
+                'content' => 'flex flex-col gap-1 justify-end text-neutral-900 sm:min-w-0',
+                'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
+                'category' => 'text-sky-700 font-medium'
+            ];
+        }
+
         return [
             'container' => 'space-y-2',
             'title' => 'text-base/5',

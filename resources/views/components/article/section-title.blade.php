@@ -1,4 +1,7 @@
-<div class="section-title flex items-center justify-between lg:border-t lg:pt-2 lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300">
+<div @class([
+    'section-title flex items-center justify-between lg:border-b lg:pb-2 lg:border-t-neutral-900 lg:border-b-neutral-300',
+    'lg:border-t lg:pt-2' => $borderedTop
+])>
     <h2 class="font-bold text-neutral-900 text-lg">
         {{ $slot }}
     </h2>
