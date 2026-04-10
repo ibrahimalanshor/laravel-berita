@@ -6,7 +6,7 @@
     <nav class="flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:pb-2 sm:border-neutral-200">
         <a class="hover:underline" href="{{ route('home') }}">Beranda</a>
         <span class="icon-[tabler--chevron-right] text-neutral-400"></span>
-        <a class="hover:underline" href="{{ route('category.detail', ['slug' => $article->category->slug]) }}">{{ $article->category->name }}</a>
+        <a class="hover:underline" href="{{ route('category.detail', ['category' => $article->category->slug]) }}">{{ $article->category->name }}</a>
     </nav>
 
     <div class="grid grid-cols-1 divide-y divide-neutral-200 gap-6 sm:grid-cols-5 sm:divide-y-0 lg:grid-cols-6">

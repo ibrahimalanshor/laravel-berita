@@ -12,7 +12,7 @@
             <a href="{{ route('article.detail', ['article' => $article]) }}">{{ $article->title }}</a>
         </h3>
         <div class="{{ $classList['meta'] }}">
-            <a href="{{ route('category.detail', ['slug' => $article->category->slug] )}}" @class([
+            <a href="{{ route('category.detail', ['category' => $article->category] )}}" @class([
                 'truncate hover:underline',
                 $classList['category'],
             ])>{{ $article->category->name }}</a>

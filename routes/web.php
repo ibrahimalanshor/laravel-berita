@@ -12,13 +12,11 @@ Route::view('subscribe', 'subscribe')
     ->name('subscribe');
 Route::view('search', 'search')
     ->name('search');
-Route::view('news', 'news')
-    ->name('news');
 Route::view('featured', 'featured')
     ->name('featured');
 Route::view('tag/{slug}', 'tag.detail')
     ->name('tag.detail');
-Route::view('kategori/{slug}', 'category.detail')
+Route::get('kategori/{category:slug}', [HomeController::class, 'category'])
     ->name('category.detail');
 Route::view('halaman/{slug}', 'page.detail')
     ->name('page.detail');

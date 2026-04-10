@@ -17,8 +17,8 @@ class MenuSeeder extends Seeder
     {
         $navbarMenus = [
             [
-                'name' => 'News',
-                'url'  => '/news',
+                'name' => 'Politik',
+                'url'  => '/kategori/politik',
             ],
             [
                 'name' => 'Bisnis',

@@ -17,7 +17,7 @@
     <div class="flex flex-col">
         <x-article.section class="lg:order-last">
             <x-base.container class="space-y-2 lg:space-y-4">
-                <x-article.section-title :read-more-url="route('news')">Berita Terbaru</x-article.section-title>
+                <x-article.section-title :read-more-url="route('home')">Berita Terbaru</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
                     @foreach ($flash as $article)
@@ -50,7 +50,7 @@
             <x-base.container :paddless="true">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-5 sm:px-4">
                     <div class="px-4 sm:col-span-full sm:px-0">
-                        <x-article.section-title :read-more-url="route('category.detail', ['slug' => $category->slug])">{{ $category->name }}</x-article.section-title>
+                        <x-article.section-title :read-more-url="route('category.detail', ['category' => $category->slug])">{{ $category->name }}</x-article.section-title>
                     </div>
                     <div class="px-4 sm:px-0">
                         <x-article.card :article="$category->articles->first()" type="editor" />

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
-use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -94,6 +92,21 @@ class HomeController extends Controller
             'relatedArticles' => $relatedArticles,
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles
+        ]);
+    }
+    
+    /**
+     * category
+     *
+     * @param  mixed $category
+     * @return void
+     */
+    public function category(ArticleCategory $category)
+    {
+        return view('category', [
+            'category' => $category,
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name,
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya'
         ]);
     }
 
