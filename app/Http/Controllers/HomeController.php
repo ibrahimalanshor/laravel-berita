@@ -108,10 +108,16 @@ class HomeController extends Controller
             ->take(5)
             ->with('category')
             ->get();
+        $categoryArticles = $category->articles()
+            ->take(19)
+            ->with('category')
+            ->latest()
+            ->get();
 
         return view('category', [
             'category' => $category,
             'highlights' => $highlights,
+            'categoryArticles' => $categoryArticles,
             'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name,
             'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya'
         ]);

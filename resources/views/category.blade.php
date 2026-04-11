@@ -16,6 +16,18 @@
         </div>
     </section>
 </x-base.container>
+
+<x-base.container>
+    <section class="space-y-4 lg:border-b-0">
+        <x-article.section-title>Berita Terbaru {{ $category->name }}</x-article.section-title>
+
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+            @foreach ($categoryArticles as $article)
+                <x-article.card :article="$article" type="article-category" />
+            @endforeach
+        </div>
+    </section>
+</x-base.container>
 @endsection
 
 @push('scripts')
