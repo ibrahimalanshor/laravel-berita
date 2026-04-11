@@ -51,15 +51,15 @@ class MenuSeeder extends Seeder
             Menu::create([
                 'type' => 'footer_category',
                 'name' => $category->name,
-                'url' => route('category.detail', ['slug' => $category->slug])
+                'url' => route('category.detail', ['category' => $category->slug])
             ]);
         }
 
         foreach ($footerPageMenus as $page) {
             Menu::create([
                 'type' => 'footer_page',
-                'name' => $page->name,
-                'url' => route('page.detail', ['slug' => $page->slug])
+                'name' => $page->title,
+                'url' => route('page.detail', ['page' => $page->slug])
             ]);
         }
     }

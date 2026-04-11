@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Page;
 use App\Models\Tag;
 
 class HomeController extends Controller
@@ -190,6 +191,21 @@ class HomeController extends Controller
             'articles' => $articles,
             'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . ' - Lararita',
             'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . ' Lengkap dan Terpercaya di Lararita'
+        ]);
+    }
+    
+    /**
+     * page
+     *
+     * @param  mixed $page
+     * @return void
+     */
+    public function page(Page $page)
+    {
+        return view('page', [
+            'page' => $page,
+            'title' => $page->title . ' - Lararita',
+            'description' => $page->description
         ]);
     }
 
