@@ -26,7 +26,7 @@ class Sidebar extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public $borderedTop = true)
     {
         $this->highlightArticles = Article::inRandomOrder()
             ->take(5)

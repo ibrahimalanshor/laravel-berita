@@ -58,13 +58,14 @@ class Card extends Component
                     sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none
                 ',
                 'meta' => 'text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm',
-                'category' => 'sm:text-sky-700 sm:font-medium'
+                'category' => 'sm:text-sky-700 sm:font-medium',
+                'summary' => ''
             ];
         }
 
         if ($type === 'highlight-sidebar') {
             return [
-                'container' => 'relative sm:flex sm:flex-row-reverse sm:gap-4 sm:items-start',
+                'container' => 'relative sm:flex sm:flex-row-reverse sm:gap-4 sm:items-start sm:justify-between',
                 'title' => 'text-lg/6 sm:text-sm',
                 'title-normal' => '',
                 'title-featured' => '',
@@ -77,7 +78,8 @@ class Card extends Component
                     sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none sm:min-w-0
                 ',
                 'meta' => 'text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm',
-                'category' => 'sm:text-sky-700 sm:font-medium'
+                'category' => 'sm:text-sky-700 sm:font-medium',
+                'summary' => ''
             ];
         }
 
@@ -93,7 +95,8 @@ class Card extends Component
                 'thumbnail-link' => '',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
-                'category' => 'text-sky-700 font-medium'
+                'category' => 'text-sky-700 font-medium',
+                'summary' => ''
             ];
         }
 
@@ -109,7 +112,8 @@ class Card extends Component
                 'thumbnail-link' => 'sm:w-full',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
-                'category' => 'text-sky-700 font-medium'
+                'category' => 'text-sky-700 font-medium',
+                'summary' => ''
             ];
         }
 
@@ -125,7 +129,25 @@ class Card extends Component
                 'thumbnail-link' => '',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
-                'category' => 'text-sky-700 font-medium'
+                'category' => 'text-sky-700 font-medium',
+                'summary' => ''
+            ];
+        }
+
+        if ($type === 'category-detail') {
+            return [
+                'container' => 'flex items-start justify-between flex-row-reverse gap-4 sm:flex-row',
+                'title' => 'text-base/5',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'w-21 h-21 shrink-0 object-cover lg:w-[200px] lg:h-[120px]',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
+                'thumbnail-link' => '',
+                'content' => 'flex flex-col-reverse gap-1 min-w-0 sm:flex-col',
+                'meta' => 'text-xs flex items-center gap-2 text-neutral-700 sm:order-first lg:text-sm',
+                'category' => 'text-sky-700 font-medium',
+                'summary' => 'text-sm'
             ];
         }
 
@@ -141,13 +163,14 @@ class Card extends Component
                 'thumbnail-link' => '',
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
-                'category' => 'text-sky-700 font-medium'
+                'category' => 'text-sky-700 font-medium',
+                'summary' => ''
             ];
         }
 
         if ($type === 'editor-sidebar') {
             return [
-                'container' => 'space-y-2 sm:space-y-0 sm:flex sm:flex-row-reverse sm:gap-4 sm:items-start',
+                'container' => 'space-y-2 sm:space-y-0 sm:flex sm:flex-row-reverse sm:gap-4 sm:items-start justify-between',
                 'title' => 'text-base/5 sm:text-sm',
                 'title-normal' => '',
                 'title-featured' => '',
@@ -157,7 +180,8 @@ class Card extends Component
                 'thumbnail-link' => '',
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900 sm:min-w-0',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
-                'category' => 'text-sky-700 font-medium'
+                'category' => 'text-sky-700 font-medium',
+                'summary' => ''
             ];
         }
 
@@ -172,7 +196,8 @@ class Card extends Component
             'thumbnail-link' => '',
             'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
             'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
-            'category' => 'text-sky-700 font-medium'
+            'category' => 'text-sky-700 font-medium',
+            'summary' => ''
         ];
     }
 }

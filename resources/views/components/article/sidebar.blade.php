@@ -1,7 +1,7 @@
 <aside {{ $attributes }}>
-    <section id="main-article" class="splide space-y-4 -mx-4 sm:mx-0" aria-label="Rekomendasi Artikel">
+    <section id="main-article" class="splide space-y-4" aria-label="Rekomendasi Artikel">
         <div class="px-4 sm:p-0">
-            <x-article.section-title :bordered-top="false">Berita Utama</x-article.section-title>
+            <x-article.section-title :bordered-top="$borderedTop">Berita Utama</x-article.section-title>
         </div>
         <div class="splide__track">
             <div class="splide__list splide__list__grid sm:gap-6">
@@ -14,9 +14,9 @@
 
     <hr class="border-neutral-200 sm:hidden">
 
-    <section id="editor-article" class="splide space-y-4 -mx-4 sm:m-0" aria-label="Rekomendasi Artikel">
+    <section id="editor-article" class="splide space-y-4" aria-label="Rekomendasi Artikel">
         <div class="px-4 sm:p-0">
-            <x-article.section-title :bordered-top="false">Pilihan Editor</x-article.section-title>
+            <x-article.section-title :bordered-top="$borderedTop">Pilihan Editor</x-article.section-title>
         </div>
         <div class="splide__track">
             <div class="splide__list splide__list__grid sm:gap-6">

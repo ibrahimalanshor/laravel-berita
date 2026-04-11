@@ -2,8 +2,8 @@
 
 @section('content')
 
-<x-base.container class="py-4 space-y-4 ">
-    <nav class="flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:pb-2 sm:border-neutral-200">
+<x-base.container :paddless="true" class="py-4 space-y-4 sm:px-4">
+    <nav class="px-4 flex items-center gap-2 text-neutral-700 text-sm sm:border-b sm:pb-2 sm:border-neutral-200 sm:px-0">
         <a class="hover:underline" href="{{ route('home') }}">Beranda</a>
         <span class="icon-[tabler--chevron-right] text-neutral-400"></span>
         <a class="hover:underline" href="{{ route('category.detail', ['category' => $article->category->slug]) }}">{{ $article->category->name }}</a>
@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-1 divide-y divide-neutral-200 gap-6 sm:grid-cols-5 sm:divide-y-0 lg:grid-cols-6">
         <div class="sm:col-span-3 lg:col-span-4 space-y-6 pb-6 sm:pb-0">
-            <article class="space-y-4">
+            <article class="px-4 space-y-4 sm:px-0">
                 <header class="space-y-2">
                     <h1 class="font-bold text-neutral-900 text-3xl/8 sm:text-4xl">{{ $article->title }}</h1>
                     <p class="text-lg/6 text-neutral-700">{{ $article->summary }}</p>
@@ -39,7 +39,7 @@
 
             <hr class="border-neutral-200">
 
-            <section class="space-y-2 lg:border-b-0">
+            <section class="px-4 space-y-2 lg:border-b-0 sm:px-0">
                 <h2 class="font-bold text-neutral-900 text-lg">Topik Terkait</h2>
 
                 <ul class="flex flex-wrap gap-2">
@@ -51,7 +51,7 @@
 
             <hr class="border-neutral-200 sm:hidden">
 
-            <section class="space-y-4 lg:border-b-0">
+            <section class="px-4 space-y-4 lg:border-b-0 sm:px-0">
                 <x-article.section-title>{{ $article->category->name }}</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
@@ -63,7 +63,7 @@
 
             <hr class="border-neutral-200 sm:hidden">
 
-            <section class="space-y-4 md:pb-0">
+            <section class="px-4 space-y-4 sm:px-0 md:pb-0">
                 <x-article.section-title>Artikel Terkait</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
@@ -74,7 +74,7 @@
             </section>
         </div>
 
-        <x-article.sidebar class="sm:col-span-2 space-y-6" />
+        <x-article.sidebar class="sm:col-span-2 space-y-6" :bordered-top="false" />
     </div>
 </x-base.container>
 @endsection

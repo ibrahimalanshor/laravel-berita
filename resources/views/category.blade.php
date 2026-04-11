@@ -1,10 +1,10 @@
 @extends('layouts.home')
 
 @section('content')
-<x-base.container>
-    <h1>{{ $category->name }}</h1>
+<x-base.container class="mt-6">
+    <h1 class="font-bold text-neutral-900 text-3xl">{{ $category->name }}</h1>
 </x-base.container>
-<x-base.container :paddless="true" class="sm:px-4">
+<x-base.container :paddless="true" class="mb-2 sm:px-4 lg:mb-4">
     <section id="highlight-article" class="splide py-4" aria-label="Rekomendasi Artikel">
         <h2 class="sr-only">Berita Utama</h2>
         <div class="splide__track">
@@ -17,17 +17,17 @@
     </section>
 </x-base.container>
 
-<x-base.container>
-    <section class="space-y-4 lg:border-b-0">
+<x-base.container :paddless="true" class="border-t border-neutral-200 pt-4 grid grid-cols-1 gap-6 sm:grid-cols-5 sm:px-4 lg:border-0 lg:pt-0">
+    <section class="space-y-4 px-4 lg:border-b-0 sm:col-span-3 sm:px-0">
         <x-article.section-title>Berita Terbaru {{ $category->name }}</x-article.section-title>
 
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+        <div class="grid grid-cols-1 gap-4 lg:gap-6">
             @foreach ($categoryArticles as $article)
-                <x-article.card :article="$article" type="article-category" />
+                <x-article.card :article="$article" type="category-detail" />
             @endforeach
         </div>
     </section>
-    <x-article.sidebar class="sm:col-span-2 space-y-6" />
+    <x-article.sidebar class="sm:col-span-2 space-y-6 border-t border-neutral-200 pt-6 sm:border-0 sm:pt-0" />
 </x-base.container>
 @endsection
 

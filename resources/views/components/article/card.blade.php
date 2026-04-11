@@ -19,8 +19,11 @@
             <span>|</span>
             <time class="truncate">{{ formatDate($article->published_at) }}</time>
         </div>
-        @if ($type === 'highlight' && $featured)
-            <p class="hidden sm:block sm:text-neutral-700">{{ $article->summary }}</p>
+        @if (($type === 'highlight' && $featured) || $type === 'category-detail')
+            <p @class([
+                'hidden sm:block sm:text-neutral-700',
+                $classList['summary']
+            ])>{{ $article->summary }}</p>
         @endif
     </div>
 </article>
