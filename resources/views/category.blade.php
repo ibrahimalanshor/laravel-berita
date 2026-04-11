@@ -27,6 +27,7 @@
             @endforeach
         </div>
     </section>
+    <x-article.sidebar class="sm:col-span-2 space-y-6" />
 </x-base.container>
 @endsection
 
@@ -50,6 +51,8 @@ window.onload = function () {
     }
 
     createSlider('#highlight-article').mount();
+    createSlider('#main-article').mount();
+    createSlider('#editor-article').mount();
 }
 </script>
 @endpush
