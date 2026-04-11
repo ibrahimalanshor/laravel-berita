@@ -109,10 +109,9 @@ class HomeController extends Controller
             ->with('category')
             ->get();
         $categoryArticles = $category->articles()
-            ->take(19)
             ->with('category')
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('category', [
             'category' => $category,

@@ -26,6 +26,8 @@
                 <x-article.card :article="$article" type="category-detail" />
             @endforeach
         </div>
+
+        {{ $categoryArticles->links('article.pagination') }}
     </section>
     <x-article.sidebar class="sm:col-span-2 space-y-6 border-t border-neutral-200 pt-6 sm:border-0 sm:pt-0" />
 </x-base.container>
