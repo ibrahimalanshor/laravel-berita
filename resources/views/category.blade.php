@@ -5,8 +5,8 @@
     <h1 class="font-bold text-neutral-900 text-3xl">{{ $category->name }}</h1>
 </x-base.container>
 <x-base.container :paddless="true" class="mb-2 sm:px-4 lg:mb-4">
-    <section id="highlight-article" class="splide py-4" aria-label="Rekomendasi Artikel">
-        <h2 class="sr-only">Berita Utama</h2>
+    <section id="highlight-article" class="splide py-4" aria-label="Berita Utama Kategori {{ $category->name }}">
+        <h2 class="sr-only">Berita Utama Kategori {{ $category->name }}</h2>
         <div class="splide__track">
             <div class="splide__list splide__list__grid sm:grid-cols-4 sm:grid-rows-2 sm:gap-6">
                 @foreach ($highlights as $article)

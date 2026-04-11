@@ -12,7 +12,7 @@ Route::view('subscribe', 'subscribe')
     ->name('subscribe');
 Route::view('search', 'search')
     ->name('search');
-Route::view('featured', 'featured')
+Route::get('pilihan-editor', [HomeController::class, 'featured'])
     ->name('featured');
 Route::view('tag/{slug}', 'tag.detail')
     ->name('tag.detail');

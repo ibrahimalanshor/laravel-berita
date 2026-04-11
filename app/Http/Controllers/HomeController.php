@@ -121,5 +121,22 @@ class HomeController extends Controller
             'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya'
         ]);
     }
+    
+    /**
+     * featured
+     *
+     * @return void
+     */
+    public function featured()
+    {
+        $articles = Article::where('featured', true)
+            ->with('category')
+            ->latest()
+            ->paginate(10);
+
+        return view('featured', [
+            'articles' => $articles
+        ]);
+    }
 
 }
