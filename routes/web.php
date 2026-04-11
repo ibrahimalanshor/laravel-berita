@@ -16,7 +16,7 @@ Route::get('berita', [HomeController::class, 'news'])
     ->name('news');
 Route::get('pilihan-editor', [HomeController::class, 'featured'])
     ->name('featured');
-Route::view('tag/{slug}', 'tag.detail')
+Route::get('tag/{tag:slug}', [HomeController::class, 'tag'])
     ->name('tag.detail');
 Route::get('kategori/{category:slug}', [HomeController::class, 'category'])
     ->name('category.detail');

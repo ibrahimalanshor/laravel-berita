@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Tag;
 
 class HomeController extends Controller
 {
@@ -108,7 +109,7 @@ class HomeController extends Controller
             ->take(5)
             ->with('category')
             ->get();
-        $categoryArticles = $category->articles()
+        $articles = $category->articles()
             ->with('category')
             ->latest()
             ->paginate(10);
@@ -116,7 +117,7 @@ class HomeController extends Controller
         return view('category', [
             'category' => $category,
             'highlights' => $highlights,
-            'categoryArticles' => $categoryArticles,
+            'articles' => $articles,
             'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . ' - Lararita',
             'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya di Lararita'
         ]);
@@ -162,6 +163,33 @@ class HomeController extends Controller
             'articles' => $articles,
             'title' => 'Berita dan Artikel Terbaru - Lararita',
             'description' => 'Baca Berita dan Artikel Terbaru di Lararita'
+        ]);
+    }
+    
+    /**
+     * tag
+     *
+     * @param  mixed $tag
+     * @return void
+     */
+    public function tag(Tag $tag)
+    {
+        $highlights = $tag->articles()
+            ->inRandomOrder()
+            ->take(5)
+            ->with('category')
+            ->get();
+        $articles = $tag->articles()
+            ->with('category')
+            ->latest()
+            ->paginate(10);
+
+        return view('tag', [
+            'tag' => $tag,
+            'highlights' => $highlights,
+            'articles' => $articles,
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . ' - Lararita',
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . ' Lengkap dan Terpercaya di Lararita'
         ]);
     }
 
