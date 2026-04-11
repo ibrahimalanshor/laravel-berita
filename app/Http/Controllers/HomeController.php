@@ -117,8 +117,8 @@ class HomeController extends Controller
             'category' => $category,
             'highlights' => $highlights,
             'categoryArticles' => $categoryArticles,
-            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name,
-            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya'
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . ' - Lararita',
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya di Lararita'
         ]);
     }
     
@@ -135,7 +135,33 @@ class HomeController extends Controller
             ->paginate(10);
 
         return view('featured', [
-            'articles' => $articles
+            'articles' => $articles,
+            'title' => 'Berita dan Artikel Pilihan Editor - Lararita',
+            'description' => 'Baca Berita dan Artikel Pilihan Editor di Lararita'
+        ]);
+    }
+    
+    /**
+     * news
+     *
+     * @return void
+     */
+    public function news()
+    {
+        $latests = Article::with('category')
+            ->take(5)
+            ->latest()
+            ->get();
+        $articles = Article::with('category')
+            ->skip(5)
+            ->latest()
+            ->paginate(10);
+
+        return view('news', [
+            'latests' => $latests,
+            'articles' => $articles,
+            'title' => 'Berita dan Artikel Terbaru - Lararita',
+            'description' => 'Baca Berita dan Artikel Terbaru di Lararita'
         ]);
     }
 

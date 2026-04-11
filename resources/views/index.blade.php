@@ -17,7 +17,7 @@
     <div class="flex flex-col">
         <x-article.section class="lg:order-last">
             <x-base.container class="space-y-2 lg:space-y-4">
-                <x-article.section-title :read-more-url="route('home')">Berita Terbaru</x-article.section-title>
+                <x-article.section-title :read-more-url="route('news')">Berita Terbaru</x-article.section-title>
 
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
                     @foreach ($flash as $article)

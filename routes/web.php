@@ -12,6 +12,8 @@ Route::view('subscribe', 'subscribe')
     ->name('subscribe');
 Route::view('search', 'search')
     ->name('search');
+Route::get('berita', [HomeController::class, 'news'])
+    ->name('news');
 Route::get('pilihan-editor', [HomeController::class, 'featured'])
     ->name('featured');
 Route::view('tag/{slug}', 'tag.detail')
