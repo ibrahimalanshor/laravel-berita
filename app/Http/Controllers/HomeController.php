@@ -103,8 +103,15 @@ class HomeController extends Controller
      */
     public function category(ArticleCategory $category)
     {
+        $highlights = $category->articles()
+            ->inRandomOrder()
+            ->take(5)
+            ->with('category')
+            ->get();
+
         return view('category', [
             'category' => $category,
+            'highlights' => $highlights,
             'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name,
             'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya'
         ]);
