@@ -255,5 +255,18 @@ class HomeController extends Controller
             'articles' => $articles
         ]);
     }
+    
+    /**
+     * subscribe
+     *
+     * @return void
+     */
+    public function subscribe()
+    {
+        return view('subscribe', [
+            'title' => 'Berlangganan Lararita',
+            'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
+        ]);
+    }
 
 }

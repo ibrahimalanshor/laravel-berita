@@ -48,7 +48,7 @@ class Button extends Component
         $colorClass = match($this->color) {
             'light' => 'bg-white text-neutral-900',
             'bordered' => 'bg-white border border-neutral-300 text-neutral-900',
-            'primary' => 'bg-sky-600 text-white'
+            'primary' => 'bg-sky-600 text-white hover:bg-sky-700'
         };
 
         $sizeClass = match($this->size) {

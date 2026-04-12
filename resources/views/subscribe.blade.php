@@ -1,0 +1,62 @@
+@extends('layouts.home')
+
+@section('content')
+<x-base.container>
+    <section class="py-6 space-y-6">
+        <div class="space-y-1">
+            <h1 class="font-bold text-3xl text-neutral-900">Berlangganan Lararita</h1>
+            <p class="text-neutral-700">Dengan berlangganan lararita anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
+        </div>
+        <hr class="border-neutral-200">
+        <div class="space-y-4">
+            <h2 class="font-bold text-xl text-neutral-900">Pilih Paket Langganan</h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <article class="border border-neutral-200 rounded-md p-4 space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-lg text-neutral-900">Lararita Newsletter</h3>
+                        <p class="text-lg text-red-600 font-bold">Rp 0/bulan</p>
+                        <p class="text-neutral-700 text-sm">Manfaat yang didapatkan:</p>
+                        <ul class="space-y-1">
+                            <li class="flex items-center gap-2">
+                                <span class="icon-[tabler--check] text-green-600"></span>
+                                <p class="text-neutral-900">Notifikasi email artikel terbaru</p>
+                            </li>
+                            <li class="flex items-center gap-2 line-through opacity-50">
+                                <span class="icon-[tabler--x] text-red-600"></span>
+                                <p class="text-neutral-900">Bebas Iklan</p>
+                            </li>
+                            <li class="flex items-center gap-2 line-through opacity-50">
+                                <span class="icon-[tabler--x] text-red-600"></span>
+                                <p class="text-neutral-900">Akses ke artikel premium sepuasnya</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <x-base.button color="bordered" class="w-full">Mulai Berlangganan</x-base.button>
+                </article>
+                <article class="border border-neutral-200 rounded-md p-4 space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-lg text-neutral-900">Lararita Plus</h3>
+                        <p class="text-lg text-red-600 font-bold">Rp 15.000/bulan</p>
+                        <p class="text-neutral-700 text-sm">Manfaat yang didapatkan:</p>
+                        <ul class="space-y-1">
+                            <li class="flex items-center gap-2">
+                                <span class="icon-[tabler--check] text-green-600"></span>
+                                <p class="text-neutral-900">Notifikasi email artikel terbaru</p>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="icon-[tabler--check] text-green-600"></span>
+                                <p class="text-neutral-900">Bebas Iklan</p>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="icon-[tabler--check] text-green-600"></span>
+                                <p class="text-neutral-900">Akses ke artikel premium sepuasnya</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <x-base.button color="primary" class="w-full">Mulai Berlangganan</x-base.button>
+                </article>
+            </div>
+        </div>
+    </section>
+</x-base.container>
+@endsection

@@ -8,7 +8,7 @@ Route::name('home')
 
 Route::view('login', 'login')
     ->name('login');
-Route::view('subscribe', 'subscribe')
+Route::get('subscribe', [HomeController::class, 'subscribe'])
     ->name('subscribe');
 Route::get('search', [HomeController::class, 'search'])
     ->name('search');
