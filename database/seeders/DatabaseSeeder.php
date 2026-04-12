@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             PageSeeder::class,
             MenuSeeder::class,
-            SocialLinkSeeder::class
+            SocialLinkSeeder::class,
+            SubscriptionPackageSeeder::class
         ]);
     }
 }

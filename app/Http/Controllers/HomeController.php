@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Author;
 use App\Models\Page;
+use App\Models\SubscriptionPackage;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -263,9 +264,12 @@ class HomeController extends Controller
      */
     public function subscribe()
     {
+        $packages = SubscriptionPackage::all();
+
         return view('subscribe', [
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
+            'packages' => $packages
         ]);
     }
 

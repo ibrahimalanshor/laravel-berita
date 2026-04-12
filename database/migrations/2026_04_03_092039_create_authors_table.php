@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('twitter_url')->nullable();
             $table->string('tiktok_url')->nullable();
             $table->string('youtube_url')->nullable();
-            $table->string('youtube_url')->nullable();
+            $table->string('facebook_url')->nullable();
             $table->timestamps();
         });
     }
