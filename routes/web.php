@@ -10,7 +10,7 @@ Route::view('login', 'login')
     ->name('login');
 Route::view('subscribe', 'subscribe')
     ->name('subscribe');
-Route::view('search', 'search')
+Route::get('search', [HomeController::class, 'search'])
     ->name('search');
 Route::get('berita', [HomeController::class, 'news'])
     ->name('news');

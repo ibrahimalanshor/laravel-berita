@@ -7,6 +7,7 @@ use App\Models\ArticleCategory;
 use App\Models\Author;
 use App\Models\Page;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -228,6 +229,29 @@ class HomeController extends Controller
             'articles' => $articles,
             'title' => 'Profil dan Tulisan dari ' . $author->name,
             'description' => 'Profil Penulis dan Berita Tulisan dari ' . $author->name . ' Terbaru'
+        ]);
+    }
+    
+    /**
+     * search
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'q' => ['required', 'string']
+        ]);
+
+        $q = $request->input('q');
+        $articles = Article::paginate(10);
+
+        return view('search', [
+            'title' => 'Hasil Pencarian \''. $q . '\' Berita dan Artikel',
+            'description' => 'Daftar Berita dan Artikel Sesuai Pencarian \''. $q . '\'',
+            'q' => $q,
+            'articles' => $articles
         ]);
     }
 
