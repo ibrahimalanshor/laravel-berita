@@ -245,11 +245,12 @@ class HomeController extends Controller
         ]);
 
         $q = $request->input('q');
-        $articles = Article::paginate(10);
+        $articles = Article::paginate(10)
+            ->withQueryString();
 
         return view('search', [
-            'title' => 'Hasil Pencarian \''. $q . '\' Berita dan Artikel',
-            'description' => 'Daftar Berita dan Artikel Sesuai Pencarian \''. $q . '\'',
+            'title' => 'Hasil Pencarian "'. $q . '" Berita dan Artikel',
+            'description' => 'Daftar Berita dan Artikel Sesuai Pencarian "'. $q . '"',
             'q' => $q,
             'articles' => $articles
         ]);

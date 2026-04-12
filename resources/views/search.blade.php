@@ -2,15 +2,21 @@
 
 @section('content')
 <x-base.container>
-    <section>
-        <h1>Hasil Pencarian "{{ $q }}"</h1>
-        <p>Ditemukan {{ $articles->total() }} hasil pencarian.</p>
+    <section class="py-6 space-y-4">
+        <div class="space-y-1">
+            <h1 class="font-bold text-3xl text-neutral-900">Hasil Pencarian</h1>
+            <p class="text-neutral-700">Ditemukan {{ $articles->total() }} dari hasil pencarian "{{ $q }}".</p>
+        </div>
 
-        <div>
+        <hr class="border-neutral-200">
+
+        <div class="grid grid-cols-1 gap-4">
             @foreach ($articles as $article)
                 <x-article.card :article="$article" type="search" />
             @endforeach
         </div>
+
+        {{ $articles->links('article.pagination') }}
     </section>
 </x-base.container>
 @endsection
