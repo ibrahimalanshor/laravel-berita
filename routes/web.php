@@ -22,7 +22,7 @@ Route::get('kategori/{category:slug}', [HomeController::class, 'category'])
     ->name('category.detail');
 Route::get('halaman/{page:slug}', [HomeController::class, 'page'])
     ->name('page.detail');
-Route::view('author/{slug}', 'page.detail')
+Route::get('author/{author:slug}', [HomeController::class, 'author'])
     ->name('author.detail');
 Route::get('{article:slug}', [HomeController::class, 'article'])
     ->name('article.detail');

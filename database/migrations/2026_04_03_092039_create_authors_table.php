@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('image_url')->nullable();
+            $table->text('about');
+            $table->string('facebook_url')->nullable();
+            $table->string('instagram_url')->nullable();
+            $table->string('twitter_url')->nullable();
+            $table->string('tiktok_url')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->timestamps();
         });
     }

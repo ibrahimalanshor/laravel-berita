@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Author;
 use App\Models\Page;
 use App\Models\Tag;
 
@@ -206,6 +207,27 @@ class HomeController extends Controller
             'page' => $page,
             'title' => $page->title . ' - Lararita',
             'description' => $page->description
+        ]);
+    }
+    
+    /**
+     * author
+     *
+     * @param  mixed $author
+     * @return void
+     */
+    public function author(Author $author)
+    {
+        $articles = $author->articles()
+            ->with('category')
+            ->latest()
+            ->paginate(10);
+            
+        return view('author', [
+            'author' => $author,
+            'articles' => $articles,
+            'title' => 'Profil dan Tulisan dari ' . $author->name,
+            'description' => 'Profil Penulis dan Berita Tulisan dari ' . $author->name . ' Terbaru'
         ]);
     }
 
