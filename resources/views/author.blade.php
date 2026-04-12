@@ -7,22 +7,22 @@
         <div class="space-y-2">
             <h1 class="font-bold text-neutral-900 text-3xl">{{ $author->name }}</h1>
             <div class="flex gap-2">
-                <a target="_blank" href="" class="">
-                    <span class="icon-[tabler--brand-whatsapp-filled] size-5 text-green-600"></span>
+                <a target="_blank" href="{{ $author->instagram_url }}" class="">
+                    <span class="icon-[tabler--brand-instagram-filled] size-5 text-indigo-600"></span>
                 </a>
-                <a target="_blank" href="" class="">
+                <a target="_blank" href="{{ $author->facebook_url }}" class="">
                     <span class="icon-[tabler--brand-facebook-filled] size-5 text-blue-600"></span>
                 </a>
-                <a target="_blank" href="" class="">
+                <a target="_blank" href="{{ $author->twitter_url }}" class="">
                     <span class="icon-[tabler--brand-twitter-filled] size-5 text-sky-600"></span>
                 </a>
-                <a target="_blank" href="" class="">
+                <a target="_blank" href="{{ $author->tiktok_url }}" class="">
                     <span class="icon-[tabler--brand-tiktok-filled] size-5 text-neutral-900"></span>
                 </a>
-                <a target="_blank" href="" class="">
+                <a target="_blank" href="{{ $author->youtube_url }}" class="">
                     <span class="icon-[tabler--brand-youtube-filled] size-5 text-red-600"></span>
                 </a>
-                <a target="_blank" href="" class="">
+                <a target="_blank" href="{{ $author->email }}" class="">
                     <span class="icon-[tabler--mail-filled] size-5 text-neutral-600"></span>
                 </a>
             </div>

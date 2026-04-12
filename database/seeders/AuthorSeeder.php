@@ -51,7 +51,8 @@ class AuthorSeeder extends Seeder
                 'facebook_url' => 'http://facebook.com',
                 'twitter_url' => 'http://x.com',
                 'tiktok_url' => 'http://tiktok.com',
-                'youtube_url' => 'http://youtube.com'
+                'youtube_url' => 'http://youtube.com',
+                'email' => fake()->email()
             ]);
         }
     }

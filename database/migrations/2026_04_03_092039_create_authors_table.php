@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('image_url')->nullable();
             $table->text('about');
-            $table->string('facebook_url')->nullable();
+            $table->string('email')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('tiktok_url')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->string('youtube_url')->nullable();
             $table->timestamps();
         });
