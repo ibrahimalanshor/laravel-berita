@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
 <nav class="flex items-center justify-center border rounded w-fit mx-auto border-neutral-300">
     @if (!$paginator->onFirstPage())
-    <a href="{{ $paginator->previousPageUrl() }}" class="w-9 h-9 flex items-center justify-center border-r border-neutral-300">
+    <a href="{{ $paginator->previousPageUrl() }}" class="w-9 h-9 flex items-center justify-center border-r border-neutral-300" aria-label="Halaman Sebelumnya">
         <span class="icon-[tabler--chevron-left]"></span>
     </a>
     @endif
@@ -28,7 +28,7 @@
         @endif
     @endforeach
     @if ($paginator->hasMorePages())
-    <a href="{{ $paginator->nextPageUrl() }}" class="w-9 h-9 flex items-center justify-center ">
+    <a href="{{ $paginator->nextPageUrl() }}" class="w-9 h-9 flex items-center justify-center" aria-label="Halaman Selanjutnya">
         <span class="icon-[tabler--chevron-right]"></span>
     </a>
     @endif
