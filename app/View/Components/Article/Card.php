@@ -21,7 +21,8 @@ class Card extends Component
     public function __construct(
         public $article,
         public $type,
-        public bool $featured = false
+        public bool $featured = false,
+        public $titleLevel = 3
     )
     {
         $this->classList = $this->getClassList($type);

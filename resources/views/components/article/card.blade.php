@@ -3,14 +3,14 @@
         <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" @class([$classList['thumbnail'], $classList['thumbnail-normal'] => !$featured, $classList['thumbnail-featured'] => $featured])>
     </a>
     <div class="{{ $classList['content'] }}">
-        <h3 @class([
+        <h{{ $titleLevel }} @class([
             'font-bold sm:hover:underline',
             $classList['title'],
             $classList['title-featured'] => $featured,
             $classList['title-normal'] => !$featured,
         ])>
             <a href="{{ route('article.detail', ['article' => $article]) }}">{{ $article->title }}</a>
-        </h3>
+        </h{{ $titleLevel }}>
         <div class="{{ $classList['meta'] }}">
             <a href="{{ route('category.detail', ['category' => $article->category] )}}" @class([
                 'truncate hover:underline',

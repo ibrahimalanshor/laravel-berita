@@ -6,7 +6,7 @@
     <section class="py-4 space-y-4" aria-label="Berita Utama Pilihan Editor">
         <div class="grid gap-4 sm:grid-cols-5">
                 @foreach ($articles as $article)
-                    <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
+                    <x-article.card :article="$article" title-level="2" type="editor" @class(['splide__slide']) />
                 @endforeach
             </div>
         </div>
