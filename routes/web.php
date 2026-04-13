@@ -29,7 +29,9 @@ Route::controller(SubscribeController::class)
     ->name('subscribe.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/checkout/{package:slug}', 'checkout')->name('checkout');
+        Route::get('/checkout/{package:slug}', 'checkout')
+            ->name('checkout')
+            ->middleware('auth');
     });
     
 Route::get('{article:slug}', [HomeController::class, 'article'])
