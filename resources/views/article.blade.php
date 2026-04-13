@@ -44,7 +44,9 @@
 
                 <ul class="flex flex-wrap gap-2">
                     @foreach ($article->tags as $tag)
-                        <x-tag.link :tag="$tag" />
+                        <li>
+                            <x-tag.link :tag="$tag" />
+                        </li>
                     @endforeach
                 </ul>
             </section>

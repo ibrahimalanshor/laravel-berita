@@ -1,5 +1,5 @@
 <div class="relative sm:flex sm:items-center sm:gap-2">
-    <button class="text-neutral-700 flex items-center open-share-dropdown sm:hidden" data-toggle="dropdown" data-target="#share-dropdown">
+    <button class="text-neutral-700 flex items-center open-share-dropdown sm:hidden" data-toggle="dropdown" data-target="#share-dropdown" aria-label="Bagikan">
         <span class="icon-[tabler--share] size-5"></span>
     </button>
     <p class="hidden md:block text-sm text-neutral-700">Bagikan:</p>

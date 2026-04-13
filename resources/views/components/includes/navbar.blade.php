@@ -1,6 +1,8 @@
 <nav class="bg-neutral-900 h-14 text-white lg:h-15 sticky top-0 z-10">
     <x-base.container class="h-full flex items-center justify-between">
-        <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>
+        @if (request()->route()->named('home'))
+            <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>
+        @endif
         <button class="open-nav-menu flex items-center sm:hidden" aria-label="Buka Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
             <span class="icon-[tabler--menu-2] size-5"></span>
         </button>
