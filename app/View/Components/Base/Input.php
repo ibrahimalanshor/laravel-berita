@@ -43,12 +43,12 @@ class Input extends Component
     {
         $sizeClass = match ($this->size) {
             'sm' => 'h-9 px-3 rounded-md',
-            'md' => '',
+            'md' => 'h-10 px-3 rounded-md',
             'custom' => ''
         };
 
         $colorClass = match ($this->color) {
-            'light' => '',
+            'light' => 'border border-neutral-300',
             'custom' => ''
         };
         

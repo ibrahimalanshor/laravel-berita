@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('home')
@@ -8,8 +9,6 @@ Route::name('home')
 
 Route::view('login', 'login')
     ->name('login');
-Route::get('subscribe', [HomeController::class, 'subscribe'])
-    ->name('subscribe');
 Route::get('search', [HomeController::class, 'search'])
     ->name('search');
 Route::get('berita', [HomeController::class, 'news'])
@@ -24,5 +23,14 @@ Route::get('halaman/{page:slug}', [HomeController::class, 'page'])
     ->name('page.detail');
 Route::get('author/{author:slug}', [HomeController::class, 'author'])
     ->name('author.detail');
+
+Route::controller(SubscribeController::class)
+    ->prefix('subscribe')
+    ->name('subscribe.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/checkout/{package:slug}', 'checkout')->name('checkout');
+    });
+    
 Route::get('{article:slug}', [HomeController::class, 'article'])
     ->name('article.detail');

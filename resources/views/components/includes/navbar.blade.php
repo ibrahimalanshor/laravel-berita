@@ -31,7 +31,7 @@
                 <p>Masuk</p>
             </x-base.button>
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe') }}">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                 <p>Berlangganan</p>
             </x-base.button>
 
@@ -61,7 +61,7 @@
                 />
             </form>
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe') }}">
+            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
                 <p>Berlangganan</p>
             </x-base.button>
 

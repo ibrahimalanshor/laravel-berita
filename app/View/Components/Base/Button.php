@@ -47,7 +47,7 @@ class Button extends Component
     {
         $colorClass = match($this->color) {
             'light' => 'bg-white text-neutral-900',
-            'bordered' => 'bg-white border border-neutral-300 text-neutral-900',
+            'bordered' => 'bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100',
             'primary' => 'bg-sky-600 text-white hover:bg-sky-700'
         };
 

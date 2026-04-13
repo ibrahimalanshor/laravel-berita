@@ -15,7 +15,7 @@
                     <article class="border border-neutral-200 rounded-md p-4 space-y-4">
                         <div class="space-y-2">
                             <h3 class="font-bold text-lg text-neutral-900">{{ $package->name }}</h3>
-                            <p class="text-lg text-red-600 font-bold lg:text-xl">Rp {{ $package->price }}/bulan</p>
+                            <p class="text-lg text-red-600 font-bold lg:text-xl">Rp {{ number_format($package->price) }}/bulan</p>
                             <p class="text-neutral-700 text-sm">Manfaat yang didapatkan:</p>
                             <ul class="space-y-1">
                                 <li @class(['flex items-center gap-2', 'line-through opacity-50' => !$package->newsletter])>
@@ -32,7 +32,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <x-base.button :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Mulai Berlangganan</x-base.button>
+                        <x-base.button tag-name="a" href="{{ route('subscribe.checkout', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Mulai Berlangganan</x-base.button>
                     </article>
                 @endforeach
             </div>
