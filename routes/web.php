@@ -10,8 +10,12 @@ Route::name('home')
 
 Route::view('login', 'login')
     ->name('login');
-Route::get('auth/google', [AuthController::class, 'redirectToGoogle'])
-    ->name('auth.google');
+Route::prefix('auth/google')
+    ->name('auth.google')
+    ->group(function () {
+        Route::get('/', [AuthController::class, 'redirectToGoogle']);
+        Route::get('/callback', [AuthController::class, 'handleGoogleCallback']);
+    });
 
 Route::get('search', [HomeController::class, 'search'])
     ->name('search');
