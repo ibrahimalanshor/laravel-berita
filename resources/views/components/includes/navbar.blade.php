@@ -29,7 +29,7 @@
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('login') }}">
+            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('auth.google') }}">
                 <p>Masuk</p>
             </x-base.button>
 
@@ -67,7 +67,7 @@
                 <p>Berlangganan</p>
             </x-base.button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('login') }}">
+            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('auth.google') }}">
                 <p>Masuk</p>
             </x-base.button>
         </div>
