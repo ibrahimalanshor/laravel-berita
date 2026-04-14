@@ -17,6 +17,9 @@
         @livewireStyles
     </head>
     <body>
+        <nav class="bg-neutral-900 h-14 lg:h-15 flex items-center justify-center fixed top-0 left-0 w-full">
+            <x-includes.logo class="max-h-6" />
+        </nav>
         @yield('content')
 
         @livewireScripts

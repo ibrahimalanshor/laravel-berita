@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="prose prose-neutral prose-a:text-sky-600 max-w-none mx-auto">{!! $author->about !!}</div>
+    <div class="prose prose-neutral prose-a:text-red-700 max-w-none mx-auto">{!! $author->about !!}</div>
     
 </article>
 

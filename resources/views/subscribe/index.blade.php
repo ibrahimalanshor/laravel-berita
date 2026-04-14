@@ -15,19 +15,19 @@
                     <article class="border border-neutral-200 rounded-md p-4 space-y-4">
                         <div class="space-y-2">
                             <h3 class="font-bold text-lg text-neutral-900">{{ $package->name }}</h3>
-                            <p class="text-lg text-red-600 font-bold lg:text-xl">Rp {{ number_format($package->price) }}/bulan</p>
+                            <p class="text-lg text-red-700 font-bold lg:text-xl">Rp {{ number_format($package->price) }}/bulan</p>
                             <p class="text-neutral-700 text-sm">Manfaat yang didapatkan:</p>
                             <ul class="space-y-1">
                                 <li @class(['flex items-center gap-2', 'line-through opacity-50' => !$package->newsletter])>
-                                    <span class="{{ $package->newsletter ? 'icon-[tabler--check] text-green-600' : 'icon-[tabler--x] text-red-600' }}"></span>
+                                    <span class="{{ $package->newsletter ? 'icon-[tabler--check] text-green-700' : 'icon-[tabler--x] text-red-700' }}"></span>
                                     <p class="text-neutral-900">Notifikasi email artikel terbaru</p>
                                 </li>
                                 <li @class(['flex items-center gap-2', 'line-through opacity-50' => !$package->no_ads])>
-                                    <span class="{{ $package->no_ads ? 'icon-[tabler--check] text-green-600' : 'icon-[tabler--x] text-red-600' }}"></span>
+                                    <span class="{{ $package->no_ads ? 'icon-[tabler--check] text-green-700' : 'icon-[tabler--x] text-red-700' }}"></span>
                                     <p class="text-neutral-900">Bebas Iklan</p>
                                 </li>
                                 <li @class(['flex items-center gap-2', 'line-through opacity-50' => !$package->premium_articles])>
-                                    <span class="{{ $package->premium_articles ? 'icon-[tabler--check] text-green-600' : 'icon-[tabler--x] text-red-600' }}"></span>
+                                    <span class="{{ $package->premium_articles ? 'icon-[tabler--check] text-green-700' : 'icon-[tabler--x] text-red-700' }}"></span>
                                     <p class="text-neutral-900">Akses ke artikel premium sepuasnya</p>
                                 </li>
                             </ul>

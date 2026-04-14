@@ -18,7 +18,7 @@
 
                     <div class="text-sm flex items-center justify-between">
                         <div>
-                            <a href="{{ route('author.detail', ['author' => $article->author->slug])}}" class="text-sky-600 font-medium hover:underline">{{ $article->author->name }}</a>
+                            <a href="{{ route('author.detail', ['author' => $article->author->slug])}}" class="text-red-700 font-medium hover:underline">{{ $article->author->name }}</a>
                             <p class="text-xs text-neutral-700 sm:text-sm">Terbit {{ formatDate($article->published_at) }}</p>
                         </div>
 
@@ -32,7 +32,7 @@
                     <figcaption class="text-xs text-neutral-700 mt-1">{{ $article->thumbnail_caption }}</figcaption>
                 </figure>
 
-                <div class="prose prose-neutral prose-a:text-sky-600 max-w-none">
+                <div class="prose prose-neutral prose-a:text-red-700 max-w-none">
                     {!! $article->content !!}
                 </div>
             </article>

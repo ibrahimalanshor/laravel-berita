@@ -13,7 +13,7 @@
             @foreach ($element as $page => $url)
                 @if ($page == $paginator->currentPage())
                     <span @class([
-                        'w-9 h-9 flex items-center justify-center bg-sky-600 text-white font-medium',
+                        'w-9 h-9 flex items-center justify-center bg-red-700 text-white font-medium',
                         'rounded-l' => $page === 1,
                         'border-r border-neutral-300' => $page !== $paginator->lastPage(),
                         'rounded-r' => $page === $paginator->lastPage()
