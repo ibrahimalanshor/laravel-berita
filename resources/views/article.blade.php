@@ -22,7 +22,10 @@
                             <p class="text-xs text-neutral-700 sm:text-sm">Terbit {{ formatDate($article->published_at) }}</p>
                         </div>
 
-                        <x-article.share :article="$article" />
+                        <div class="flex items-center gap-2 sm:flex-col sm:items-end">
+                            <x-article.action />
+                            <x-article.share :article="$article" />
+                        </div>
                     </div>
                 </header>
 
