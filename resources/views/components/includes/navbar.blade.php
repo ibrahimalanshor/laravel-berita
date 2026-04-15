@@ -29,13 +29,33 @@
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('auth.google') }}">
-                <p>Masuk</p>
-            </x-base.button>
+            @if (!auth()->check())
+                <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('auth.google') }}">
+                    <p>Masuk</p>
+                </x-base.button>
+            @endif
 
             <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                 <p>Berlangganan</p>
             </x-base.button>
+
+            @if (auth()->check())
+                <hr class="border-neutral-300 sm:hidden">
+
+                @php
+                    $userMenus = [
+                        'Profil' => route('profile'),
+                        'Baca Nanti' => route('read-later'),
+                        'Artikel Favorit' => route('favourite')
+                    ]
+                @endphp
+
+                <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
+                    @foreach ($userMenus as $menu => $url)
+                        <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
+                    @endforeach
+                </div>
+            @endif
 
             <hr class="border-neutral-300 sm:hidden">
 

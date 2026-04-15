@@ -11,7 +11,8 @@ Route::name('home')
 Route::controller(AuthController::class)
     ->group(function () {
         Route::get('login', 'login')
-            ->name('login');
+            ->name('login')
+            ->middleware('guest');
 
         Route::prefix('auth/google')
             ->name('auth.google')
@@ -19,6 +20,16 @@ Route::controller(AuthController::class)
                 Route::get('/', 'redirectToGoogle');
                 Route::get('/callback', 'handleGoogleCallback');
             });
+    });
+
+Route::middleware('auth')
+    ->group(function () {
+        Route::view('profil', 'profile')
+            ->name('profile');
+        Route::view('baca-nanti', 'read-later')
+            ->name('read-later');
+        Route::view('favorit', 'favourite')
+            ->name('favourite');
     });
 
 Route::get('search', [HomeController::class, 'search'])
