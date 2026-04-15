@@ -18,8 +18,14 @@ class AuthController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-
-    public function handleGoogleCallback()
+    
+    /**
+     * handleGoogleCallback
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function handleGoogleCallback(Request $request)
     {
         $googleUser = Socialite::driver('google')->user();
 
@@ -36,6 +42,12 @@ class AuthController extends Controller
         
         Auth::login($user);
 
-        return redirect()->route('home');
+        if (!$request->session()->exists('login-action-checkout')) {
+            return redirect()->route('home');
+        }
+
+        $loginActionCheckout = $request->session()->exists('login-action-checkout');
+
+        return route('subscribe.checkout', ['slug' => $loginActionCheckout]);
     }
 }
