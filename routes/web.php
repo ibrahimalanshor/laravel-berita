@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\Route;
 Route::name('home')
     ->get('/', [HomeController::class, 'index']);
 
-Route::view('login', 'login')
-    ->name('login');
-Route::prefix('auth/google')
-    ->name('auth.google')
+Route::controller(AuthController::class)
     ->group(function () {
-        Route::get('/', [AuthController::class, 'redirectToGoogle']);
-        Route::get('/callback', [AuthController::class, 'handleGoogleCallback']);
+        Route::get('login', 'login')
+            ->name('login');
+
+        Route::prefix('auth/google')
+            ->name('auth.google')
+            ->group(function () {
+                Route::get('/', 'redirectToGoogle');
+                Route::get('/callback', 'handleGoogleCallback');
+            });
     });
 
 Route::get('search', [HomeController::class, 'search'])
@@ -38,7 +42,8 @@ Route::controller(SubscribeController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/checkout/{package:slug}', 'checkout')
-            ->name('checkout');
+            ->name('checkout')
+            ->middleware('auth');
     });
     
 Route::get('{article:slug}', [HomeController::class, 'article'])

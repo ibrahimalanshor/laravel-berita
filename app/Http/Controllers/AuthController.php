@@ -5,10 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Socialite;
 
 class AuthController extends Controller
-{    
+{  
+    /**
+     * login
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function login(Request $request)
+    {
+        $intended = $request->session()->get('url.intended');
+        $intentedToCheckout = $intended && Str::contains($intended, 'checkout');
+
+        return view('login', [
+            'title' => 'Masuk atau Daftar - Lararita',
+            'description' => 'Masuk ke akun Anda untuk mendapatkan pengalaman terbaik dalam membaca berita di Lararita',
+            'intentedToCheckout' => $intentedToCheckout
+        ]);
+    }
+    
     /**
      * redirectToGoogle
      *
@@ -46,8 +65,6 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
 
-        $loginActionCheckout = $request->session()->exists('login-action-checkout');
-
-        return route('subscribe.checkout', ['slug' => $loginActionCheckout]);
+        return redirect()->intended(route('home'));
     }
 }

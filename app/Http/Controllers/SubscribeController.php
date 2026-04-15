@@ -33,13 +33,6 @@ class SubscribeController extends Controller
      */
     public function checkout(SubscriptionPackage $package, Request $request)
     {
-        if (!Auth::check()) {
-            $request->session()->put('login-action-checkout', $package->slug);
-
-            return redirect()
-                ->route('login');
-        }
-
         return view('subscribe.checkout', [
             'title' => 'Checkout Berlangganan Lararita',
             'description' => "Konfirmasi berlangganan paket {$package->name} dengan melakukan pembayaran melalui metode yang tersedia",
