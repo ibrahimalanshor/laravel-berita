@@ -85,11 +85,16 @@
                 </x-base.button>
             @else
                 <div class="flex items-center relative">
-                    <button class="flex items-center" aria-label="Buka Profil">
+                    <button class="open-user-navbar-dropdown flex items-center cursor-pointer" aria-label="Buka Profil" data-toggle="dropdown" data-target="#user-navbar-dropdown">
                         <span class="icon-[tabler--user-circle] size-5"></span>
                     </button>
 
-                    <div class="absolute bg-white top-10 right-0 shadow rounded-md text-neutral-700 py-1 min-w-40">
+                    <div
+                        id="user-navbar-dropdown"
+                        class="hidden absolute bg-white top-10 right-0 shadow rounded-md text-neutral-700 py-1 min-w-40"
+                        data-click-outside-close="dropdown"
+                        data-ignore=".open-user-navbar-dropdown"
+                    >
                         @php
                             $menuIcon = [
                                 'Profil' => 'icon-[tabler--user]',
@@ -103,6 +108,10 @@
                                 {{ $menu }}
                             </a>
                         @endforeach
+                        <a href="" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 border-t border-neutral-200">
+                            <span class="icon-[tabler--logout] size-4"></span>
+                            Logout
+                        </a>
                     </div>
                 </div>
             @endif

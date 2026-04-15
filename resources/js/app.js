@@ -66,16 +66,12 @@ toggles.forEach(toggle => {
     })
 })
 
-clickOutsideCloses.forEach(el => {
-    const type = el.dataset.clickOutsideClose
-    
-    if (type === 'drawer') {
-        const ignores = Array.from(document.querySelectorAll(el.dataset.ignore))
+clickOutsideCloses.forEach(el => {    
+    const ignores = Array.from(document.querySelectorAll(el.dataset.ignore))
 
-        document.addEventListener('click', e => {
-            if (!el.classList.contains('hidden') && !el.contains(e.target) && !ignores.some(ignore => ignore.contains(e.target))) {
-                closeEl(el, el.dataset.closeType)
-            }
-        })
-    }
+    document.addEventListener('click', e => {
+        if (!el.classList.contains('hidden') && !el.contains(e.target) && !ignores.some(ignore => ignore.contains(e.target))) {
+            closeEl(el, el.dataset.closeType)
+        }
+    })
 })

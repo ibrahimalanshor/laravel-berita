@@ -6,7 +6,7 @@
     <div
         id="share-dropdown"
         class="hidden absolute bg-white border border-neutral-200 rounded-md shadow-lg right-0 mt-2 py-1 sm:flex sm:static sm:bg-none sm:border-0 sm:shadow-none sm:p-0 sm:m-0 sm:gap-2"
-        data-click-outside-close="drawer"
+        data-click-outside-close="dropdown"
         data-ignore=".open-share-dropdown"
     >
         <a target="_blank" href="https://api.whatsapp.com/send?text={{  urlencode($shareText) }}" class="flex items-center gap-2 px-3 py-2 sm:p-0">
