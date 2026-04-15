@@ -42,15 +42,7 @@
             @if (auth()->check())
                 <hr class="border-neutral-300 sm:hidden">
 
-                @php
-                    $userMenus = [
-                        'Profil' => route('profile'),
-                        'Baca Nanti' => route('read-later'),
-                        'Artikel Favorit' => route('favourite')
-                    ]
-                @endphp
-
-                <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
+                <div class="flex flex-col gap-2 font-medium sm:hidden">
                     @foreach ($userMenus as $menu => $url)
                         <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
                     @endforeach
@@ -87,9 +79,33 @@
                 <p>Berlangganan</p>
             </x-base.button>
 
-            <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('auth.google') }}">
-                <p>Masuk</p>
-            </x-base.button>
+            @if (!auth()->check())
+                <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('auth.google') }}">
+                    <p>Masuk</p>
+                </x-base.button>
+            @else
+                <div class="flex items-center relative">
+                    <button class="flex items-center" aria-label="Buka Profil">
+                        <span class="icon-[tabler--user-circle] size-5"></span>
+                    </button>
+
+                    <div class="absolute bg-white top-10 right-0 shadow rounded-md text-neutral-700 py-1 min-w-40">
+                        @php
+                            $menuIcon = [
+                                'Profil' => 'icon-[tabler--user]',
+                                'Baca Nanti' => 'icon-[tabler--bookmark]',
+                                'Artikel Favorit' => 'icon-[tabler--heart]'
+                            ]
+                        @endphp
+                        @foreach ($userMenus as $menu => $url)
+                            <a href="" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
+                                <span class="{{ $menuIcon[$menu] }} size-4"></span>
+                                {{ $menu }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </x-base.container>
 </nav>

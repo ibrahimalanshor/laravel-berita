@@ -31,6 +31,13 @@ class Navbar extends Component
      * @var mixed
      */
     public bool $displayTag;
+    
+    /**
+     * userMenus
+     *
+     * @var array
+     */
+    public $userMenus = [];
 
     /**
      * Create a new component instance.
@@ -40,6 +47,12 @@ class Navbar extends Component
         $this->menus = Menu::where('type', 'navbar')
             ->take(4)
             ->get();
+
+        $this->userMenus = [
+            'Profil' => route('profile'),
+            'Baca Nanti' => route('read-later'),
+            'Artikel Favorit' => route('favourite')
+        ];
 
         $this->displayTag = Route::currentRouteName() === 'home';
 
