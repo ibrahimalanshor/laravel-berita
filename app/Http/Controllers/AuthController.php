@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -44,22 +45,9 @@ class AuthController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function handleGoogleCallback(Request $request)
+    public function handleGoogleCallback(Request $request, AuthService $authService)
     {
-        $googleUser = Socialite::driver('google')->user();
-
-        $user = User::updateOrCreate(
-            [
-                'google_id' => $googleUser->id
-            ],
-            [
-                'name' => $googleUser->name,
-                'email' => $googleUser->email,
-                'email_verified_at' => now(),
-            ]
-        );
-        
-        Auth::login($user);
+        $authService->loginFromCallback(Socialite::driver('google')->user());
 
         if (!$request->session()->exists('login-action-checkout')) {
             return redirect()->route('home');

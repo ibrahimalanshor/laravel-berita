@@ -25,15 +25,28 @@
             sm:absolute sm:top-16 sm:rounded-md sm:left-4 sm:h-auto sm:border sm:border-neutral-300 sm:shadow-lg sm:shadow-black/50 sm:space-y-0
             lg:static lg:flex lg:top-0 lg:left-0 lg:w-auto lg:bg-transparent lg:text-white lg:border-0 lg:shadow-none
         " id="nav-menu" data-click-outside-close="drawer" data-ignore=".open-nav-menu">
-            <button class="flex items-center ml-auto sm:hidden" aria-label="Tutup Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
-                <span class="icon-[tabler--x] size-5"></span>
-            </button>
+            <div class="flex items-center @if (auth()->check()) justify-between @else justify-end @endif sm:hidden">
+                @auth
+                    @php
+                        $user = auth()->user()
+                    @endphp
 
-            @if (!auth()->check())
+                    @if ($user->avatar_url)
+                        <span class="icon-[tabler--user-circle] size-5"></span>
+                    @else
+                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-7 rounded-full">
+                    @endif
+                @endauth
+                <button class="flex items-center" aria-label="Tutup Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
+
+            @guest
                 <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="bordered" class="w-full sm:hidden" href="{{ route('auth.google') }}">
                     <p>Masuk</p>
                 </x-base.button>
-            @endif
+            @endguest
 
             <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                 <p>Berlangganan</p>
@@ -86,12 +99,20 @@
             @else
                 <div class="flex items-center relative">
                     <button class="open-user-navbar-dropdown flex items-center cursor-pointer" aria-label="Buka Profil" data-toggle="dropdown" data-target="#user-navbar-dropdown">
-                        <span class="icon-[tabler--user-circle] size-5"></span>
+                        @php
+                            $user = auth()->user()
+                        @endphp
+
+                        @if (!$user->avatar_url)
+                            <span class="icon-[tabler--user-circle] size-5"></span>
+                        @else
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-9 rounded-full">
+                        @endif
                     </button>
 
                     <div
                         id="user-navbar-dropdown"
-                        class="hidden absolute bg-white top-10 right-0 shadow rounded-md text-neutral-700 py-1 min-w-40"
+                        class="hidden absolute bg-white {{ $user->avatar_url ? 'top-11' : 'top-10' }} right-0 shadow rounded-md text-neutral-700 py-1 min-w-40"
                         data-click-outside-close="dropdown"
                         data-ignore=".open-user-navbar-dropdown"
                     >
