@@ -25,10 +25,12 @@ Route::controller(AuthController::class)
     });
 
 Route::controller(ProfileController::class)
+    ->prefix('profile')
+    ->name('profile.')
     ->middleware('auth')
     ->group(function () {
-        Route::get('profil', 'view')
-            ->name('profile');
+        Route::get('/', 'view')
+            ->name('index');
         Route::get('baca-nanti', 'bookmark')
             ->name('bookmark');
         Route::get('favorit', 'favourite')
