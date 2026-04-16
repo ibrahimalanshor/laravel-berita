@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscribeController;
@@ -26,8 +27,8 @@ Route::middleware('auth')
     ->group(function () {
         Route::view('profil', 'profile')
             ->name('profile');
-        Route::view('baca-nanti', 'read-later')
-            ->name('read-later');
+        Route::view('baca-nanti', 'bookmark')
+            ->name('bookmark');
         Route::view('favorit', 'favourite')
             ->name('favourite');
     });
@@ -57,5 +58,12 @@ Route::controller(SubscribeController::class)
             ->middleware('auth');
     });
     
-Route::get('{article:slug}', [HomeController::class, 'article'])
-    ->name('article.detail');
+Route::controller(ArticleController::class)
+    ->name('article.')
+    ->group(function () {
+        Route::post('/{article:slug}/bookmark', 'bookmark')
+            ->name('bookmark')
+            ->middleware('auth');
+        Route::get('{article:slug}', 'view')
+            ->name('detail');
+    });

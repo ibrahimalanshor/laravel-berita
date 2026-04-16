@@ -23,7 +23,9 @@
                         </div>
 
                         <div class="flex items-center gap-2 sm:flex-col sm:items-end">
-                            <x-article.action />
+                            @auth
+                                <x-article.action :article="$article" />
+                            @endauth
                             <x-article.share :article="$article" />
                         </div>
                     </div>

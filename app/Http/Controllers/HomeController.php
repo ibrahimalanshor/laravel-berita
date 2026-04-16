@@ -53,53 +53,6 @@ class HomeController extends Controller
     }
     
     /**
-     * article
-     *
-     * @return void
-     */
-    public function article(Article $article)
-    {
-        $article->load('category', 'tags', 'author');
-
-        $categoryArticles = $article->category
-            ->articles()
-            ->with('category')
-            ->latest('published_at')
-            ->take(6)
-            ->get();
-
-        $relatedArticles = Article::where('id', '!=', $article->id)
-            ->whereHas('tags', function ($query) use ($article) {
-                $query->whereIn('tags.id', $article->tags->pluck('id'));
-            })
-            ->latest('published_at')
-            ->take(6)
-            ->get();
-
-            
-        $highlightArticles = Article::inRandomOrder()
-            ->take(5)
-            ->with('category')
-            ->get();
-
-        $editorArticles = Article::latest('published_at')
-            ->take(5)
-            ->with('category')
-            ->where('featured', true)
-            ->get();
-        
-        return view('article', [
-            'title' => $article->title,
-            'description' => $article->summary,
-            'article' => $article,
-            'categoryArticles' => $categoryArticles,
-            'relatedArticles' => $relatedArticles,
-            'highlightArticles' => $highlightArticles,
-            'editorArticles' => $editorArticles
-        ]);
-    }
-    
-    /**
      * category
      *
      * @param  mixed $category

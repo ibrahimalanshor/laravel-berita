@@ -39,7 +39,7 @@
                 <p>Berlangganan</p>
             </x-base.button>
 
-            @if (auth()->check())
+            @auth
                 <hr class="border-neutral-300 sm:hidden">
 
                 <div class="flex flex-col gap-2 font-medium sm:hidden">
@@ -47,7 +47,7 @@
                         <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
                     @endforeach
                 </div>
-            @endif
+            @endauth
 
             <hr class="border-neutral-300 sm:hidden">
 
