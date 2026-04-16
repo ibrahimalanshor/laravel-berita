@@ -18,6 +18,13 @@ class Action extends Component
     public bool $bookmarked = false;
 
     /**
+     * addedToFavorite
+     *
+     * @var bool
+     */
+    public bool $addedToFavorite = false;
+
+    /**
      * Create a new component instance.
      */
     public function __construct(public Article $article)
@@ -26,6 +33,12 @@ class Action extends Component
 
         $this->bookmarked = $user->bookmarks()
             ->where('article_id', $article->id)
+            ->wherePivot('type', 'bookmark')
+            ->exists();
+
+        $this->addedToFavorite = $user->bookmarks()
+            ->where('article_id', $article->id)
+            ->wherePivot('type', 'favorite')
             ->exists();
     }
 

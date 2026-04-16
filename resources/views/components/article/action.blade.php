@@ -16,9 +16,12 @@
                 <span class="text-neutral-700 sm:hidden">{{ $bookmarked ? 'Hapus dari Baca Nanti' : 'Baca Nanti' }}</span>
             </button>
         </form>
-        <a href="" class="flex items-center gap-2 px-3 py-2 whitespace-nowrap sm:p-0">
-            <span class="icon-[tabler--heart] text-neutral-700 size-4 shrink-0 sm:size-5"></span>
-            <span class="text-neutral-700 sm:hidden">Tambah Ke Favorit</span>
-        </a>
+        <form action="{{ route('article.favorite', ['article' => $article->slug]) }}" method="POST">
+            @csrf
+            <button class="flex items-center gap-2 px-3 py-2 whitespace-nowrap sm:p-0 sm:cursor-pointer" type="submit">
+                <span class="{{ $addedToFavorite ? 'icon-[tabler--heart-filled] text-red-700' : 'icon-[tabler--heart] text-neutral-700' }} size-4 shrink-0 sm:size-5 {{ $addedToFavorite ? 'sm:icon-[tabler--heart-filled]' : 'sm:icon-[tabler--heart]' }}"></span>
+                <span class="text-neutral-700 sm:hidden">{{ $addedToFavorite ? 'Hapus dari Favorit' : 'Tambah Ke Favorit' }}</span>
+            </button>
+        </form>
     </div>
 </div>

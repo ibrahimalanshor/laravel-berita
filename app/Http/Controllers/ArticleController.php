@@ -64,15 +64,49 @@ class ArticleController extends Controller
     public function bookmark(Article $article, Request $request)
     {
         $user = $request->user();
+        $bookmarked = $user->bookmarks()
+            ->where('article_id', $article->id)
+            ->wherePivot('type', 'bookmark')
+            ->exists();
 
-        if ($user->bookmarks()->where('article_id', $article->id)->exists()) {
-            $user->bookmarks()->detach($article->id);
+        if ($bookmarked) {
+            $user->bookmarks()
+                ->wherePivot('type', 'bookmark')
+                ->detach($article->id, ['type' => 'bookmark']);
 
             return back()->with('message', 'Artikel dihapus dari bookmark');
         }
 
-        $user->bookmarks()->attach($article->id);
+        $user->bookmarks()->attach($article->id, ['type' => 'bookmark']);
 
         return back()->with('message', 'Artikel ditambahkan ke bookmark');
+    }
+    
+    /**
+     * favorite
+     *
+     * @param  mixed $article
+     * @param  mixed $request
+     * @return void
+     */
+    public function favorite(Article $article, Request $request)
+    {
+        $user = $request->user();
+        $favourited = $user->bookmarks()
+            ->where('article_id', $article->id)
+            ->wherePivot('type', 'favorite')
+            ->exists();
+
+        if ($favourited) {
+            $user->bookmarks()
+                ->wherePivot('type', 'favorite')
+                ->detach($article->id, ['type' => 'favorite']);
+
+            return back()->with('message', 'Artikel dihapus dari favorit');
+        }
+
+        $user->bookmarks()->attach($article->id, ['type' => 'favorite']);
+
+        return back()->with('message', 'Artikel ditambahkan ke favorit');
     }
 }

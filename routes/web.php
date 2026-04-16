@@ -60,10 +60,17 @@ Route::controller(SubscribeController::class)
     
 Route::controller(ArticleController::class)
     ->name('article.')
+    ->prefix('{article:slug}')
     ->group(function () {
-        Route::post('/{article:slug}/bookmark', 'bookmark')
-            ->name('bookmark')
-            ->middleware('auth');
-        Route::get('{article:slug}', 'view')
+        Route::middleware('auth')
+            ->group(function () {
+                Route::post('/bookmark', 'bookmark')
+                    ->name('bookmark')
+                    ->middleware('auth');
+                Route::post('/favorite', 'favorite')
+                    ->name('favorite')
+                    ->middleware('auth');
+            });
+        Route::get('/', 'view')
             ->name('detail');
     });
