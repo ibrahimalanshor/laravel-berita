@@ -31,7 +31,7 @@
                         $user = auth()->user()
                     @endphp
 
-                    @if ($user->avatar_url)
+                    @if (!$user->avatar_url)
                         <span class="icon-[tabler--user-circle] size-5"></span>
                     @else
                         <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-7 rounded-full">
@@ -97,7 +97,7 @@
                     <p>Masuk</p>
                 </x-base.button>
             @else
-                <div class="flex items-center relative">
+                <div class="hidden sm:flex items-center relative">
                     <button class="open-user-navbar-dropdown flex items-center cursor-pointer" aria-label="Buka Profil" data-toggle="dropdown" data-target="#user-navbar-dropdown">
                         @php
                             $user = auth()->user()
@@ -106,7 +106,7 @@
                         @if (!$user->avatar_url)
                             <span class="icon-[tabler--user-circle] size-5"></span>
                         @else
-                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-9 rounded-full">
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-8 rounded-full">
                         @endif
                     </button>
 
@@ -120,11 +120,12 @@
                             $menuIcon = [
                                 'Profil' => 'icon-[tabler--user]',
                                 'Baca Nanti' => 'icon-[tabler--bookmark]',
-                                'Artikel Favorit' => 'icon-[tabler--heart]'
+                                'Artikel Favorit' => 'icon-[tabler--heart]',
+                                'Logout' => 'icon-[tabler--logout]'
                             ]
                         @endphp
                         @foreach ($userMenus as $menu => $url)
-                            <a href="" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
+                            <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
                                 <span class="{{ $menuIcon[$menu] }} size-4"></span>
                                 {{ $menu }}
                             </a>

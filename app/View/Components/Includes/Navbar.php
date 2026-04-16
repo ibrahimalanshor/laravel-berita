@@ -51,7 +51,8 @@ class Navbar extends Component
         $this->userMenus = [
             'Profil' => route('profile'),
             'Baca Nanti' => route('bookmark'),
-            'Artikel Favorit' => route('favourite')
+            'Artikel Favorit' => route('favourite'),
+            'Logout' => route('favourite')
         ];
 
         $this->displayTag = Route::currentRouteName() === 'home';

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,13 +24,14 @@ Route::controller(AuthController::class)
             });
     });
 
-Route::middleware('auth')
+Route::controller(ProfileController::class)
+    ->middleware('auth')
     ->group(function () {
-        Route::view('profil', 'profile')
+        Route::get('profil', 'view')
             ->name('profile');
-        Route::view('baca-nanti', 'bookmark')
+        Route::get('baca-nanti', 'bookmark')
             ->name('bookmark');
-        Route::view('favorit', 'favourite')
+        Route::get('favorit', 'favourite')
             ->name('favourite');
     });
 
