@@ -4,11 +4,15 @@
 <section class="border border-neutral-300 rounded-md p-4 space-y-4">
     <h1 class="font-bold text-neutral-900 text-lg">Baca Nanti ({{ $bookmarksCount }})</h1>
 
-    <div class="space-y-4">
-        @foreach ($bookmarks as $bookmark)
-            <x-article.card type="bookmark" :article="$bookmark" />
-        @endforeach
-    </div>
+    @if ($bookmarksCount === 0)
+        <p class="text-neutral-500">Belum ada artikel yang disimpan untuk dibaca nanti.</p>
+    @else
+        <div class="space-y-4">
+            @foreach ($bookmarks as $bookmark)
+                <x-article.card type="bookmark" :article="$bookmark" />
+            @endforeach
+        </div>
+    @endif
 
     {{ $bookmarks->links('article.pagination') }}
 </section>

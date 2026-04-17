@@ -125,15 +125,11 @@
                             ]
                         @endphp
                         @foreach ($userMenus as $menu => $url)
-                            <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
+                            <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 {{ $menu === 'Logout' ? 'border-t border-neutral-200' : '' }}">
                                 <span class="{{ $menuIcon[$menu] }} size-4"></span>
                                 {{ $menu }}
                             </a>
                         @endforeach
-                        <a href="" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 border-t border-neutral-200">
-                            <span class="icon-[tabler--logout] size-4"></span>
-                            Logout
-                        </a>
                     </div>
                 </div>
             @endif
