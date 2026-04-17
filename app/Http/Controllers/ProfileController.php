@@ -80,4 +80,32 @@ class ProfileController extends Controller
             'favourites' => $favourites
         ]);
     }
+
+    /**
+     * subscribtion
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function subscribtion(Request $request)
+    {
+        $currentRoute = Route::currentRouteName();
+        $favouriteCount = $request->user()
+            ->bookmarks()
+            ->wherePivot('type', 'favorite')
+            ->count();
+        $favourites = $request->user()
+            ->bookmarks()
+            ->wherePivot('type', 'favorite')
+            ->paginate(10);
+
+        return view('profile.subscribtion', [
+            'title' => 'Artikel Favorit - Lararita',
+            'description' => 'Daftar berita yang disimpan sebagai favorit',
+            'user' => $request->user(),
+            'current_route' => $currentRoute,
+            'favouriteCount' => $favouriteCount,
+            'favourites' => $favourites
+        ]);
+    }
 }

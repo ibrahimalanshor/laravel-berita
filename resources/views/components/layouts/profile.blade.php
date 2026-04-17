@@ -1,8 +1,8 @@
 @extends('layouts.home')
 
 @section('content')
-<x-base.container class="py-6 grid gap-4 items-start md:grid-cols-3 md:py-8 lg:py-10">
-    <aside class="border border-neutral-300 p-2 rounded-md flex flex-col space-y-1">
+<x-base.container class="py-6 grid gap-4 items-start md:grid-cols-3 md:py-8 lg:grid-cols-7 lg:py-10">
+    <aside class="border border-neutral-300 p-2 rounded-md flex flex-col space-y-1 lg:col-span-2">
         @php
             $menus = [
                 [
@@ -25,9 +25,9 @@
                 ],
                 [
                     'name' => 'Langganan',
-                    'url' => 'profile.subscribe',
+                    'url' => route('profile.subscribtion'),
                     'icon' => 'tabler--bell-ringing',
-                    'route' => 'profile.subscribe'
+                    'route' => 'profile.subscribtion'
                 ],
                 [
                     'name' => 'Keluar',
@@ -49,7 +49,7 @@
         @endforeach
     </aside>
 
-    <div class="md:col-span-2">
+    <div class="md:col-span-2 lg:col-span-5">
         @yield('profile-content')
     </div>
 </x-base.container>
