@@ -56,7 +56,8 @@ class AuthService
             }
 
             $fileName = 'users/' . Str::random() . '.png';
-            $avatarFilePath = Storage::put($fileName, file_get_contents($tempAvatarFilePath));
+            
+            Storage::put($fileName, file_get_contents($tempAvatarFilePath));
 
             return Storage::url($fileName);
         } catch (Exception $e) {

@@ -2,7 +2,13 @@
 
 use Illuminate\Support\Carbon;
 
-function setting(string $key) : string | null
+/**
+ * setting
+ *
+ * @param  mixed $key
+ * @return string
+ */
+function setting(string $key): string | null
 {
     $setting = cache('setting');
 
@@ -17,7 +23,14 @@ function setting(string $key) : string | null
     return $setting[$key];
 }
 
-function formatDate(string $date) : string
+/**
+ * formatDate
+ *
+ * @param  mixed $date
+ * @param  mixed $format
+ * @return string
+ */
+function formatDate(string $date, string $format = 'l, d M Y'): string
 {
-    return Carbon::parse($date)->format('l, d M Y');
+    return Carbon::parse($date)->format($format);
 }
