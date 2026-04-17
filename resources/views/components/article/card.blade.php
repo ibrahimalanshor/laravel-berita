@@ -26,4 +26,10 @@
             ])>{{ $article->summary }}</p>
         @endif
     </div>
+
+    @if ($type === 'bookmark')
+        <button class="ml-auto self-center cursor-pointer text-red-700 hover:text-red-800">
+            <span class="icon-[tabler--trash] size-4"></span>
+        </button>
+    @endif
 </article>

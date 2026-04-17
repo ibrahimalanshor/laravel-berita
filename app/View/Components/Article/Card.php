@@ -203,6 +203,23 @@ class Card extends Component
             ];
         }
 
+        if ($type === 'bookmark') {
+            return [
+                'container' => 'flex gap-4 sm:flex-row',
+                'title' => 'text-base/5 line-clamp-2',
+                'title-normal' => '',
+                'title-featured' => '',
+                'thumbnail' => 'w-16 h-16 object-cover',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
+                'thumbnail-link' => '',
+                'content' => 'min-w-0 flex flex-col gap-1 justify-start text-neutral-900',
+                'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
+                'category' => 'text-red-700 font-medium',
+                'summary' => 'hidden sm:block sm:text-neutral-700'
+            ];
+        }
+
         return [
             'container' => 'space-y-2',
             'title' => 'text-base/5',

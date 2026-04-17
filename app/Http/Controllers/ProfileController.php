@@ -17,9 +17,39 @@ class ProfileController extends Controller
     {
         $currentRoute = Route::currentRouteName();
 
-        return view('profile', [
+        return view('profile.index', [
             'user' => $request->user(),
-            'current_route' => $currentRoute
+            'current_route' => $currentRoute,
+            'title' => 'Profil Saya - Lararita',
+            'description' => 'Detail informasi akun dan form edit profil pengguna'
+        ]);
+    }  
+
+    /**
+     * bookmark
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function bookmark(Request $request)
+    {
+        $currentRoute = Route::currentRouteName();
+        $bookmarksCount = $request->user()
+            ->bookmarks()
+            ->wherePivot('type', 'bookmark')
+            ->count();
+        $bookmarks = $request->user()
+            ->bookmarks()
+            ->wherePivot('type', 'bookmark')
+            ->paginate(10);
+
+        return view('profile.bookmark', [
+            'title' => 'Baca Nanti - Lararita',
+            'description' => 'Daftar berita yang disimpan untuk dibaca nanti',
+            'user' => $request->user(),
+            'current_route' => $currentRoute,
+            'bookmarksCount' => $bookmarksCount,
+            'bookmarks' => $bookmarks
         ]);
     }
 }
