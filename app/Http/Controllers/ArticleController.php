@@ -74,12 +74,12 @@ class ArticleController extends Controller
                 ->wherePivot('type', 'bookmark')
                 ->detach($article->id, ['type' => 'bookmark']);
 
-            return back()->with('message', 'Artikel dihapus dari bookmark');
+            return back()->with('message', 'Artikel dihapus dari baca nanti');
         }
 
         $user->bookmarks()->attach($article->id, ['type' => 'bookmark']);
 
-        return back()->with('message', 'Artikel ditambahkan ke bookmark');
+        return back()->with('message', 'Artikel ditambahkan ke baca nanti');
     }
     
     /**

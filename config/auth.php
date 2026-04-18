@@ -114,4 +114,5 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    'avatar_dir' => env('AUTH_AVATAR_DIR', 'users')
 ];

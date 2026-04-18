@@ -37,6 +37,8 @@ Route::controller(ProfileController::class)
     ->group(function () {
         Route::get('/', 'view')
             ->name('index');
+        Route::post('/', 'update')
+            ->name('update');
         Route::get('baca-nanti', 'bookmark')
             ->name('bookmark');
         Route::get('favorit', 'favourite')

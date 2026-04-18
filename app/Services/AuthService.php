@@ -55,7 +55,7 @@ class AuthService
                 return null;
             }
 
-            $fileName = 'users/' . Str::random() . '.png';
+            $fileName = config('auth.avatar_dir') . '/' . Str::random() . '.png';
             
             Storage::put($fileName, file_get_contents($tempAvatarFilePath));
 

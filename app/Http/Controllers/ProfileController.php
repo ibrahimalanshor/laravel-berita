@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {  
@@ -23,7 +25,34 @@ class ProfileController extends Controller
             'title' => 'Profil Saya - Lararita',
             'description' => 'Detail informasi akun dan form edit profil pengguna'
         ]);
-    }  
+    }
+    
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function update(UpdateRequest $request)
+    {
+        $user = $request->user();
+
+        $newAvatarUrl = null;
+
+        if ($request->file('avatar')) {
+            $filePath = $request->file('avatar')
+                ->store(config('auth.avatar_dir'));
+            $newAvatarUrl = Storage::url($filePath);
+        }
+
+        $user->update(array_merge(
+            ['name' => $request->input('name')],
+            $request->input('password') ? ['password' => $request->input('password')] : [],
+            $newAvatarUrl ? ['avatar_url' => $newAvatarUrl] : []
+        ));
+
+        return back()->with('message', 'Profil berhasil diperbarui');
+    }
 
     /**
      * bookmark
