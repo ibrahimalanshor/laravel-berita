@@ -203,7 +203,7 @@ class Card extends Component
             ];
         }
 
-        if ($type === 'bookmark') {
+        if ($type === 'bookmark' || $type === 'favorite') {
             return [
                 'container' => 'flex gap-4 sm:flex-row',
                 'title' => 'text-base/5 line-clamp-2',

@@ -27,9 +27,12 @@
         @endif
     </div>
 
-    @if ($type === 'bookmark')
-        <button class="ml-auto self-center cursor-pointer text-red-700 hover:text-red-800">
-            <span class="icon-[tabler--trash] size-4"></span>
-        </button>
+    @if ($type === 'bookmark' || $type === 'favorite')
+        <form action="{{ route('article.' . $type, ['article' => $article]) }}" method="POST" class="ml-auto self-center">
+            @csrf
+            <button class="cursor-pointer text-red-700 hover:text-red-800">
+                <span class="icon-[tabler--trash] size-4"></span>
+            </button>
+        </form>
     @endif
 </article>

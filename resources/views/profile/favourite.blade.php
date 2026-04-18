@@ -9,7 +9,7 @@
     @else
         <div class="space-y-4">
             @foreach ($favourites as $favourite)
-                <x-article.card type="bookmark" :article="$favourite" />
+                <x-article.card type="favorite" :article="$favourite" />
             @endforeach
         </div>
     @endif
