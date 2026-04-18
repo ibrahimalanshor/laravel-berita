@@ -1,6 +1,14 @@
 <article {{ $attributes->class($classList['container']) }}>
     <a @class(['block shrink-0', $classList['thumbnail-link']]) href="{{ route('article.detail', ['article' => $article]) }}">
         <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" @class([$classList['thumbnail'], $classList['thumbnail-normal'] => !$featured, $classList['thumbnail-featured'] => $featured])>
+
+        <p @class([
+            $classList['premium-badge'],
+            $classList['premium-badge-featured'] => $featured,
+            $classList['premium-badge-normal'] => !$featured,
+        ])>
+            <span class="icon-[tabler--star-filled]"></span>
+        </p>
     </a>
     <div class="{{ $classList['content'] }}">
         <h{{ $titleLevel }} @class([

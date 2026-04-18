@@ -60,7 +60,10 @@ class Card extends Component
                 ',
                 'meta' => 'text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm',
                 'category' => 'sm:text-red-700 sm:font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => 'absolute top-4 left-4 z-20 flex items-center justify-center gap-1 font-bold bg-amber-500 text-amber-100 text-sm w-6 h-6 rounded-full',
+                'premium-badge-normal' => 'sm:top-2 sm:left-2 sm:w-5 sm:h-5 sm:text-xs',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -80,7 +83,10 @@ class Card extends Component
                 ',
                 'meta' => 'text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm',
                 'category' => 'sm:text-red-700 sm:font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -93,11 +99,14 @@ class Card extends Component
                 'thumbnail' => 'w-21 h-21 shrink-0 object-cover',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -110,11 +119,14 @@ class Card extends Component
                 'thumbnail' => 'w-21 h-21 shrink-0 object-cover rounded sm:h-[75px] lg:h-[105px] sm:w-full sm:rounded-none',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => 'sm:w-full',
+                'thumbnail-link' => 'sm:w-full relative',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -131,7 +143,10 @@ class Card extends Component
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -148,7 +163,10 @@ class Card extends Component
                 'content' => 'flex flex-col-reverse gap-1 min-w-0 sm:flex-col',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 sm:order-first lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => 'text-sm'
+                'summary' => 'text-sm',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -165,7 +183,10 @@ class Card extends Component
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -182,7 +203,10 @@ class Card extends Component
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900 sm:min-w-0',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => ''
+                'summary' => '',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -199,7 +223,10 @@ class Card extends Component
                 'content' => 'flex flex-col gap-1 justify-start text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => 'hidden sm:block sm:text-neutral-700'
+                'summary' => 'hidden sm:block sm:text-neutral-700',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -216,7 +243,10 @@ class Card extends Component
                 'content' => 'min-w-0 flex flex-col gap-1 justify-start text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
-                'summary' => 'hidden sm:block sm:text-neutral-700'
+                'summary' => 'hidden sm:block sm:text-neutral-700',
+                'premium-badge' => '',
+                'premium-badge-normal' => '',
+                'premium-badge-featured' => ''
             ];
         }
 
@@ -228,11 +258,14 @@ class Card extends Component
             'thumbnail' => 'h-[175px] w-full object-cover sm:h-[75px] lg:h-[105px]',
             'thumbnail-normal' => '',
             'thumbnail-featured' => '',
-            'thumbnail-link' => '',
+            'thumbnail-link' => 'relative',
             'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
             'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
             'category' => 'text-red-700 font-medium',
-            'summary' => ''
+            'summary' => '',
+            'premium-badge' => 'absolute top-2 left-2 z-20 flex items-center justify-center gap-1 font-bold bg-amber-500 text-amber-100 text-sm w-6 h-6 rounded-full',
+            'premium-badge-normal' => 'sm:top-auto sm:bottom-0 sm:left-auto sm:right-0 sm:rounded-none sm:bg-amber-500/75 sm:w-5 sm:h-5 sm:text-xs',
+            'premium-badge-featured' => ''
         ];
     }
 }
