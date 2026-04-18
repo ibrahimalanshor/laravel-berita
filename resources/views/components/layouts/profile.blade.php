@@ -39,13 +39,23 @@
         @endphp
 
         @foreach ($menus as $menu)
-            <a href="{{ $menu['url'] }}" @class([
-                'hover:bg-neutral-100 text-neutral-700 flex items-center gap-2 px-3 py-2 rounded-md',
-                'bg-neutral-100 font-medium' => $current_route === $menu['route']
-            ])>
-                <span class="icon-[{{ $menu['icon'] }}] size-4"></span>
-                {{ $menu['name'] }}
-            </a>
+            @if ($menu['name'] === 'Keluar')
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="hover:bg-neutral-100 text-neutral-700 flex items-center gap-2 px-3 py-2 rounded-md w-full cursor-pointer">
+                        <span class="icon-[{{ $menu['icon'] }}] size-4"></span>
+                        {{ $menu['name'] }}
+                    </button>
+                </form>
+            @else
+                <a href="{{ $menu['url'] }}" @class([
+                    'hover:bg-neutral-100 text-neutral-700 flex items-center gap-2 px-3 py-2 rounded-md',
+                    'bg-neutral-100 font-medium' => $current_route === $menu['route']
+                ])>
+                    <span class="icon-[{{ $menu['icon'] }}] size-4"></span>
+                    {{ $menu['name'] }}
+                </a>
+            @endif
         @endforeach
     </aside>
 

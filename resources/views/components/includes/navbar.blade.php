@@ -127,7 +127,7 @@
                             @if ($menu === 'Logout')
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 w-full border-t border-neutral-200">
+                                    <button class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 w-full border-t border-neutral-200 cursor-pointer">
                                         <span class="{{ $menuIcon[$menu] }} size-4"></span>
                                         {{ $menu }}
                                     </button>
