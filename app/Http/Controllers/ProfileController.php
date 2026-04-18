@@ -90,22 +90,12 @@ class ProfileController extends Controller
     public function subscribtion(Request $request)
     {
         $currentRoute = Route::currentRouteName();
-        $favouriteCount = $request->user()
-            ->bookmarks()
-            ->wherePivot('type', 'favorite')
-            ->count();
-        $favourites = $request->user()
-            ->bookmarks()
-            ->wherePivot('type', 'favorite')
-            ->paginate(10);
 
         return view('profile.subscribtion', [
-            'title' => 'Artikel Favorit - Lararita',
-            'description' => 'Daftar berita yang disimpan sebagai favorit',
+            'title' => 'Status Langganan - Lararita',
+            'description' => 'Status langganan yang aktif',
             'user' => $request->user(),
-            'current_route' => $currentRoute,
-            'favouriteCount' => $favouriteCount,
-            'favourites' => $favourites
+            'current_route' => $currentRoute
         ]);
     }
 }
