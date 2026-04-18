@@ -31,11 +31,7 @@
                         $user = auth()->user()
                     @endphp
 
-                    @if (!$user->avatar_url)
-                        <span class="icon-[tabler--user-circle] size-5"></span>
-                    @else
-                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-7 rounded-full">
-                    @endif
+                    <img src="{{ $user->avatar_url ?? asset('avatar.svg') }}" alt="{{ $user->name }}" class="size-7 rounded-full">
                 @endauth
                 <button class="flex items-center" aria-label="Tutup Menu Navigasi" data-toggle="drawer" data-target="#nav-menu">
                     <span class="icon-[tabler--x] size-5"></span>
@@ -103,16 +99,12 @@
                             $user = auth()->user()
                         @endphp
 
-                        @if (!$user->avatar_url)
-                            <span class="icon-[tabler--user-circle] size-5"></span>
-                        @else
-                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="size-8 rounded-full">
-                        @endif
+                        <img src="{{ $user->avatar_url ?? asset('avatar.svg') }}" alt="{{ $user->name }}" class="size-8 rounded-full">
                     </button>
 
                     <div
                         id="user-navbar-dropdown"
-                        class="hidden absolute bg-white {{ $user->avatar_url ? 'top-11' : 'top-10' }} right-0 shadow rounded-md text-neutral-700 py-1 min-w-40"
+                        class="hidden absolute bg-white top-11 right-0 shadow rounded-md text-neutral-700 py-1 min-w-40"
                         data-click-outside-close="dropdown"
                         data-ignore=".open-user-navbar-dropdown"
                     >
