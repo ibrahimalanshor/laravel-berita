@@ -29,6 +29,18 @@
 
         @livewireScripts
 
+        <script>
+            window.addEventListener('load', function () {
+                @if (session('message'))
+                    Swal.fire({
+                        title: '{{ session('message') }}',
+                        icon: 'success',
+                        confirmButtonText: 'Tutup'
+                    })
+                @endif
+            })
+        </script>
+
         @stack('scripts')
     </body>
 </html>

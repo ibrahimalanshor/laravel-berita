@@ -59,7 +59,7 @@
         @endforeach
     </aside>
 
-    <div class="md:col-span-2 lg:col-span-5">
+    <div class="md:col-span-2 lg:col-span-5 space-y-4">
         @yield('profile-content')
     </div>
 </x-base.container>

@@ -1,8 +1,10 @@
 import './bootstrap';
 import Splide from '@splidejs/splide';
 import '@splidejs/splide/css';
+import Swal from 'sweetalert2'
 
 window.Splide = Splide
+window.Swal = Swal
 
 const appOverlay = document.querySelector('#app-overlay')
 const toggles = document.querySelectorAll('[data-toggle]')
