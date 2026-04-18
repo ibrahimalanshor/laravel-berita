@@ -53,7 +53,14 @@
 
                 <div class="flex flex-col gap-2 font-medium sm:hidden">
                     @foreach ($userMenus as $menu => $url)
-                        <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
+                        @if ($menu === 'Logout')
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="lg:hover:text-neutral-400">{{ $menu }}</button>
+                            </form>
+                        @else
+                            <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
+                        @endif
                     @endforeach
                 </div>
             @endauth
@@ -117,10 +124,20 @@
                             ]
                         @endphp
                         @foreach ($userMenus as $menu => $url)
-                            <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 {{ $menu === 'Logout' ? 'border-t border-neutral-200' : '' }}">
-                                <span class="{{ $menuIcon[$menu] }} size-4"></span>
-                                {{ $menu }}
-                            </a>
+                            @if ($menu === 'Logout')
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100 w-full border-t border-neutral-200">
+                                        <span class="{{ $menuIcon[$menu] }} size-4"></span>
+                                        {{ $menu }}
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
+                                    <span class="{{ $menuIcon[$menu] }} size-4"></span>
+                                    {{ $menu }}
+                                </a>
+                            @endif
                         @endforeach
                     </div>
                 </div>

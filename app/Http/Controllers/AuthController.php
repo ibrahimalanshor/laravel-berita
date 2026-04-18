@@ -55,4 +55,16 @@ class AuthController extends Controller
 
         return redirect()->intended(route('home'));
     }
+    
+    /**
+     * logout
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
 }

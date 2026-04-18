@@ -12,15 +12,21 @@ Route::name('home')
 
 Route::controller(AuthController::class)
     ->group(function () {
-        Route::get('login', 'login')
-            ->name('login')
-            ->middleware('guest');
+        Route::post('logout', 'logout')
+            ->name('logout')
+            ->middleware('auth');
 
-        Route::prefix('auth/google')
-            ->name('auth.google')
+        Route::middleware('guest')
             ->group(function () {
-                Route::get('/', 'redirectToGoogle');
-                Route::get('/callback', 'handleGoogleCallback');
+                Route::get('login', 'login')
+                    ->name('login');
+
+                Route::prefix('auth/google')
+                    ->name('auth.google')
+                    ->group(function () {
+                        Route::get('/', 'redirectToGoogle');
+                        Route::get('/callback', 'handleGoogleCallback');
+                    });
             });
     });
 
