@@ -111,16 +111,16 @@ class ProfileController extends Controller
     }
 
     /**
-     * subscribtion
+     * subscription
      *
      * @param  mixed $request
      * @return void
      */
-    public function subscribtion(Request $request)
+    public function subscription(Request $request)
     {
         $currentRoute = Route::currentRouteName();
 
-        return view('profile.subscribtion', [
+        return view('profile.subscription', [
             'title' => 'Status Langganan - Lararita',
             'description' => 'Status langganan yang aktif',
             'user' => $request->user(),

@@ -43,8 +43,8 @@ Route::controller(ProfileController::class)
             ->name('bookmark');
         Route::get('favorit', 'favourite')
             ->name('favourite');
-        Route::get('subscribtion', 'subscribtion')
-            ->name('subscribtion');
+        Route::get('subscription', 'subscription')
+            ->name('subscription');
     });
 
 Route::get('search', [HomeController::class, 'search'])

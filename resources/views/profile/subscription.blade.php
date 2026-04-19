@@ -5,7 +5,7 @@
     <h1 class="font-bold text-neutral-900 text-lg">Status Langganan</h1>
 
     <div>
-        @if (!$user->subscribtion)
+        @if (!$user->subscription)
             <p class="text-neutral-500">Belum ada langganan. <a href="{{ route('subscribe.index') }}" class="text-red-700 font-medium underline">Tambah Langganan</a>.</p>
         @endif
     </div>

@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\SubscriptionPackage;
+use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
-{
+{    
     /**
-     * article
+     * view
      *
+     * @param  mixed $article
+     * @param  mixed $subscriptionService
      * @return void
      */
-    public function view(Article $article)
+    public function view(Article $article, SubscriptionService $subscriptionService)
     {
         $article->load('category', 'tags', 'author');
 
@@ -47,6 +51,8 @@ class ArticleController extends Controller
             ->where('premium_articles', true)
             ->take(3)
             ->get();
+
+        $hasSubscription = !Auth::check() ? false : $subscriptionService->hasAccessToPremiumArticles(Auth::user());
         
         return view('article', [
             'title' => $article->title,
@@ -56,7 +62,8 @@ class ArticleController extends Controller
             'relatedArticles' => $relatedArticles,
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles,
-            'packages' => $packages
+            'packages' => $packages,
+            'hasSubscription' => $hasSubscription
         ]);
     }
     

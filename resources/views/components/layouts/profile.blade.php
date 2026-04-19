@@ -25,9 +25,9 @@
                 ],
                 [
                     'name' => 'Langganan',
-                    'url' => route('profile.subscribtion'),
+                    'url' => route('profile.subscription'),
                     'icon' => 'tabler--bell-ringing',
-                    'route' => 'profile.subscribtion'
+                    'route' => 'profile.subscription'
                 ],
                 [
                     'name' => 'Keluar',
