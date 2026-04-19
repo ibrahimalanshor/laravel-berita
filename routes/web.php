@@ -53,6 +53,8 @@ Route::get('berita', [HomeController::class, 'news'])
     ->name('news');
 Route::get('pilihan-editor', [HomeController::class, 'featured'])
     ->name('featured');
+Route::get('premium', [HomeController::class, 'premium'])
+    ->name('premium');
 Route::get('tag/{tag:slug}', [HomeController::class, 'tag'])
     ->name('tag.detail');
 Route::get('kategori/{category:slug}', [HomeController::class, 'category'])

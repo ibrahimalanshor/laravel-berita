@@ -106,6 +106,25 @@ class HomeController extends Controller
     }
     
     /**
+     * premium
+     *
+     * @return void
+     */
+    public function premium()
+    {
+        $articles = Article::where('premium', true)
+            ->with('category')
+            ->latest()
+            ->paginate(10);
+
+        return view('premium', [
+            'articles' => $articles,
+            'title' => 'Berita dan Artikel Premium - Lararita',
+            'description' => 'Baca Berita dan Artikel Premium di Lararita'
+        ]);
+    }
+    
+    /**
      * news
      *
      * @return void
