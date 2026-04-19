@@ -37,8 +37,39 @@
                     <figcaption class="text-xs text-neutral-700 mt-1">{{ $article->thumbnail_caption }}</figcaption>
                 </figure>
 
-                <div class="prose prose-neutral prose-a:text-red-700 max-w-none">
+                <div class="prose prose-neutral prose-a:text-red-700 max-w-none line-clamp-[10] relative">
                     {!! $article->content !!}
+
+                    <div class="absolute inset-0 bg-linear-to-b from-white-0 to-white pointer-events-none"></div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <h2 class="font-bold text-xl text-center flex items-center justify-center gap-2 text-neutral-900">
+                            <span class="icon-[tabler--lock-filled] text-amber-600 size-5"></span>
+                            Konten Premium
+                        </h2>
+                        <p class="text-neutral-600 text-center">Berlangganan untuk membaca berita dan artikel premium.</p>
+                    </div>
+
+                    <div class="border border-neutral-300 rounded-md divide-y divide-neutral-300">
+                        @foreach ($packages as $package)
+                            <div class="p-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-neutral-900">{{ $package->name }}</h3>
+                                    <p class="text-red-700 font-bold text-xl">
+                                        {{ number_format($package->price) }}
+                                        <span class="text-base text-neutral-700 font-normal">/ bulan</span>
+                                    </p>
+                                </div>
+                                <x-base.button :color="$package->featured ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">Langganan</x-base.button>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <p class="text-center">
+                        <a href="{{ route('subscribe.index') }}" class="font-medium text-red-700 underline ">Lihat Paket Lainnya</a>
+                    </p>
                 </div>
             </article>
 

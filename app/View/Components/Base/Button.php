@@ -52,7 +52,7 @@ class Button extends Component
         };
 
         $sizeClass = match($this->size) {
-            'sm' => 'h-9 px-3 rounded-md',
+            'sm' => 'h-9 px-3 rounded-md text-sm',
             'md' => 'h-10 px-4 rounded-md',
             'custom' => ''
         };

@@ -1,6 +1,6 @@
 <{{ $tagName }} {{ $attributes->class("gap-2 font-medium $classList") }}>
     @if ($icon)
-        <span class="{{ $icon }} size-4"></span>
+        <span class="{{ $icon }}"></span>
     @endif
     {{ $slot }}
 </{{ $tagName }}>

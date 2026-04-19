@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\SubscriptionPackage;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -31,7 +32,6 @@ class ArticleController extends Controller
             ->take(6)
             ->get();
 
-            
         $highlightArticles = Article::inRandomOrder()
             ->take(5)
             ->with('category')
@@ -42,6 +42,11 @@ class ArticleController extends Controller
             ->with('category')
             ->where('featured', true)
             ->get();
+
+        $packages = SubscriptionPackage::latest('featured')
+            ->where('premium_articles', true)
+            ->take(3)
+            ->get();
         
         return view('article', [
             'title' => $article->title,
@@ -50,7 +55,8 @@ class ArticleController extends Controller
             'categoryArticles' => $categoryArticles,
             'relatedArticles' => $relatedArticles,
             'highlightArticles' => $highlightArticles,
-            'editorArticles' => $editorArticles
+            'editorArticles' => $editorArticles,
+            'packages' => $packages
         ]);
     }
     
