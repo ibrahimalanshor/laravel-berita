@@ -304,7 +304,8 @@ class ArticleSeeder extends Seeder
                 'thumbnail_caption' => 'Menteri HAM Natalius Pigai menyampaikan paparan saat rapat kerja bersama Komisi XIII DPR di Kompleks Parlemen, Senayan, Jakarta, Selasa (7/4/2026). ANTARA FOTO/Rivan Awal Lingga/sgd',
                 'summary' => 'Furqon mengingatkan fenomena \'Godzilla\' El Nino akan menyulitkan bagi nelayan tradisional karena stok ikan menurun dan membuat nelayan melaut lebih jauh.',
                 'content' => $content,
-                'author_id' => $authors->random()
+                'author_id' => $authors->random(),
+                'premium' => rand(0, 5) === 1
             ]);
 
             $article->tags()->attach($tags);

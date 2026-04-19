@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('thumbnail_url');
             $table->string('thumbnail_caption');
             $table->boolean('featured')->default(false);
+            $table->boolean('premium')->default(false);
             $table->text('content');
             $table->datetime('published_at')->nullable();
             $table->foreignId('category_id')->constrained('article_categories')->restrictOnDelete();

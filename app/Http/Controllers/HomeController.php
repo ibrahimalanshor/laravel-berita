@@ -42,13 +42,20 @@ class HomeController extends Controller
             ])
             ->get();
 
+        $premiumArticles = Article::latest('published_at')
+            ->take(5)
+            ->with('category')
+            ->where('premium', true)
+            ->get();
+
         return view('index', [
             'title' => 'Lararita - Berita Terkini, Trending dan Terpercaya',
             'description' => 'Lararita - Berita Indonesia dan Dunia Terkini Hari Ini, Kabar Harian Terbaru Terpercaya Terlengkap Seputar Politik, Ekonomi, Travel, Teknologi, Otomotif, Bola',
             'highlights' => $highlights,
             'flash' => $flash,
             'editors' => $editors,
-            'categories' => $categories
+            'categories' => $categories,
+            'premiumArticles' => $premiumArticles
         ]);
     }
     

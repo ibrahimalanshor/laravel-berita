@@ -27,22 +27,43 @@
             </x-base.container>
         </x-article.section>
 
-        <x-article.section>
-            <x-base.container :paddless="true">
-                <div id="editor-pick-article" class="splide space-y-4">
-                    <div class="px-4">
-                        <x-article.section-title :read-more-url="route('featured')">Pilihan Editor</x-article.section-title>
-                    </div>
-                    <div class="splide__track px-4">
-                        <div class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
-                            @foreach ($editors as $article)
-                                <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
-                            @endforeach
+        @if ($editors->count())
+            <x-article.section>
+                <x-base.container :paddless="true">
+                    <div id="editor-pick-article" class="splide space-y-4">
+                        <div class="px-4">
+                            <x-article.section-title :read-more-url="route('featured')">Pilihan Editor</x-article.section-title>
+                        </div>
+                        <div class="splide__track px-4">
+                            <div class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
+                                @foreach ($editors as $article)
+                                    <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-            </x-base.container>
-        </x-article.section>
+                </x-base.container>
+            </x-article.section>
+        @endif
+        
+        @if ($premiumArticles->count())
+            <x-article.section>
+                <x-base.container :paddless="true">
+                    <div id="premium-article" class="splide space-y-4">
+                        <div class="px-4">
+                            <x-article.section-title :read-more-url="route('premium')">Artikel Premium</x-article.section-title>
+                        </div>
+                        <div class="splide__track px-4">
+                            <div class="splide__list splide__list__grid sm:grid-cols-5 sm:gap-4">
+                                @foreach ($premiumArticles as $article)
+                                    <x-article.card :article="$article" type="editor" @class(['splide__slide']) />
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </x-base.container>
+            </x-article.section>
+        @endif
     </div>
 
     @foreach ($categories as $category)
@@ -90,7 +111,8 @@ window.onload = function () {
     }
 
     createSlider('#highlight-article').mount();
-    createSlider('#editor-pick-article').mount();
+    @if ($editors->count()) createSlider('#editor-pick-article').mount(); @endif
+    @if ($premiumArticles->count()) createSlider('#premium-article').mount(); @endif
 
     const categories = JSON.parse("{{ $categories->pluck('id') }}")
         .map(cat => `category-${cat}-article`)
