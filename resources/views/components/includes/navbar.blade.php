@@ -1,4 +1,4 @@
-<nav class="bg-neutral-900 h-14 text-white lg:h-15 sticky top-0 z-10">
+<nav class="bg-neutral-900 h-14 text-white lg:h-15 sticky top-0 z-20">
     <x-base.container class="h-full flex items-center justify-between">
         @if (request()->route()->named('home'))
             <h1 class="sr-only">{{ $title ?? config('app.name') }}</h1>

@@ -76,7 +76,7 @@ class Card extends Component
                 'thumbnail' => 'rounded-lg w-full h-[225px] object-cover sm:rounded-none sm:w-18 sm:h-18',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => '
                     absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white
                     sm:static sm:p-0 sm:bg-transparent sm:text-neutral-900 sm:bg-none sm:min-w-0
@@ -84,7 +84,7 @@ class Card extends Component
                 'meta' => 'text-sm flex items-center gap-2 sm:order-first sm:text-xs sm:text-neutral-700 lg:text-sm',
                 'category' => 'sm:text-red-700 sm:font-medium',
                 'summary' => '',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute top-4 left-4 z-20 flex items-center justify-center gap-1 font-bold bg-amber-500 text-amber-100 text-sm w-6 h-6 rounded-full sm:top-auto sm:bottom-0 sm:left-auto sm:right-0 sm:w-5 sm:h-5 sm:text-xs sm:rounded-none sm:bg-amber-500/75',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -139,12 +139,12 @@ class Card extends Component
                 'thumbnail' => 'w-21 h-21 shrink-0 object-cover',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => '',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -159,12 +159,12 @@ class Card extends Component
                 'thumbnail' => 'w-21 h-21 shrink-0 object-cover lg:w-[200px] lg:h-[120px]',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col-reverse gap-1 min-w-0 sm:flex-col',
                 'meta' => 'text-xs flex items-center gap-2 text-neutral-700 sm:order-first lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => 'text-sm',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -179,12 +179,12 @@ class Card extends Component
                 'thumbnail' => 'h-[175px] w-full object-cover sm:h-[100px] lg:h-[150px]',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => '',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute top-2 left-2 z-20 flex items-center justify-center gap-1 font-bold bg-amber-500 text-amber-100 text-sm w-6 h-6 rounded-full sm:top-auto sm:bottom-0 sm:left-auto sm:right-0 sm:w-5 sm:h-5 sm:text-xs sm:rounded-none sm:bg-amber-500/75',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -199,12 +199,12 @@ class Card extends Component
                 'thumbnail' => 'h-[175px] w-full object-cover sm:rounded-none sm:w-18 sm:h-18',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col gap-1 justify-end text-neutral-900 sm:min-w-0',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => '',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute top-4 left-4 z-20 flex items-center justify-center gap-1 font-bold bg-amber-500 text-amber-100 text-sm w-6 h-6 rounded-full sm:top-auto sm:bottom-0 sm:left-auto sm:right-0 sm:w-5 sm:h-5 sm:text-xs sm:rounded-none sm:bg-amber-500/75',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -219,12 +219,12 @@ class Card extends Component
                 'thumbnail' => 'w-21 h-21 object-cover sm:w-[200px] sm:h-[120px]',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'flex flex-col gap-1 justify-start text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => 'hidden sm:block sm:text-neutral-700',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
@@ -239,12 +239,12 @@ class Card extends Component
                 'thumbnail' => 'w-16 h-16 object-cover',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
-                'thumbnail-link' => '',
+                'thumbnail-link' => 'relative',
                 'content' => 'min-w-0 flex flex-col gap-1 justify-start text-neutral-900',
                 'meta' => 'flex items-center gap-2 order-first text-xs text-neutral-700 lg:text-sm',
                 'category' => 'text-red-700 font-medium',
                 'summary' => 'hidden sm:block sm:text-neutral-700',
-                'premium-badge' => '',
+                'premium-badge' => 'absolute bottom-0 right-0 z-10 w-5 h-5 flex items-center justify-center text-sm bg-amber-500/75 text-amber-100',
                 'premium-badge-normal' => '',
                 'premium-badge-featured' => ''
             ];
