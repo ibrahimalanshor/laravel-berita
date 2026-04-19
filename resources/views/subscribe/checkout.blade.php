@@ -8,6 +8,12 @@
             <p class="text-neutral-700">Konfirmasi berlangganan paket {{ $package->name }} dengan melakukan pembayaran melalui metode yang tersedia.</p>
         </div>
 
+        <div class="space-y-2">
+            <p class="text-neutral-700">Manfaat yang didapatkan:</p>
+
+            <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
+        </div>
+
         <form class="flex flex-col gap-4 items-center justify-between border p-4 border-neutral-200 rounded-lg sm:flex-row">
             <p class="font-bold text-red-600 text-2xl">Total Harga: {{ number_format($package->price) }}</p>
             <x-base.button color="primary" icon="{{ $package->price === 0 ? 'icon-[tabler--check]' : 'icon-[tabler--credit-card-filled]' }}" type="submit">

@@ -68,7 +68,7 @@
                                             <span class="text-base text-neutral-700 font-normal">/ bulan</span>
                                         </p>
                                     </div>
-                                    <x-base.button :color="$package->featured ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">Langganan</x-base.button>
+                                    <x-base.button tag-name="a" :href="route('subscribe.checkout', ['package' => $package])" :color="$package->featured ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">Langganan</x-base.button>
                                 </div>
                             @endforeach
                         </div>
