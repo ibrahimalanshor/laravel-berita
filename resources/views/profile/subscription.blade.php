@@ -16,7 +16,7 @@
                     <div class="text-sm flex items-center gap-2 text-neutral-700">
                         <p >{{ $user->subscription->premium ? 'Premium' : 'Gratis' }}</p>
                         <p class="text-neutral-300">|</p>
-                        <p>Aktif sampai 19 Mei 2026</p>
+                        <p>Aktif sampai {{ $user->subscription->end_at ? formatDate($user->subscription->end_at, 'd F Y') : 'selamanya' }}</p>
                     </div>
                 </div>
                 <p class="text-red-700 font-bold text-xl sm:text-2xl">{{ number_format($user->subscription->package_price) }}/bulan</p>

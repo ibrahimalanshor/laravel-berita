@@ -37,6 +37,8 @@ class SubscriptionService
                 $user->subscription->update(['active' => false]);
             }
 
+            $startAt = now();
+
             $user->subscription()->create([
                 'package_id' => $package->id,
                 'package_name' => $package->name,
@@ -44,7 +46,9 @@ class SubscriptionService
                 'newsletter' => $package->newsletter,
                 'no_ads' => $package->no_ads,
                 'premium' => $package->premium,
-                'premium_articles' => $package->premium_articles
+                'premium_articles' => $package->premium_articles,
+                'start_at' => $startAt,
+                'end_at' => $package->premium ? $startAt->addMonth(1)->endOfDay() : null
             ]);
         });
     }

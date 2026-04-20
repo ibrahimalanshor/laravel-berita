@@ -19,7 +19,9 @@ class Subscription extends Model
         'premium',
         'newsletter',
         'no_ads',
-        'premium_articles'
+        'premium_articles',
+        'start_at',
+        'end_at'
     ];
     
     /**

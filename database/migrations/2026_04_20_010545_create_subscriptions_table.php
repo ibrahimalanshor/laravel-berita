@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('newsletter')->default(false);
             $table->boolean('no_ads')->default(false);
             $table->boolean('premium_articles')->default(false);
+            $table->dateTime('start_at');
+            $table->dateTime('end_at')->nullable();
             $table->foreignId('package_id')->constrained('subscription_packages')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
