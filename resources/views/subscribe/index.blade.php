@@ -26,7 +26,7 @@
                         @elseif ($subscription->package_id === $package->id)
                             <x-base.button disabled color="bordered" class="w-full">Paket saat ini</x-base.button>
                         @else
-                            <x-base.button tag-name="a" href="{{ route('subscribe.checkout.process', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Upgrade</x-base.button>
+                            <x-base.button tag-name="a" href="{{ route('subscribe.checkout.process', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">{{ $package->premium ? 'Upgrade' : 'Berlangganan' }}</x-base.button>
                         @endif
                     </article>
                 @endforeach

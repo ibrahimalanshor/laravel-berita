@@ -52,6 +52,10 @@
                 <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                     <p>Upgrade Premium</p>
                 </x-base.button>
+            @else
+                <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="warning" class="w-full sm:hidden" href="{{ route('profile.subscription') }}">
+                    <p>Premium</p>
+                </x-base.button>
             @endif
 
             @auth
@@ -104,6 +108,10 @@
             @elseif (!$subscription->premium)
                 <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
                     <p>Upgrade Premium</p>
+                </x-base.button>
+            @else
+                <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="warning" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('profile.subscription') }}">
+                    <p>Premium</p>
                 </x-base.button>
             @endif
 
