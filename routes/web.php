@@ -70,7 +70,7 @@ Route::controller(SubscribeController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
 
-        Route::prefix('{package:slug}/checkout')
+        Route::prefix('checkout/{package:slug}')
             ->name('checkout.')
             ->group(function () {
                 Route::get('/', 'checkout')->name('process');

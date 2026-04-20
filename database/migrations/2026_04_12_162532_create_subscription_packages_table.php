@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->decimal('price', 8, 2);
             $table->boolean('featured')->default(false);
+            $table->boolean('premium')->default(false);
             $table->boolean('newsletter')->default(false);
             $table->boolean('no_ads')->default(false);
             $table->boolean('premium_articles')->default(false);

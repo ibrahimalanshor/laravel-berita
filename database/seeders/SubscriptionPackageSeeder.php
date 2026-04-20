@@ -25,6 +25,7 @@ class SubscriptionPackageSeeder extends Seeder
             'slug' => Str::slug('Lararita Plus'),
             'price' => 15000,
             'featured' => true,
+            'premium' => true,
             'newsletter' => true,
             'no_ads' => true,
             'premium_articles' => true

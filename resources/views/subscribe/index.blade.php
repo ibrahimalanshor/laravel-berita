@@ -2,8 +2,8 @@
 
 @section('content')
 <x-base.container>
-    <section class="py-6 space-y-6">
-        <div class="space-y-1">
+    <section class="py-6 space-y-6 sm:py-8 lg:py-10">
+        <div class="space-y-2">
             <h1 class="font-bold text-3xl text-neutral-900">Berlangganan Lararita</h1>
             <p class="text-neutral-700">Dengan berlangganan lararita anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
         </div>

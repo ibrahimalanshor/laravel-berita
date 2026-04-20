@@ -44,9 +44,15 @@
                 </x-base.button>
             @endguest
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
-                <p>Berlangganan</p>
-            </x-base.button>
+            @if (!auth()->check() || !$subscription)
+                <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
+                    <p>Berlangganan</p>
+                </x-base.button>
+            @elseif (!$subscription->premium)
+                <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
+                    <p>Upgrade Premium</p>
+                </x-base.button>
+            @endif
 
             @auth
                 <hr class="border-neutral-300 sm:hidden">
@@ -91,9 +97,15 @@
                 />
             </form>
 
-            <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
-                <p>Berlangganan</p>
-            </x-base.button>
+            @if (!auth()->check() || !$subscription)
+                <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
+                    <p>Berlangganan</p>
+                </x-base.button>
+            @elseif (!$subscription->premium)
+                <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
+                    <p>Upgrade Premium</p>
+                </x-base.button>
+            @endif
 
             @if (!auth()->check())
                 <x-base.button icon="icon-[tabler--brand-google-filled]" tag-name="a" color="light" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('auth.google') }}">

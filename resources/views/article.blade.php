@@ -55,7 +55,7 @@
                                 <span class="icon-[tabler--lock-filled] text-amber-600 size-5"></span>
                                 Konten Premium
                             </h2>
-                            <p class="text-neutral-500 text-center">Berlangganan untuk membaca berita dan artikel premium.</p>
+                            <p class="text-neutral-500 text-center">Berlangganan premium untuk membaca berita dan artikel premium.</p>
                         </div>
 
                         <div class="border border-neutral-300 rounded-md divide-y divide-neutral-300">

@@ -17,7 +17,7 @@
         @livewireStyles
     </head>
     <body>
-        <div class="fixed inset-0 bg-black/50 hidden z-10" id="app-overlay"></div>
+        <div class="fixed inset-0 bg-black/50 hidden z-20" id="app-overlay"></div>
         
         <x-includes.navbar />
 

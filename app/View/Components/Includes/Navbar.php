@@ -3,9 +3,11 @@
 namespace App\View\Components\Includes;
 
 use App\Models\Menu;
+use App\Models\Subscription;
 use App\Models\Tag;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
@@ -38,6 +40,13 @@ class Navbar extends Component
      * @var array
      */
     public $userMenus = [];
+    
+    /**
+     * subscription
+     *
+     * @var mixed
+     */
+    public ?Subscription $subscription;
 
     /**
      * Create a new component instance.
@@ -60,6 +69,8 @@ class Navbar extends Component
         if ($this->displayTag) {
             $this->tags = Tag::get();
         }
+
+        $this->setSubscribed();
     }
 
     /**
@@ -68,5 +79,17 @@ class Navbar extends Component
     public function render(): View|Closure|string
     {
         return view('components.includes.navbar');
+    }
+
+    private function setSubscribed()
+    {
+        if (!Auth::check()) {
+            $this->subscription = null;
+            return;
+        }
+
+        $user = Auth::user();
+
+        $this->subscription = $user->subscription;
     }
 }
