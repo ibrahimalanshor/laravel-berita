@@ -41,12 +41,22 @@ class User extends Authenticatable
     }
     
     /**
+     * subscriptions
+     *
+     * @return void
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+    
+    /**
      * subscription
      *
      * @return void
      */
     public function subscription()
     {
-        return $this->hasOne(Subscription::class);
+        return $this->hasOne(Subscription::class)->ofMany('active');
     }
 }

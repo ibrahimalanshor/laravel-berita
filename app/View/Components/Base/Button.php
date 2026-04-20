@@ -58,7 +58,8 @@ class Button extends Component
         };
 
         $displayClass = $this->ignoreDisplay ? '' : 'inline-flex items-center justify-center';
+        $cursorClass = $this->tagName === 'button' ? 'cursor-pointer' : '';
 
-        $this->classList = "$displayClass $colorClass $sizeClass cursor-pointer";
+        $this->classList = "$displayClass $colorClass $sizeClass $cursorClass";
     }
 }

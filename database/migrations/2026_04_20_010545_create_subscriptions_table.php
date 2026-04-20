@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->string('package_name');
-            $table->decimal('package_price');
+            $table->decimal('package_price', 8, 2);
+            $table->boolean('active')->default(true);
+            $table->boolean('premium')->default(false);
             $table->boolean('newsletter')->default(false);
             $table->boolean('no_ads')->default(false);
             $table->boolean('premium_articles')->default(false);

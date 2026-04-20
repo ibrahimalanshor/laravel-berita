@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubscriptionPackage;
+use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +17,13 @@ class SubscribeController extends Controller
     public function index()
     {
         $packages = SubscriptionPackage::all();
+        $subscription = Auth::check() ? Auth::user()->subscription : null;
 
         return view('subscribe.index', [
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
-            'packages' => $packages
+            'packages' => $packages,
+            'subscription' => $subscription
         ]);
     }
     
@@ -39,26 +42,20 @@ class SubscribeController extends Controller
             'package' => $package
         ]);
     }
-    
+        
     /**
      * pay
      *
      * @param  mixed $package
      * @param  mixed $request
+     * @param  mixed $subscriptionService
      * @return void
      */
-    public function pay(SubscriptionPackage $package, Request $request)
+    public function pay(SubscriptionPackage $package, Request $request, SubscriptionService $subscriptionService)
     {
         $user = $request->user();
 
-        $user->subscription()->create([
-            'package_id' => $package->id,
-            'package_name' => $package->name,
-            'package_price' => $package->price,
-            'newsletter' => $package->newsletter,
-            'no_ads' => $package->no_ads,
-            'premium_articles' => $package->premium_articles
-        ]);
+        $subscriptionService->subscribe($user, $package);
 
         return redirect()
             ->route('home')
