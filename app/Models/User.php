@@ -39,4 +39,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Article::class, 'bookmarks');
     }
+    
+    /**
+     * subscription
+     *
+     * @return void
+     */
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
 }
