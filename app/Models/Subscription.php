@@ -21,4 +21,14 @@ class Subscription extends Model
         'no_ads',
         'premium_articles'
     ];
+    
+    /**
+     * package
+     *
+     * @return void
+     */
+    public function package()
+    {
+        return $this->belongsTo(SubscriptionPackage::class);
+    }
 }
