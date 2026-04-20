@@ -1,15 +1,21 @@
 @extends('layouts.profile')
 
 @section('profile-content')
-<section class="border border-neutral-300 rounded-md p-4 space-y-4">
-    <h1 class="font-bold text-neutral-900 text-lg">Status Langganan</h1>
+<section class="border border-neutral-300 rounded-md p-4">
+    <div class="flex items-center justify-between mb-4">
+        <h1 class="font-bold text-neutral-900 text-lg">Status Langganan</h1>
+
+        @if ($user->subscription)
+            <x-base.button tag-name="a" :href="route('subscribe.index')" color="primary" size="sm" class="hidden sm:flex sm:items-center" ignore-display>{{ $user->subscription->premium ? 'Paket Lainnya' : 'Upgrade Premium' }}</x-base.button>
+        @endif
+    </div>
 
     @if (!$user->subscription)
         <div>
             <p class="text-neutral-500">Belum ada langganan. <a href="{{ route('subscribe.index') }}" class="text-red-700 font-medium underline">Tambah Langganan</a>.</p>
         </div>
     @else
-        <div class="bg-neutral-100 p-4 rounded-md flex flex-col gap-4">
+        <div class="bg-neutral-100 p-4 rounded-md flex flex-col gap-4 mb-4 sm:mb-0">
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
                 <div>
                     <h2 class="font-bold text-lg text-neutral-900">{{ $user->subscription->package_name }}</h2>
@@ -24,6 +30,10 @@
 
             <x-subscription-package.benefit-list :package="$user->subscription->package" />
         </div>
+    @endif
+
+    @if ($user->subscription)
+        <x-base.button tag-name="a" :href="route('subscribe.index')" color="primary" class="flex items-center justify-center w-full sm:hidden" ignore-display>{{ $user->subscription->premium ? 'Paket Lainnya' : 'Upgrade Premium' }}</x-base.button>
     @endif
 </section>
 @endsection
