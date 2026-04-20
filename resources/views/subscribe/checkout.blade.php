@@ -21,6 +21,12 @@
                 {{ $package->price === 0 ? 'Berlangganan Gratis' : 'Lanjutkan Pembayaran' }}
             </x-base.button>
         </form>
+
+        @if ($subscription && $subscription->premium)
+            <x-base.alert icon="icon-[tabler--info-triangle-filled]" color="warning">
+                <p>Anda masih memiliki paket Premium yang aktif hingga {{ formatDate($subscription->end_at, 'd F Y') }}. Paket Gratis akan otomatis aktif setelah masa aktif Premium berakhir.</p>
+            </x-base.alert>
+        @endif
     </section>
 </x-base.container>
 @endsection

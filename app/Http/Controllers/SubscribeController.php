@@ -36,10 +36,15 @@ class SubscribeController extends Controller
      */
     public function checkout(SubscriptionPackage $package, Request $request)
     {
+        $subscription = $request->user()->subscription;
+
+        abort_if($subscription && $subscription->package_id === $package->id, 403);
+
         return view('subscribe.checkout', [
             'title' => 'Checkout Berlangganan Lararita',
             'description' => "Konfirmasi berlangganan paket {$package->name} dengan melakukan pembayaran melalui metode yang tersedia",
-            'package' => $package
+            'package' => $package,
+            'subscription' => $subscription
         ]);
     }
         
