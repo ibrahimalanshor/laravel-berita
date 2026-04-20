@@ -52,7 +52,8 @@ class ArticleController extends Controller
             ->take(3)
             ->get();
 
-        $hasSubscription = !Auth::check() ? false : $subscriptionService->hasAccessToPremiumArticles(Auth::user());
+        $hasSubscription = !Auth::check() ? false : Auth::user()->subscription;
+        $hasAccessPremium = !Auth::check() ? false : $subscriptionService->hasAccessToPremiumArticles(Auth::user());
         
         return view('article', [
             'title' => $article->title,
@@ -63,7 +64,8 @@ class ArticleController extends Controller
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles,
             'packages' => $packages,
-            'hasSubscription' => $hasSubscription
+            'hasSubscription' => $hasSubscription,
+            'hasAccessPremium' => $hasAccessPremium
         ]);
     }
     
