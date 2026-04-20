@@ -20,7 +20,7 @@
                             
                             <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
                         </div>
-                        <x-base.button tag-name="a" href="{{ route('subscribe.checkout', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Mulai Berlangganan</x-base.button>
+                        <x-base.button tag-name="a" href="{{ route('subscribe.checkout.process', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Mulai Berlangganan</x-base.button>
                     </article>
                 @endforeach
             </div>

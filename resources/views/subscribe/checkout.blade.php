@@ -14,7 +14,8 @@
             <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
         </div>
 
-        <form class="flex flex-col gap-4 items-center justify-between border p-4 border-neutral-200 rounded-lg sm:flex-row">
+        <form class="flex flex-col gap-4 items-center justify-between border p-4 border-neutral-200 rounded-lg sm:flex-row" method="POST" action="{{ route('subscribe.checkout.pay', ['package' => $package]) }}">
+            @csrf
             <p class="font-bold text-red-600 text-2xl">Total Harga: {{ number_format($package->price) }}</p>
             <x-base.button color="primary" icon="{{ $package->price === 0 ? 'icon-[tabler--check]' : 'icon-[tabler--credit-card-filled]' }}" type="submit">
                 {{ $package->price === 0 ? 'Berlangganan Gratis' : 'Lanjutkan Pembayaran' }}

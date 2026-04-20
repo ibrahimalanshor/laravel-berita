@@ -8,31 +8,31 @@
                 [
                     'name' => 'Profil',
                     'url' => route('profile.index'),
-                    'icon' => 'tabler--user',
+                    'icon' => 'icon-[tabler--user]',
                     'route' => 'profile.index'
                 ],
                 [
                     'name' => 'Artikel Baca Nanti',
                     'url' => route('profile.bookmark'),
-                    'icon' => 'tabler--bookmark',
+                    'icon' => 'icon-[tabler--bookmark]',
                     'route' => 'profile.bookmark'
                 ],
                 [
                     'name' => 'Artikel Favorit',
                     'url' => route('profile.favourite'),
-                    'icon' => 'tabler--heart',
+                    'icon' => 'icon-[tabler--heart]',
                     'route' => 'profile.favourite'
                 ],
                 [
                     'name' => 'Langganan',
                     'url' => route('profile.subscription'),
-                    'icon' => 'tabler--bell-ringing',
+                    'icon' => 'icon-[tabler--bell-ringing]',
                     'route' => 'profile.subscription'
                 ],
                 [
                     'name' => 'Keluar',
                     'url' => 'logout',
-                    'icon' => 'tabler--logout',
+                    'icon' => 'icon-[tabler--logout]',
                     'route' => null
                 ]
             ]
@@ -43,7 +43,7 @@
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class="hover:bg-neutral-100 text-neutral-700 flex items-center gap-2 px-3 py-2 rounded-md w-full cursor-pointer">
-                        <span class="icon-[{{ $menu['icon'] }}] size-4"></span>
+                        <span class="{{ $menu['icon'] }} size-4"></span>
                         {{ $menu['name'] }}
                     </button>
                 </form>
@@ -52,7 +52,7 @@
                     'hover:bg-neutral-100 text-neutral-700 flex items-center gap-2 px-3 py-2 rounded-md',
                     'bg-neutral-100 font-medium' => $current_route === $menu['route']
                 ])>
-                    <span class="icon-[{{ $menu['icon'] }}] size-4"></span>
+                    <span class="{{ $menu['icon'] }} size-4"></span>
                     {{ $menu['name'] }}
                 </a>
             @endif

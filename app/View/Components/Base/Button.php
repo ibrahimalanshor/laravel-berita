@@ -59,6 +59,6 @@ class Button extends Component
 
         $displayClass = $this->ignoreDisplay ? '' : 'inline-flex items-center justify-center';
 
-        $this->classList = "$displayClass $colorClass $sizeClass";
+        $this->classList = "$displayClass $colorClass $sizeClass cursor-pointer";
     }
 }

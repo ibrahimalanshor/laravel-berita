@@ -39,4 +39,29 @@ class SubscribeController extends Controller
             'package' => $package
         ]);
     }
+    
+    /**
+     * pay
+     *
+     * @param  mixed $package
+     * @param  mixed $request
+     * @return void
+     */
+    public function pay(SubscriptionPackage $package, Request $request)
+    {
+        $user = $request->user();
+
+        $user->subscription()->create([
+            'package_id' => $package->id,
+            'package_name' => $package->name,
+            'package_price' => $package->price,
+            'newsletter' => $package->newsletter,
+            'no_ads' => $package->no_ads,
+            'premium_articles' => $package->premium_articles
+        ]);
+
+        return redirect()
+            ->route('home')
+            ->with('message', 'Berlangganan berhasil! Nikmati manfaatnya sekarang.');
+    }
 }

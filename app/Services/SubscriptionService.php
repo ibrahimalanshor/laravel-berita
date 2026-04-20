@@ -18,6 +18,6 @@ class SubscriptionService
             return false;
         }
 
-        return $user->supscription->premium_articles;
+        return $user->subscription->premium_articles;
     }
 }

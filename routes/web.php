@@ -69,9 +69,13 @@ Route::controller(SubscribeController::class)
     ->name('subscribe.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/checkout/{package:slug}', 'checkout')
-            ->name('checkout')
-            ->middleware('auth');
+
+        Route::prefix('{package:slug}/checkout')
+            ->name('checkout.')
+            ->group(function () {
+                Route::get('/', 'checkout')->name('process');
+                Route::post('/', 'pay')->name('pay');
+            });
     });
     
 Route::controller(ArticleController::class)
