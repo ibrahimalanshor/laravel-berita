@@ -4,32 +4,49 @@
 <x-base.container>
     <section class="py-6 space-y-6 sm:py-8 lg:py-10">
         <div class="space-y-2">
-            <h1 class="font-bold text-3xl text-neutral-900">Berlangganan Lararita</h1>
+            <h1 class="font-bold text-3xl text-neutral-900">Berlangganan Lararita Premium</h1>
             <p class="text-neutral-700">Dengan berlangganan lararita anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
         </div>
-        <hr class="border-neutral-200">
+
+        <div class="grid gap-4 sm:grid-cols-3">
+            @php
+                $featureIcons = [
+                    'newsletter' => 'icon-[tabler--mail]',
+                    'no_ads' => 'icon-[tabler--ad-off]',
+                    'premium_articles' => 'icon-[tabler--news]'
+                ];   
+            @endphp
+            @foreach ($features as $feature => $detail)
+                <div class="bg-neutral-100 rounded-md p-4 space-y-2">
+                    <span class="{{ $featureIcons[$feature] }} size-6 text-red-700"></span>
+                    <div class="space-y-1">
+                        <h2 class="font-bold text-lg text-neutral-900">{{ $detail['title'] }}</h2>
+                        <p class="text-neutral-600">{{ $detail['description'] }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
         <div class="space-y-4">
             <h2 class="font-bold text-xl text-neutral-900">Pilih Paket Langganan</h2>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                @foreach ($packages as $package)
-                    <article class="border border-neutral-200 rounded-md p-4 space-y-4">
-                        <div class="space-y-2">
-                            <h3 class="font-bold text-lg text-neutral-900">{{ $package->name }}</h3>
-                            <p class="text-lg text-red-700 font-bold lg:text-xl">Rp {{ number_format($package->price) }}/bulan</p>
-                            <p class="text-neutral-700 text-sm">Manfaat yang didapatkan:</p>
-                            
-                            <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
-                        </div>
-                        
-                        @if (!$subscription)
-                            <x-base.button tag-name="a" href="{{ route('subscribe.checkout.process', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">Berlangganan</x-base.button>
-                        @elseif ($subscription->package_id === $package->id)
-                            <x-base.button disabled color="bordered" class="w-full">Paket saat ini</x-base.button>
-                        @else
-                            <x-base.button tag-name="a" href="{{ route('subscribe.checkout.process', ['package' => $package->slug]) }}" :color="$package->featured ? 'primary' : 'bordered'" class="w-full">{{ $package->premium ? 'Upgrade' : 'Berlangganan' }}</x-base.button>
-                        @endif
-                    </article>
-                @endforeach
+            <div class="space-y-4">
+                <label class="border block border-neutral-300 rounded-lg px-4 py-3 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
+                    <div class="flex items-center justify-between gap-3">
+                        <input type="radio" name="period" id="" checked class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700 size-4">
+                        <p class="font-medium text-lg">Bulanan</p>
+                    </div>
+                    <p class="font-bold text-2xl text-red-700">{{ number_format(15000) }}</p>
+                </label>
+                <label class="border block border-neutral-300 rounded-lg px-4 py-3 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
+                    <div class="flex items-center justify-between gap-3">
+                        <input type="radio" name="period" id="" class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700 size-4">
+                        <p class="font-medium text-lg">Tahunan</p>
+                    </div>
+                    <p class="font-bold text-2xl text-red-700">{{ number_format(130000) }}</p>
+                </label>
+            </div>
+            <div class="flex justify-end">
+                <x-base.button color="primary" icon="icon-[tabler--arrow-right]" icon-pos="right" class="w-full sm:w-auto" size="lg">Berlangganan</x-base.button>
             </div>
         </div>
     </section>

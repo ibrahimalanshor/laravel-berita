@@ -8,6 +8,7 @@
 
 @plugin "@iconify/tailwind4";
 @plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
 
 @theme {
     --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',

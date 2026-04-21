@@ -24,7 +24,8 @@ class Button extends Component
         public $color = 'light',
         public $size = 'md',
         public $ignoreDisplay = false,
-        public $tagName = 'button'
+        public $tagName = 'button',
+        public $iconPos = 'left'
     )
     {
         $this->setClassList();
@@ -55,6 +56,7 @@ class Button extends Component
         $sizeClass = match($this->size) {
             'sm' => 'h-9 px-3 rounded-md',
             'md' => 'h-10 px-4 rounded-md',
+            'lg' => 'h-11 px-5 rounded-md',
             'custom' => ''
         };
 
