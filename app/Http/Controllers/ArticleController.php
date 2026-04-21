@@ -17,7 +17,7 @@ class ArticleController extends Controller
      * @param  mixed $subscriptionService
      * @return void
      */
-    public function view(Article $article, SubscriptionService $subscriptionService)
+    public function view(Article $article)
     {
         $article->load('category', 'tags', 'author');
 
@@ -53,7 +53,6 @@ class ArticleController extends Controller
             ->get();
 
         $hasSubscription = !Auth::check() ? false : Auth::user()->subscription;
-        $hasAccessPremium = !Auth::check() ? false : $subscriptionService->hasAccessToPremiumArticles(Auth::user());
         
         return view('article', [
             'title' => $article->title,
@@ -64,8 +63,7 @@ class ArticleController extends Controller
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles,
             'packages' => $packages,
-            'hasSubscription' => $hasSubscription,
-            'hasAccessPremium' => $hasAccessPremium
+            'hasSubscription' => $hasSubscription
         ]);
     }
     

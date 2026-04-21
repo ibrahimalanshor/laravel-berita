@@ -39,16 +39,16 @@
 
                 <div @class([
                     'prose prose-neutral prose-a:text-red-700 max-w-none',
-                    'line-clamp-[10] relative' => $article->premium && !$hasAccessPremium
+                    'line-clamp-[10] relative' => $article->premium && !$hasSubscription
                 ])>
                     {!! $article->content !!}
 
-                    @if ($article->premium && !$hasAccessPremium)
+                    @if ($article->premium && !$hasSubscription)
                         <div class="absolute inset-0 bg-linear-to-b from-white-0 to-white pointer-events-none"></div>
                     @endif
                 </div>
 
-                @if ($article->premium && !$hasAccessPremium)
+                @if ($article->premium && !$hasSubscription)
                     <section class="space-y-4">
                         <div class="space-y-1">
                             <h2 class="font-bold text-xl text-center flex items-center justify-center gap-2 text-neutral-900">
@@ -69,7 +69,7 @@
                                         </p>
                                     </div>
                                     <x-base.button tag-name="a" :href="route('subscribe.checkout.process', ['package' => $package])" :color="$package->featured ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">
-                                        {{ $hasSubscription ? 'Upgrade' : 'Berlangganan' }}
+                                        {{ !auth()->check() ? 'Upgrade' : 'Berlangganan' }}
                                     </x-base.button>
                                 </div>
                             @endforeach

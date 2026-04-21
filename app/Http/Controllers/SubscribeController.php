@@ -17,6 +17,7 @@ class SubscribeController extends Controller
     public function index()
     {
         $package = SubscriptionPackage::first();
+        $hasSubscription = Auth::check() && Auth::user()->subscription;
 
         $features = [
             'newsletter' => [
@@ -37,7 +38,8 @@ class SubscribeController extends Controller
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
             'package' => $package,
-            'features' => $features
+            'features' => $features,
+            'hasSubscription' => $hasSubscription
         ]);
     }
     
@@ -60,29 +62,6 @@ class SubscribeController extends Controller
         ]);
 
         $subscriptionService->subscribe($user, $request->input('period'));
-
-        return redirect()
-            ->route('home')
-            ->with('message', 'Berlangganan berhasil! Nikmati manfaatnya sekarang.');
-    }
-        
-    /**
-     * pay
-     *
-     * @param  mixed $package
-     * @param  mixed $request
-     * @param  mixed $subscriptionService
-     * @return void
-     */
-    public function pay(SubscriptionPackage $package, Request $request, SubscriptionService $subscriptionService)
-    {
-        $user = $request->user();
-        $subscription = $user->subscription;
-        $futureSubscription = $subscriptionService->getFutureSubscription($user, $package);
-
-        abort_if($subscription && $subscription->package_id === $package->id && $futureSubscription, 403);
-
-        $subscriptionService->subscribe($user, $package);
 
         return redirect()
             ->route('home')

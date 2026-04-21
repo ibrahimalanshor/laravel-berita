@@ -27,7 +27,8 @@
             @endforeach
         </div>
 
-        <div class="space-y-4">
+        <form class="space-y-4" method="POST" action="{{ route('subscribe.checkout') }}">
+            @csrf
             <h2 class="font-bold text-xl text-neutral-900">Pilih Paket Langganan</h2>
             <div class="space-y-4">
                 <label class="border block border-neutral-300 rounded-lg px-3 py-2 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
@@ -46,9 +47,11 @@
                 </label>
             </div>
             <div class="flex justify-end">
-                <x-base.button color="primary" icon="icon-[tabler--arrow-right]" icon-pos="right" class="w-full sm:w-auto">Berlangganan</x-base.button>
+                <x-base.button :disabled="$hasSubscription" color="primary" icon="icon-[tabler--arrow-right]" icon-pos="right" class="w-full sm:w-auto">
+                    {{ $hasSubscription ? 'Sudah Berlangganan' : 'Berlangganan' }}
+                </x-base.button>
             </div>
-        </div>
+        </form>
     </section>
 </x-base.container>
 @endsection

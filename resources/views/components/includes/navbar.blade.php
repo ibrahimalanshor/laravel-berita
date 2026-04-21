@@ -44,11 +44,11 @@
                 </x-base.button>
             @endguest
 
-            @if (!auth()->check() || !$subscription)
+            @if (!auth()->check())
                 <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                     <p>Berlangganan</p>
                 </x-base.button>
-            @elseif (!$subscription->premium)
+            @elseif (!$subscription)
                 <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="w-full sm:hidden" href="{{ route('subscribe.index') }}">
                     <p>Upgrade Premium</p>
                 </x-base.button>
@@ -101,11 +101,11 @@
                 />
             </form>
 
-            @if (!auth()->check() || !$subscription)
+            @if (!auth()->check())
                 <x-base.button icon="icon-[tabler--bell-ringing-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
                     <p>Berlangganan</p>
                 </x-base.button>
-            @elseif (!$subscription->premium)
+            @elseif (!$subscription)
                 <x-base.button icon="icon-[tabler--star-filled]" tag-name="a" color="primary" class="hidden sm:flex items-center" size="sm" :ignoreDisplay="true" href="{{ route('subscribe.index') }}">
                     <p>Upgrade Premium</p>
                 </x-base.button>
