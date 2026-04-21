@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Subscription;
 use App\Models\SubscriptionPackage;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -33,11 +34,15 @@ class SubscriptionService
     public function subscribe(User $user, SubscriptionPackage $package)
     {
         DB::transaction(function () use ($user, $package) {
-            if ($user->subscription) {
-                $user->subscription->update(['active' => false]);
-            }
-
             $startAt = now();
+
+            if ($user->subscription) {
+                if (!$user->subscription->end_at) {
+                    $user->subscription->update(['end_at' => $startAt->subSecond()]);
+                } else {
+                    $startAt = $user->subscription->end_at->copy()->addSecond();
+                }
+            }
 
             $user->subscription()->create([
                 'package_id' => $package->id,
@@ -48,8 +53,23 @@ class SubscriptionService
                 'premium' => $package->premium,
                 'premium_articles' => $package->premium_articles,
                 'start_at' => $startAt,
-                'end_at' => $package->premium ? $startAt->addMonth(1)->endOfDay() : null
+                'end_at' => $package->premium ? $startAt->copy()->addMonth(1)->endOfDay() : null
             ]);
         });
+    }
+     
+    /**
+     * getFutureSubscription
+     *
+     * @param  mixed $user
+     * @param  mixed $package
+     * @return mixed
+     */
+    public function getFutureSubscription(User $user, SubscriptionPackage $package): mixed
+    {
+        return $user->subscriptions()
+            ->where('package_id', $package->id)
+            ->where('start_at', '>', now())
+            ->first();
     }
 }

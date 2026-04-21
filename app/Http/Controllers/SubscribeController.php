@@ -34,17 +34,21 @@ class SubscribeController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function checkout(SubscriptionPackage $package, Request $request)
+    public function checkout(SubscriptionPackage $package, Request $request, SubscriptionService $subscriptionService)
     {
-        $subscription = $request->user()->subscription;
+        $user = $request->user();
+        $subscription = $user->subscription;
 
         abort_if($subscription && $subscription->package_id === $package->id, 403);
+
+        $futureSubscription = $subscriptionService->getFutureSubscription($user, $package);
 
         return view('subscribe.checkout', [
             'title' => 'Checkout Berlangganan Lararita',
             'description' => "Konfirmasi berlangganan paket {$package->name} dengan melakukan pembayaran melalui metode yang tersedia",
             'package' => $package,
-            'subscription' => $subscription
+            'subscription' => $subscription,
+            'futureSubscription' => $futureSubscription
         ]);
     }
         
@@ -59,6 +63,10 @@ class SubscribeController extends Controller
     public function pay(SubscriptionPackage $package, Request $request, SubscriptionService $subscriptionService)
     {
         $user = $request->user();
+        $subscription = $user->subscription;
+        $futureSubscription = $subscriptionService->getFutureSubscription($user, $package);
+
+        abort_if($subscription && $subscription->package_id === $package->id && $futureSubscription, 403);
 
         $subscriptionService->subscribe($user, $package);
 

@@ -3,29 +3,38 @@
 @section('content')
 <x-base.container>
     <section class="py-6 max-w-prose space-y-6 sm:py-8 lg:py-10">
-        <div class="space-y-2">
-            <h1 class="font-bold text-3xl text-neutral-900">Checkout Berlangganan Paket {{ $package->name }}</h1>
-            <p class="text-neutral-700">Konfirmasi berlangganan paket {{ $package->name }} dengan melakukan pembayaran melalui metode yang tersedia.</p>
-        </div>
+        @if ($futureSubscription)
+            <div class="space-y-4">
+                <h1 class="font-bold text-3xl text-neutral-900">Checkout Berlangganan Paket {{ $package->name }}</h1>
+                <x-base.alert icon="icon-[tabler--info-triangle-filled]" color="warning">
+                    <p>Anda sudah berlangganan paket {{ $futureSubscription->package_name }} yang akan aktif pada {{ formatDate($futureSubscription->start_at, 'd F Y') }}.</p>
+                </x-base.alert>
+            </div>
+        @else
+            <div class="space-y-2">
+                <h1 class="font-bold text-3xl text-neutral-900">Checkout Berlangganan Paket {{ $package->name }}</h1>
+                <p class="text-neutral-700">Konfirmasi berlangganan paket {{ $package->name }} dengan melakukan pembayaran melalui metode yang tersedia.</p>
+            </div>
 
-        <div class="space-y-2">
-            <p class="text-neutral-700">Manfaat yang didapatkan:</p>
+            <div class="space-y-2">
+                <p class="text-neutral-700">Manfaat yang didapatkan:</p>
 
-            <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
-        </div>
+                <x-subscription-package.benefit-list :package="$package"></x-subscription-package.benefit-list>
+            </div>
 
-        <form class="flex flex-col gap-4 items-center justify-between border p-4 border-neutral-200 rounded-lg sm:flex-row" method="POST" action="{{ route('subscribe.checkout.pay', ['package' => $package]) }}">
-            @csrf
-            <p class="font-bold text-red-600 text-2xl">Total Harga: {{ number_format($package->price) }}</p>
-            <x-base.button color="primary" icon="{{ $package->price === 0 ? 'icon-[tabler--check]' : 'icon-[tabler--credit-card-filled]' }}" type="submit">
-                {{ $package->price === 0 ? 'Berlangganan Gratis' : 'Lanjutkan Pembayaran' }}
-            </x-base.button>
-        </form>
+            <form class="flex flex-col gap-4 items-center justify-between border p-4 border-neutral-200 rounded-lg sm:flex-row" method="POST" action="{{ route('subscribe.checkout.pay', ['package' => $package]) }}">
+                @csrf
+                <p class="font-bold text-red-600 text-2xl">Total Harga: {{ number_format($package->price) }}</p>
+                <x-base.button color="primary" icon="{{ $package->price === 0 ? 'icon-[tabler--check]' : 'icon-[tabler--credit-card-filled]' }}" type="submit">
+                    {{ $package->price === 0 ? 'Berlangganan Gratis' : 'Lanjutkan Pembayaran' }}
+                </x-base.button>
+            </form>
 
-        @if ($subscription && $subscription->premium)
-            <x-base.alert icon="icon-[tabler--info-triangle-filled]" color="warning">
-                <p>Anda masih memiliki paket Premium yang aktif hingga {{ formatDate($subscription->end_at, 'd F Y') }}. Paket Gratis akan otomatis aktif setelah masa aktif Premium berakhir.</p>
-            </x-base.alert>
+            @if ($subscription && $subscription->premium)
+                <x-base.alert icon="icon-[tabler--info-triangle-filled]" color="warning">
+                    <p>Anda masih memiliki paket Premium yang aktif hingga {{ formatDate($subscription->end_at, 'd F Y') }}. Paket Gratis akan otomatis aktif setelah masa aktif Premium berakhir.</p>
+                </x-base.alert>
+            @endif
         @endif
     </section>
 </x-base.container>

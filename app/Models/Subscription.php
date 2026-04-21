@@ -25,6 +25,16 @@ class Subscription extends Model
     ];
     
     /**
+     * casts
+     *
+     * @var array
+     */
+    protected $casts = [
+        'end_at' => 'datetime',
+        'start_at' => 'datetime',
+    ];
+    
+    /**
      * package
      *
      * @return void
