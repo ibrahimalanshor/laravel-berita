@@ -33,7 +33,7 @@ class SubscribeController extends Controller
             ]
         ];
 
-        return view('subscribe.index', [
+        return view('subscribe', [
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
             'package' => $package,
@@ -44,26 +44,26 @@ class SubscribeController extends Controller
     /**
      * checkout
      *
-     * @param  mixed $package
      * @param  mixed $request
+     * @param  mixed $subscriptionService
      * @return void
      */
-    public function checkout(SubscriptionPackage $package, Request $request, SubscriptionService $subscriptionService)
+    public function checkout(Request $request, SubscriptionService $subscriptionService)
     {
         $user = $request->user();
         $subscription = $user->subscription;
 
-        abort_if($subscription && $subscription->package_id === $package->id, 403);
+        abort_if($subscription, 403);
 
-        $futureSubscription = $subscriptionService->getFutureSubscription($user, $package);
-
-        return view('subscribe.checkout', [
-            'title' => 'Checkout Berlangganan Lararita',
-            'description' => "Konfirmasi berlangganan paket {$package->name} dengan melakukan pembayaran melalui metode yang tersedia",
-            'package' => $package,
-            'subscription' => $subscription,
-            'futureSubscription' => $futureSubscription
+        $request->validate([
+            'period' => ['required', 'in:month,year']
         ]);
+
+        $subscriptionService->subscribe($user, $request->input('period'));
+
+        return redirect()
+            ->route('home')
+            ->with('message', 'Berlangganan berhasil! Nikmati manfaatnya sekarang.');
     }
         
     /**

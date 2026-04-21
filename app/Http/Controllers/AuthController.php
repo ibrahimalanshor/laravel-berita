@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $intended = $request->session()->get('url.intended');
-        $intentedToCheckout = $intended && Str::contains($intended, 'checkout');
+        $intentedToCheckout = $intended && Str::contains($intended, 'subscribe');
 
         return view('login', [
             'title' => 'Masuk atau Daftar - Lararita',

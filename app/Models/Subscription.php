@@ -12,14 +12,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'active',
-        'package_id',
-        'package_name',
-        'package_price',
-        'premium',
-        'newsletter',
-        'no_ads',
-        'premium_articles',
+        'period',
         'start_at',
         'end_at'
     ];

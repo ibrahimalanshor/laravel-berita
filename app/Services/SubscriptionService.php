@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Subscription;
 use App\Models\SubscriptionPackage;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class SubscriptionService
 {
@@ -28,34 +26,18 @@ class SubscriptionService
      * subscribe
      *
      * @param  mixed $user
-     * @param  mixed $package
+     * @param  mixed $period
      * @return void
      */
-    public function subscribe(User $user, SubscriptionPackage $package)
+    public function subscribe(User $user, string $period)
     {
-        DB::transaction(function () use ($user, $package) {
-            $startAt = now();
+        $startAt = now();
 
-            if ($user->subscription) {
-                if (!$user->subscription->end_at) {
-                    $user->subscription->update(['end_at' => $startAt->subSecond()]);
-                } else {
-                    $startAt = $user->subscription->end_at->copy()->addSecond();
-                }
-            }
-
-            $user->subscription()->create([
-                'package_id' => $package->id,
-                'package_name' => $package->name,
-                'package_price' => $package->price,
-                'newsletter' => $package->newsletter,
-                'no_ads' => $package->no_ads,
-                'premium' => $package->premium,
-                'premium_articles' => $package->premium_articles,
-                'start_at' => $startAt,
-                'end_at' => $package->premium ? $startAt->copy()->addMonth(1)->endOfDay() : null
-            ]);
-        });
+        $user->subscription()->create([
+            'period' => $period,
+            'start_at' => $startAt,
+            'end_at' => $startAt->copy()->add(1, $period)
+        ]);
     }
      
     /**

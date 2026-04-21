@@ -59,6 +59,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Subscription::class)
             ->where('start_at', '<=', now())
-            ->where(fn ($q) => $q->whereNull('end_at')->orWhere('end_at', '>=', now()));
+            ->where('end_at', '>=', now());
     }
 }
