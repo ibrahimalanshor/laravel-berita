@@ -46,7 +46,7 @@
                 </label>
             </div>
             <div class="flex justify-end">
-                <x-base.button color="primary" icon="icon-[tabler--arrow-right]" icon-pos="right" class="w-full sm:w-auto" size="lg">Berlangganan</x-base.button>
+                <x-base.button color="primary" icon="icon-[tabler--arrow-right]" icon-pos="right" class="w-full sm:w-auto">Berlangganan</x-base.button>
             </div>
         </div>
     </section>
