@@ -30,19 +30,19 @@
         <div class="space-y-4">
             <h2 class="font-bold text-xl text-neutral-900">Pilih Paket Langganan</h2>
             <div class="space-y-4">
-                <label class="border block border-neutral-300 rounded-lg px-4 py-3 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
+                <label class="border block border-neutral-300 rounded-lg px-3 py-2 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
                     <div class="flex items-center justify-between gap-3">
-                        <input type="radio" name="period" id="" checked class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700 size-4">
-                        <p class="font-medium text-lg">Bulanan</p>
+                        <input type="radio" name="period" id="" checked class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700">
+                        <p class="font-medium">Bulanan</p>
                     </div>
-                    <p class="font-bold text-2xl text-red-700">{{ number_format(15000) }}</p>
+                    <p class="font-bold text-2xl text-red-700">{{ number_format($package->monthly_price) }}</p>
                 </label>
-                <label class="border block border-neutral-300 rounded-lg px-4 py-3 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
+                <label class="border block border-neutral-300 rounded-lg px-3 py-2 flex items-center justify-between has-checked:border-2 has-checked:border-red-700">
                     <div class="flex items-center justify-between gap-3">
-                        <input type="radio" name="period" id="" class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700 size-4">
-                        <p class="font-medium text-lg">Tahunan</p>
+                        <input type="radio" name="period" id="" class="border-neutral-300 checked:border-red-700 focus:outline-red-700 checked:bg-red-700">
+                        <p class="font-medium">Tahunan</p>
                     </div>
-                    <p class="font-bold text-2xl text-red-700">{{ number_format(130000) }}</p>
+                    <p class="font-bold text-2xl text-red-700">{{ number_format($package->yearly_price) }}</p>
                 </label>
             </div>
             <div class="flex justify-end">

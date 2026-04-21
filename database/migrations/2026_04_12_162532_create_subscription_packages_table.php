@@ -13,14 +13,8 @@ return new class extends Migration
     {
         Schema::create('subscription_packages', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->decimal('price', 8, 2);
-            $table->boolean('featured')->default(false);
-            $table->boolean('premium')->default(false);
-            $table->boolean('newsletter')->default(false);
-            $table->boolean('no_ads')->default(false);
-            $table->boolean('premium_articles')->default(false);
+            $table->decimal('monthly_price', 8, 2);
+            $table->decimal('yearly_price', 8, 2);
             $table->timestamps();
         });
     }
