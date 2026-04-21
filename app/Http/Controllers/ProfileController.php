@@ -119,11 +119,16 @@ class ProfileController extends Controller
     public function subscription(Request $request)
     {
         $currentRoute = Route::currentRouteName();
+        $subscriptions = $request->user()
+            ->subscriptions()
+            ->latest('created_at')
+            ->get();
 
         return view('profile.subscription', [
             'title' => 'Status Langganan - Lararita',
             'description' => 'Status langganan yang aktif',
             'user' => $request->user(),
+            'subscriptions' => $subscriptions,
             'current_route' => $currentRoute
         ]);
     }
