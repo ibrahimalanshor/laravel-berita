@@ -58,26 +58,23 @@
                             <p class="text-neutral-500 text-center">Berlangganan premium untuk membaca berita dan artikel premium.</p>
                         </div>
 
-                        <div class="border border-neutral-300 rounded-md divide-y divide-neutral-300">
+                        <form class="border border-neutral-300 rounded-md divide-y divide-neutral-300" method="POST" action="{{ route('subscribe.checkout') }}">
+                            @csrf
                             @foreach ($packages as $package)
                                 <div class="p-4 flex items-center justify-between">
                                     <div>
-                                        <h3 class="font-bold text-neutral-900">{{ $package->name }}</h3>
+                                        <h3 class="font-bold text-neutral-900">{{ $package['name'] }}</h3>
                                         <p class="text-red-700 font-bold text-xl">
-                                            {{ number_format($package->price) }}
-                                            <span class="text-base text-neutral-700 font-normal">/ bulan</span>
+                                            {{ number_format($package['price']) }}
+                                            <span class="text-base text-neutral-700 font-normal">/ {{ $package['period_name'] }}</span>
                                         </p>
                                     </div>
-                                    <x-base.button tag-name="a" :href="route('subscribe.checkout.process', ['package' => $package])" :color="$package->featured ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">
-                                        {{ !auth()->check() ? 'Upgrade' : 'Berlangganan' }}
+                                    <x-base.button name="period" type="submit" value="{{ $package['period'] }}" :color="$package['featured'] ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">
+                                        {{ auth()->check() ? 'Upgrade' : 'Berlangganan' }}
                                     </x-base.button>
                                 </div>
                             @endforeach
-                        </div>
-
-                        <p class="text-center">
-                            <a href="{{ route('subscribe.index') }}" class="font-medium text-red-700 underline ">Lihat Paket Lainnya</a>
-                        </p>
+                            </form>
                     </section>
                 @endif
             </article>

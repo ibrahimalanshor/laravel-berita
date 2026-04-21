@@ -12,6 +12,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
+        'price',
         'period',
         'start_at',
         'end_at'

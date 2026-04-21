@@ -16,6 +16,7 @@ return new class extends Migration
             $table->enum('period', ['month', 'year']);
             $table->dateTime('start_at');
             $table->dateTime('end_at');
+            $table->decimal('price', 8, 2);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

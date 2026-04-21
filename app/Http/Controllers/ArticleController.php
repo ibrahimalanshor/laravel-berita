@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\SubscriptionPackage;
-use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,10 +46,24 @@ class ArticleController extends Controller
             ->where('featured', true)
             ->get();
 
-        $packages = SubscriptionPackage::latest('featured')
-            ->where('premium_articles', true)
-            ->take(3)
-            ->get();
+        $package = SubscriptionPackage::first();
+
+        $packages = [
+            [
+                'name' => 'Bulanan',
+                'period' => 'month',
+                'period_name' => 'bulan',
+                'price' => $package->monthly_price,
+                'featured' => true
+            ],
+            [
+                'name' => 'Tahunan',
+                'period' => 'year',
+                'period_name' => 'tahun',
+                'price' => $package->yearly_price,
+                'featured' => false
+            ]
+        ];
 
         $hasSubscription = !Auth::check() ? false : Auth::user()->subscription;
         

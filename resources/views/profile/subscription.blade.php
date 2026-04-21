@@ -2,7 +2,14 @@
 
 @section('profile-content')
 <section class="border border-neutral-300 rounded-md p-4 space-y-4">
-    <h1 class="font-bold text-neutral-900 text-lg">Status Langganan</h1>
+    <div class="flex items-center justify-between">
+        <h1 class="font-bold text-neutral-900 text-lg">Status Langganan</h1>
+        @if ($user->subscription)
+            <span class="bg-green-100 text-green-800 text-sm font-medium px-2 py-1 rounded-md">
+                Aktif
+            </span>
+        @endif
+    </div>
 
     @if (!$user->subscription)
         <div>
@@ -13,29 +20,32 @@
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
                 <div>
                     <h2 class="font-bold text-lg text-neutral-900">Premium {{ $user->subscription->period === 'month' ? 'Bulanan' : 'Tahunan' }}</h2>
-                    <p class="text-neutral-700 text-sm">Aktif sampai {{ $user->subscription->end_at ? formatDate($user->subscription->end_at, 'd F Y') : 'selamanya' }}</p>
+                    <p class="text-neutral-700 text-sm">Aktif sampai {{ formatDate($user->subscription->end_at, 'd F Y') }}</p>
                 </div>
-                <p class="text-red-700 font-bold text-xl sm:text-2xl">{{ number_format($user->subscription->package_price) }}/bulan</p>
+                <p class="text-red-700 font-bold text-xl sm:text-2xl">{{ number_format($user->subscription->price) }}/{{ $user->subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
             </div>
         </div>
     @endif
 </section>
 
-<section class="border border-neutral-300 rounded-md p-4">
-    <h2 class="font-bold text-neutral-900 text-lg">Riwayat Langganan</h2>
+@if ($subscriptions->count())
+    <section class="border border-neutral-300 rounded-md p-4">
+        <h2 class="font-bold text-neutral-900 text-lg">Riwayat Langganan</h2>
 
-    <div class="divide-y divide-neutral-200">
-        @foreach ($subscriptions as $subscription)
-            <div class="flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between">
-                <div class="space-y-1">
-                    <h3 class="font-medium text-neutral-900 flex items-center">
-                        Premium {{ $subscription->period === 'month' ? 'Bulanan' : 'Tahunan' }}
-                    </h3>
-                    <p class="text-sm text-neutral-500">{{ formatDate($subscription->start_at, 'd F Y') }} s.d {{ $subscription->end_at ? formatDate($subscription->end_at, 'd F Y') : '-' }}</p>
+        <div class="divide-y divide-neutral-200">
+            @foreach ($subscriptions as $subscription)
+                <div class="flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-medium text-neutral-900 flex items-center">
+                            Premium {{ $subscription->period === 'month' ? 'Bulanan' : 'Tahunan' }}
+                        </h3>
+                        <p class="text-sm text-neutral-500">{{ formatDate($subscription->start_at, 'd F Y') }} s.d {{ $subscription->end_at ? formatDate($subscription->end_at, 'd F Y') : '-' }}</p>
+                    </div>
+                    <p class="font-bold text-red-700">{{ number_format($subscription->price) }}/{{ $subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
                 </div>
-                <p class="font-bold text-red-700">{{ number_format($subscription->package_price) }}/bulan</p>
-            </div>
-        @endforeach
-    </div>
-</section>
+            @endforeach
+        </div>
+    </section>
+@endif
+
 @endsection
