@@ -19,11 +19,27 @@ class SubscribeController extends Controller
         $packages = SubscriptionPackage::all();
         $subscription = Auth::check() ? Auth::user()->subscription : null;
 
+        $features = [
+            'newsletter' => [
+                'title' => 'Notifikasi Email',
+                'description' => 'Dapatkan notifikasi ke email Anda ketika ada berita dan artikel terbaru'
+            ],
+            'no_ads' => [
+                'title' => 'Tanpa Iklan',
+                'description' => 'Nikmati membaca berita dan artikel tanpa gangguan iklan'
+            ],
+            'premium_articles' => [
+                'title' => 'Akses Artikel Premium',
+                'description' => 'Baca berita dan artikel premium sepuasnya'
+            ]
+        ];
+
         return view('subscribe.index', [
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
             'packages' => $packages,
-            'subscription' => $subscription
+            'subscription' => $subscription,
+            'features' => $features
         ]);
     }
     
