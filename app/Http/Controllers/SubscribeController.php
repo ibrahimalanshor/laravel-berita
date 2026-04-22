@@ -53,7 +53,7 @@ class SubscribeController extends Controller
         $user = $request->user();
         $subscription = $user->subscription;
 
-        abort_if($subscription, 403);
+        abort_if($subscription && !$subscription->expired, 403);
 
         $request->validate([
             'period' => ['required', 'in:month,year']
