@@ -81,6 +81,10 @@
 
             <hr class="border-neutral-200">
 
+            <x-article.comment class="px-4 sm:px-0" />
+
+            <hr class="border-neutral-200">
+
             <section class="px-4 space-y-2 lg:border-b-0 sm:px-0">
                 <h2 class="font-bold text-neutral-900 text-lg">Topik Terkait</h2>
 
