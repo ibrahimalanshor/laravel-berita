@@ -39,16 +39,16 @@
 
                 <div @class([
                     'prose prose-neutral prose-a:text-red-700 max-w-none',
-                    'line-clamp-[10] relative' => $article->premium && !$hasSubscription
+                    'line-clamp-[10] relative' => $article->premium && (!$subscription || $subscription->expired)
                 ])>
                     {!! $article->content !!}
 
-                    @if ($article->premium && !$hasSubscription)
+                    @if ($article->premium && (!$subscription || $subscription->expired))
                         <div class="absolute inset-0 bg-linear-to-b from-white-0 to-white pointer-events-none"></div>
                     @endif
                 </div>
 
-                @if ($article->premium && !$hasSubscription)
+                @if ($article->premium && (!$subscription || $subscription->expired))
                     <section class="space-y-4">
                         <div class="space-y-1">
                             <h2 class="font-bold text-xl text-center flex items-center justify-center gap-2 text-neutral-900">
@@ -70,7 +70,7 @@
                                         </p>
                                     </div>
                                     <x-base.button name="period" type="submit" value="{{ $package['period'] }}" :color="$package['featured'] ? 'primary' : 'bordered'" size="custom" class="h-9 px-3 rounded-md text-sm lg:h-10 lg:px-4 lg:text-base">
-                                        {{ auth()->check() ? 'Upgrade' : 'Berlangganan' }}
+                                        {{ auth()->check() ? ($subscription ? 'Perpanjang' : 'Upgrade') : 'Berlangganan' }}
                                     </x-base.button>
                                 </div>
                             @endforeach

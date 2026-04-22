@@ -16,7 +16,6 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        $package = SubscriptionPackage::first();
         $hasSubscription = Auth::check() && Auth::user()->subscription;
 
         $features = [
@@ -37,7 +36,6 @@ class SubscribeController extends Controller
         return view('subscribe', [
             'title' => 'Berlangganan Lararita',
             'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
-            'package' => $package,
             'features' => $features,
             'hasSubscription' => $hasSubscription
         ]);

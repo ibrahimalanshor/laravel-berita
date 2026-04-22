@@ -1,20 +1,27 @@
 <?php
 
-namespace App\View\Components\SubscriptionPackage;
+namespace App\View\Components\Subscribe;
 
 use App\Models\SubscriptionPackage;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class BenefitList extends Component
-{
+class Checkout extends Component
+{    
+    /**
+     * package
+     *
+     * @var mixed
+     */
+    public $package;
+    
     /**
      * Create a new component instance.
      */
-    public function __construct(public SubscriptionPackage $package)
+    public function __construct()
     {
-        //
+        $this->package = SubscriptionPackage::first();
     }
 
     /**
@@ -22,6 +29,6 @@ class BenefitList extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.subscription-package.benefit-list');
+        return view('components.subscribe.checkout');
     }
 }

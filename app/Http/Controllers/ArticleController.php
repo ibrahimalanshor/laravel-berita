@@ -65,7 +65,7 @@ class ArticleController extends Controller
             ]
         ];
 
-        $hasSubscription = !Auth::check() ? false : Auth::user()->subscription;
+        $subscription = !Auth::check() ? null : Auth::user()->subscription;
         
         return view('article', [
             'title' => $article->title,
@@ -76,7 +76,7 @@ class ArticleController extends Controller
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles,
             'packages' => $packages,
-            'hasSubscription' => $hasSubscription
+            'subscription' => $subscription
         ]);
     }
     

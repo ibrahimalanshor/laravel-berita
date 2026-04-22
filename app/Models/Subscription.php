@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Subscription extends Model
 {    
@@ -36,5 +37,17 @@ class Subscription extends Model
     public function package()
     {
         return $this->belongsTo(SubscriptionPackage::class);
+    }
+    
+    /**
+     * expired
+     *
+     * @return Attribute
+     */
+    public function expired() : Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->end_at->isPast()
+        );
     }
 }
