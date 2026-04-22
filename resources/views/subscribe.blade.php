@@ -8,6 +8,8 @@
             <p class="text-neutral-700">Dengan berlangganan lararita anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
         </div>
 
+        <h2 class="sr-only">Manfaat Yang Didapatkan</h2>
+
         <div class="grid gap-4 sm:grid-cols-3">
             @php
                 $featureIcons = [
@@ -20,7 +22,7 @@
                 <div class="bg-neutral-100 rounded-md p-4 space-y-2">
                     <span class="{{ $featureIcons[$feature] }} size-6 text-red-700"></span>
                     <div class="space-y-1">
-                        <h2 class="font-bold text-lg text-neutral-900">{{ $detail['title'] }}</h2>
+                        <h3 class="font-bold text-lg text-neutral-900">{{ $detail['title'] }}</h3>
                         <p class="text-neutral-600">{{ $detail['description'] }}</p>
                     </div>
                 </div>

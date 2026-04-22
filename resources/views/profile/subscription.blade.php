@@ -59,7 +59,7 @@
                         </h3>
                         <p class="text-sm text-neutral-500">{{ formatDate($subscription->start_at, 'd F Y') }} s.d {{ $subscription->end_at ? formatDate($subscription->end_at, 'd F Y') : '-' }}</p>
                     </div>
-                    <p class="font-bold text-red-700">{{ number_format($subscription->price) }}/{{ $subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
+                    <p class="font-bold text-lg text-red-700">{{ number_format($subscription->price) }}/{{ $subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
                 </div>
             @endforeach
         </div>
