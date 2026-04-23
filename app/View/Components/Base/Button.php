@@ -47,7 +47,7 @@ class Button extends Component
     private function setClassList()
     {
         $colorClass = match($this->color) {
-            'light' => 'bg-white text-neutral-900',
+            'light' => 'bg-white text-neutral-900 hover:bg-neutral-100',
             'bordered' => 'bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-100',
             'primary' => 'bg-red-700 text-white hover:bg-red-800',
             'warning' => 'bg-amber-600 text-white hover:bg-amber-700',
