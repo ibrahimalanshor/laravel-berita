@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
  * @param  mixed $key
  * @return string
  */
-function setting(string $key): string | null
+function setting(string $key): ?string
 {
     $setting = cache('setting');
 
