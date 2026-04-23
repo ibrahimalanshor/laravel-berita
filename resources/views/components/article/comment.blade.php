@@ -1,7 +1,8 @@
 <section {{ $attributes->class('space-y-2') }}>
     <h2 class="font-bold text-neutral-900 text-lg">0 Komentar</h2>
 
-    <form id="komentar_baru" class="border border-neutral-300 p-4 rounded-md has-focus:border-red-700 has-focus:border-2 divide-y divide-neutral-200 space-y-3">
+    <form id="komentar_baru" class="border border-neutral-300 p-4 rounded-md has-focus:border-red-700 has-focus:border-2 divide-y divide-neutral-200 space-y-3" method="POST" action="{{ route('article.comment', ['article' => $article] )}}">
+        @csrf
         <div class="flex items-start gap-3 pb-3">
             <img src="{{ asset('avatar.svg') }}" alt="" class="size-8">
             <textarea name="" id="" placeholder="Tulis Komentar..." maxlength="1000" rows="3" class="p-0 align-middle w-full placeholder-neutral-500 text-neutral-700 border-0 focus:ring-0"></textarea>
@@ -13,7 +14,15 @@
     </form>
 
     <div class="mt-4">
-        @if (false)
+        @if (!$comments->count())
+            <div class="flex flex-col items-center text-center gap-2">
+                <span class="icon-[tabler--bubble-text] size-12 text-neutral-300"></span>
+                <div>
+                    <p class="font-bold text-neutral-900">Belum ada Komentar</p>
+                    <p class="text-neutral-500 text-sm">Jadilah yang pertama berkomentar di sini</p>
+                </div>
+            </div>
+        @else
             <article class="flex items-start gap-3">
                 <img src="{{ asset('avatar.svg') }}" alt="" class="size-8 mt-1">
                 <div class="space-y-1">
@@ -42,14 +51,6 @@
                     <span class="icon-[tabler--dots] size-5"></span>
                 </button>
             </article>
-        @else
-            <div class="flex flex-col items-center text-center gap-2">
-                <span class="icon-[tabler--bubble-text] size-12 text-neutral-300"></span>
-                <div>
-                    <p class="font-bold text-neutral-900">Belum ada Komentar</p>
-                    <p class="text-neutral-500 text-sm">Jadilah yang pertama berkomentar di sini</p>
-                </div>
-            </div>
         @endif
     </div>
 </section>

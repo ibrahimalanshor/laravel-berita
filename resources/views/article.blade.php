@@ -81,7 +81,7 @@
 
             <hr class="border-neutral-200">
 
-            <x-article.comment class="px-4 sm:px-0" />
+            <x-article.comment class="px-4 sm:px-0" :article="$article" />
 
             <hr class="border-neutral-200">
 

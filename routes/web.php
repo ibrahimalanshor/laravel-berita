@@ -81,11 +81,11 @@ Route::controller(ArticleController::class)
         Route::middleware('auth')
             ->group(function () {
                 Route::post('/bookmark', 'bookmark')
-                    ->name('bookmark')
-                    ->middleware('auth');
+                    ->name('bookmark');
                 Route::post('/favorite', 'favorite')
-                    ->name('favorite')
-                    ->middleware('auth');
+                    ->name('favorite');
+                Route::post('/comment', 'comment')
+                    ->name('comment');
             });
         Route::get('/', 'view')
             ->name('detail');

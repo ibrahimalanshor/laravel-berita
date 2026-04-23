@@ -35,4 +35,14 @@ class Article extends Model
     {
         return $this->belongsTo(Author::class);
     }
+    
+    /**
+     * comments
+     *
+     * @return void
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
