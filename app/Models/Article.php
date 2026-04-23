@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {    
@@ -39,7 +40,7 @@ class Article extends Model
     /**
      * comments
      *
-     * @return void
+     * @return HasMany
      */
     public function comments()
     {
