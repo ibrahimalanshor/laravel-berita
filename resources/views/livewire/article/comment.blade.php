@@ -38,25 +38,25 @@
                             <span class="icon-[tabler--dots] size-5"></span>
                         </button>
                     </div>
-                    <img src="{{ $comment->avatar_url }}" alt="{{ $comment->name }}" class="size-8 rounded-full mt-1">
+                    <img src="{{ $comment['avatar_url'] }}" alt="{{ $comment['name'] }}" class="size-8 rounded-full mt-1">
                     <div class="space-y-1 grow">
                         <div>
-                            <p class="font-bold text-neutral-900">{{ $comment->name }}</p>
-                            <p class="text-neutral-700">{{ $comment->content }}</p>
+                            <p class="font-bold text-neutral-900">{{ $comment['name'] }}</p>
+                            <p class="text-neutral-700">{{ $comment['content'] }}</p>
                         </div>
                         <div class="flex gap-4">
-                            <span class="text-sm text-neutral-500">{{ formatDate($comment->created_at) }}</span>
+                            <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
                             <div class="flex items-center gap-1 text-sm text-neutral-500">
-                                <button class="flex items-center">
+                                <button class="flex items-center cursor-pointer" wire:click="like({{ $comment['id'] }})">
                                     <span class="icon-[tabler--thumb-up] size-4"></span>
                                 </button>
-                                {{ $comment->likes }}
+                                {{ $comment['likes'] }}
                             </div>
                             <div class="flex items-center gap-1 text-sm text-neutral-500">
-                                <button class="flex items-center">
+                                <button class="flex items-center cursor-pointer" wire:click="dislike({{ $comment['id'] }})">
                                     <span class="icon-[tabler--thumb-down] size-4"></span>
                                 </button>
-                                {{ $comment->dislikes }}
+                                {{ $comment['dislikes'] }}
                             </div>
                             <button class="text-sm text-red-700">Balas</button>
                         </div>

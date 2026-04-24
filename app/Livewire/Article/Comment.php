@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Article;
 
+use App\Livewire\Article\Traits\UpdateComment;
 use App\Models\Article;
+use App\Models\Comment as ModelsComment;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +14,8 @@ use Livewire\Component;
 
 class Comment extends Component
 {    
+    use UpdateComment;
+
     public Article $article;
     public Collection $comments;
     
@@ -33,7 +37,21 @@ class Comment extends Component
         $this->comments = $this->article->comments()
             ->latest()
             ->take(10)
-            ->get();
+            ->get()
+            ->map(fn ($comment) => $this->mapCommentData($comment));
+    }
+
+    private function mapCommentData(ModelsComment $comment)
+    {
+        return [
+            'id' => $comment->id,
+            'avatar_url' => $comment->avatar_url,
+            'name' => $comment->name,
+            'content' => $comment->content,
+            'created_at' => $comment->created_at,
+            'likes' => $comment->likes,
+            'dislikes' => $comment->dislikes
+        ];
     }
 
     public function submitNewComment()
@@ -52,7 +70,7 @@ class Comment extends Component
             
         $this->reset('newComment');
 
-        $this->comments->unshift($comment);
+        $this->comments->unshift($this->mapCommentData($comment));
     }
 
     public function render()
