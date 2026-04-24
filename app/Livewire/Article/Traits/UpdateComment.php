@@ -12,6 +12,8 @@ trait UpdateComment
 {
     abstract public function getComments() : Collection;
     abstract public function setComments(Collection $data);
+    abstract public function getReactions() : Collection;
+    abstract public function setReactions(Collection $data);
 
     private function getUserReaction(Comment $comment): ?CommentReaction
     {
@@ -42,34 +44,58 @@ trait UpdateComment
         $commentStored = Comment::find($commentId);
 
         $userReaction = $this->getUserReaction($commentStored);
-        $updateColumn = $reaction === 'like' ? 'likes' : 'dislikes';
 
         if (!$userReaction) {
-            return DB::transaction(function () use ($commentStored, $updateColumn, $commentId, $reaction) {
-                $commentStored->increment($updateColumn);
-                $commentStored->reactions()
-                    ->create([
-                        'user_id' => Auth::id(),
-                        'reaction' => $reaction
-                    ]);
+            $this->addReaction($commentStored, $reaction);
 
-                $comment = $this->getComments()->firstWhere('id', $commentId);
-
-                $this->updateComment($commentId, [$updateColumn => $comment[$updateColumn] + 1]);
-            });
+            return;
         }
 
         if ($userReaction->reaction === $reaction) {
-            return DB::transaction(function () use ($commentStored, $commentId, $reaction, $userReaction, $updateColumn) {
-                $commentStored->decrement($updateColumn);
-                $userReaction->delete();
+            $this->removeReaction($commentStored, $userReaction, $reaction);
 
-                $comment = $this->getComments()->firstWhere('id', $commentId);
-
-                $this->updateComment($commentId, [$updateColumn => $comment[$updateColumn] - 1]);
-            });
+            return;
         }
 
+        $this->switchReaction($commentId, $userReaction, $reaction);
+    }
+
+    private function addReaction(Comment $storedComment, string $reaction)
+    {
+        DB::transaction(function () use ($storedComment, $reaction) {
+            $updateReaction = $reaction === 'like' ? 'likes' : 'dislikes';
+
+            $storedComment->increment($updateReaction);
+            $storedComment->reactions()
+                ->create([
+                    'user_id' => Auth::id(),
+                    'reaction' => $reaction
+                ]);
+
+            $comment = $this->getComments()->firstWhere('id', $storedComment->id);
+
+            $this->updateComment($storedComment->id, [$updateReaction => $comment[$updateReaction] + 1]);
+            $this->setReactions($this->getReactions()->put($storedComment->id, $reaction));
+        });
+    }
+
+    private function removeReaction(Comment $storedComment, CommentReaction $userReaction, string $reaction)
+    {
+        DB::transaction(function () use ($storedComment, $userReaction, $reaction) {
+            $updateReaction = $reaction === 'like' ? 'likes' : 'dislikes';
+            
+            $storedComment->decrement($updateReaction);
+            $userReaction->delete();
+
+            $comment = $this->getComments()->firstWhere('id', $storedComment->id);
+
+            $this->updateComment($storedComment->id, [$updateReaction => $comment[$updateReaction] - 1]);
+            $this->setReactions($this->getReactions()->forget($storedComment->id));
+        });
+    }
+
+    private function switchReaction(string $commentId, CommentReaction $userReaction, string $reaction)
+    {
         DB::transaction(function() use ($commentId, $reaction, $userReaction) {
             Comment::where('id', $commentId)
                 ->update(
@@ -89,6 +115,8 @@ trait UpdateComment
                     ? ['likes' => $comment['likes'] + 1, 'dislikes' => $comment['dislikes'] - 1]
                     : ['likes' => $comment['likes'] - 1, 'dislikes' => $comment['dislikes'] + 1]
             );
+
+            $this->setReactions($this->getReactions()->put($commentId, $reaction));
         });
     }
 }

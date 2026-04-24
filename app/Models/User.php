@@ -61,4 +61,14 @@ class User extends Authenticatable
             ->where('start_at', '<=', now())
             ->latest('end_at');
     }
+    
+    /**
+     * commentReactions
+     *
+     * @return void
+     */
+    public function commentReactions()
+    {
+        return $this->hasMany(CommentReaction::class);
+    }
 }

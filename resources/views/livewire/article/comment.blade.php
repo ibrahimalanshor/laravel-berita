@@ -46,15 +46,15 @@
                         </div>
                         <div class="flex gap-4">
                             <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
-                            <div class="flex items-center gap-1 text-sm text-neutral-500">
+                            <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'text-red-700' : 'text-neutral-500' }}">
                                 <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'like')">
-                                    <span class="icon-[tabler--thumb-up] size-4"></span>
+                                    <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'icon-[tabler--thumb-up-filled]' : 'icon-[tabler--thumb-up]' }} size-4"></span>
                                 </button>
                                 {{ $comment['likes'] }}
                             </div>
-                            <div class="flex items-center gap-1 text-sm text-neutral-500">
+                            <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'text-red-700' : 'text-neutral-500' }}">
                                 <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'dislike')">
-                                    <span class="icon-[tabler--thumb-down] size-4"></span>
+                                    <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'icon-[tabler--thumb-down-filled]' : 'icon-[tabler--thumb-down]' }} size-4"></span>
                                 </button>
                                 {{ $comment['dislikes'] }}
                             </div>

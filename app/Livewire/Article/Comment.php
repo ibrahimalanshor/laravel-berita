@@ -18,6 +18,7 @@ class Comment extends Component
 
     public Article $article;
     public Collection $comments;
+    public Collection $reactions;
     
     #[Validate(rule: ['required', 'string', 'min:1', 'max:255'])]
     public string $newComment = '';
@@ -42,6 +43,16 @@ class Comment extends Component
         $this->comments = $data;
     }
 
+    public function getReactions(): Collection
+    {
+        return $this->reactions;
+    }
+
+    public function setReactions(Collection $data)
+    {
+        $this->reactions = $data;
+    }
+
     public function mount()
     {        
         $this->comments = $this->article->comments()
@@ -49,6 +60,10 @@ class Comment extends Component
             ->take(10)
             ->get()
             ->map(fn ($comment) => $this->mapCommentData($comment));
+        $this->reactions = $this->user->commentReactions()
+            ->whereIn('comment_id', $this->comments->pluck('id'))
+            ->get()
+            ->mapWithKeys(fn ($reaction) => [$reaction->comment_id => $reaction->reaction]);
     }
 
     private function mapCommentData(ModelsComment $comment)
