@@ -47,13 +47,13 @@
                         <div class="flex gap-4">
                             <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
                             <div class="flex items-center gap-1 text-sm text-neutral-500">
-                                <button class="flex items-center cursor-pointer" wire:click="like({{ $comment['id'] }})">
+                                <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'like')">
                                     <span class="icon-[tabler--thumb-up] size-4"></span>
                                 </button>
                                 {{ $comment['likes'] }}
                             </div>
                             <div class="flex items-center gap-1 text-sm text-neutral-500">
-                                <button class="flex items-center cursor-pointer" wire:click="dislike({{ $comment['id'] }})">
+                                <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'dislike')">
                                     <span class="icon-[tabler--thumb-down] size-4"></span>
                                 </button>
                                 {{ $comment['dislikes'] }}

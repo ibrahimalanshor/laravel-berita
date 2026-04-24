@@ -32,6 +32,16 @@ class Comment extends Component
         return Auth::user();
     }
 
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComments(Collection $data)
+    {
+        $this->comments = $data;
+    }
+
     public function mount()
     {        
         $this->comments = $this->article->comments()
