@@ -4,7 +4,7 @@ namespace App\Livewire\Article;
 
 use App\Livewire\Article\Traits\UpdateComment;
 use App\Models\Article;
-use App\Models\Comment as ModelsComment;
+use App\Models\Comment as CommentModel;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +19,7 @@ class Comment extends Component
     public Article $article;
     public Collection $comments;
     public Collection $reactions;
+    public ?int $replyId = null;
     
     #[Validate(rule: ['required', 'string', 'min:1', 'max:255'])]
     public string $newComment = '';
@@ -55,20 +56,27 @@ class Comment extends Component
 
     public function mount()
     {        
-        $this->comments = $this->article->comments()
-            ->whereNull('reply_id')
-            ->with(['replies' => fn ($reply) => $reply->limit(5)])
-            ->latest()
-            ->take(10)
-            ->get()
-            ->map(fn ($comment) => $this->mapCommentData($comment));
+        if (!$this->replyId) {
+            $this->comments = $this->article->comments()
+                ->whereNull('reply_id')
+                ->latest()
+                ->take(10)
+                ->get()
+                ->map(fn ($comment) => $this->mapCommentData($comment));
+        } else {
+            $this->comments = CommentModel::where('reply_id', $this->replyId)
+                ->oldest()
+                ->take(10)
+                ->get()
+                ->map(fn ($comment) => $this->mapCommentData($comment));
+        }
         $this->reactions = !Auth::check() ? collect() : $this->user->commentReactions()
             ->whereIn('comment_id', $this->comments->pluck('id'))
             ->get()
             ->mapWithKeys(fn ($reaction) => [$reaction->comment_id => $reaction->reaction]);
     }
 
-    private function mapCommentData(ModelsComment $comment)
+    private function mapCommentData(CommentModel $comment)
     {
         return [
             'id' => $comment->id,
@@ -78,7 +86,7 @@ class Comment extends Component
             'created_at' => $comment->created_at,
             'likes' => $comment->likes,
             'dislikes' => $comment->dislikes,
-            'replies' => []
+            'has_replies' => $comment->replies_count > 0
         ];
     }
 
@@ -86,19 +94,25 @@ class Comment extends Component
     {
         $this->validate();
 
-        $comment = $this->article->comments()
-            ->create([
-                'user_id' => $this->user->id,
-                'avatar_url' => $this->user->avatar_url,
-                'name' => $this->user->name,
-                'content' => $this->newComment,
-                'likes' => 0,
-                'dislikes' => 0
-            ]);
+        $comment = CommentModel::create([
+            'article_id' => !$this->replyId ? $this->article->id : null,
+            'user_id' => $this->user->id,
+            'reply_id' => $this->replyId,
+            'avatar_url' => $this->user->avatar_url,
+            'name' => $this->user->name,
+            'content' => $this->newComment,
+            'likes' => 0,
+            'dislikes' => 0,
+            'replies_count' => 0
+        ]);
             
         $this->reset('newComment');
 
-        $this->comments->unshift($this->mapCommentData($comment));
+        if ($this->replyId) {
+            $this->comments->push($this->mapCommentData($comment));
+        } else {
+            $this->comments->unshift($this->mapCommentData($comment));
+        }
     }
 
     public function render()

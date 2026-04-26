@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('content');
             $table->unsignedSmallInteger('likes')->default(0);
             $table->unsignedSmallInteger('dislikes')->default(0);
+            $table->unsignedSmallInteger('replies_count')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('reply_id')->nullable()->constrained('comments')->cascadeOnDelete();
             $table->timestamps();
         });
     }
