@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('avatar_url');
             $table->string('name');
+            $table->string('reply_name')->nullable();
             $table->string('content');
             $table->unsignedSmallInteger('likes')->default(0);
             $table->unsignedSmallInteger('dislikes')->default(0);

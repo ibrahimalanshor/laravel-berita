@@ -13,7 +13,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'user_id', 'reply_id', 'name', 'avatar_url', 'content', 'likes', 'dislikes'];
+    protected $fillable = ['article_id', 'user_id', 'reply_id', 'name', 'avatar_url', 'content', 'likes', 'dislikes', 'reply_name'];
 
     /**
      * The "booted" method of the model.
@@ -23,6 +23,7 @@ class Comment extends Model
         static::saving(function (Comment $comment) {
             if ($comment->reply_id) {
                 $comment->article_id = $comment->reply->article_id;
+                $comment->reply_name = $comment->reply->name;
             }
         });
         static::saved(function (Comment $comment) {

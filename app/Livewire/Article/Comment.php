@@ -82,6 +82,7 @@ class Comment extends Component
             'id' => $comment->id,
             'avatar_url' => $comment->avatar_url,
             'name' => $comment->name,
+            'reply_name' => $comment->reply_name,
             'content' => $comment->content,
             'created_at' => $comment->created_at,
             'likes' => $comment->likes,
@@ -113,6 +114,11 @@ class Comment extends Component
         } else {
             $this->comments->unshift($this->mapCommentData($comment));
         }
+    }
+
+    public function cancelReply()
+    {
+        $this->reset('newComment');
     }
 
     public function render()

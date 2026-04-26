@@ -22,7 +22,7 @@
                 @if (!$replyId)
                     <p class="text-sm text-neutral-500 word_left">1000 karakter tersisa</p>
                 @else
-                    <x-base.button type="button" color="bordered" size="sm" data-toggle="block" data-target="#reply-{{ $replyId }}">Batal</x-base.button>
+                    <x-base.button type="button" color="bordered" size="sm" wire:click="cancelReply">Batal</x-base.button>
                 @endif
                 <x-base.button color="primary" size="sm" icon="icon-[tabler--send-2]" icon-pos="right">Kirim</x-base.button>
             </div>
@@ -51,7 +51,12 @@
                         <div>
                             <div>
                                 <p class="font-bold text-neutral-900">{{ $comment['name'] }}</p>
-                                <p class="text-neutral-700">{{ $comment['content'] }}</p>
+                                <p class="text-neutral-700">
+                                    @if ($comment['reply_name'])
+                                        <span class="text-red-700">{{ '@' . $comment['reply_name'] }}</span>
+                                    @endif
+                                    {{ $comment['content'] }}
+                                </p>
                             </div>
                             <div class="flex gap-4">
                                 <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
