@@ -39,27 +39,45 @@
                         </button>
                     </div>
                     <img src="{{ $comment['avatar_url'] }}" alt="{{ $comment['name'] }}" class="size-8 rounded-full mt-1">
-                    <div class="space-y-1 grow">
+                    <div class="space-y-2 grow">
                         <div>
-                            <p class="font-bold text-neutral-900">{{ $comment['name'] }}</p>
-                            <p class="text-neutral-700">{{ $comment['content'] }}</p>
-                        </div>
-                        <div class="flex gap-4">
-                            <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
-                            <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'text-red-700' : 'text-neutral-500' }}">
-                                <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'like')">
-                                    <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'icon-[tabler--thumb-up-filled]' : 'icon-[tabler--thumb-up]' }} size-4"></span>
-                                </button>
-                                {{ $comment['likes'] }}
+                            <div>
+                                <p class="font-bold text-neutral-900">{{ $comment['name'] }}</p>
+                                <p class="text-neutral-700">{{ $comment['content'] }}</p>
                             </div>
-                            <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'text-red-700' : 'text-neutral-500' }}">
-                                <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'dislike')">
-                                    <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'icon-[tabler--thumb-down-filled]' : 'icon-[tabler--thumb-down]' }} size-4"></span>
-                                </button>
-                                {{ $comment['dislikes'] }}
+                            <div class="flex gap-4">
+                                <span class="text-sm text-neutral-500">{{ formatDate($comment['created_at']) }}</span>
+                                <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'text-red-700' : 'text-neutral-500' }}">
+                                    <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'like')">
+                                        <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'like' ? 'icon-[tabler--thumb-up-filled]' : 'icon-[tabler--thumb-up]' }} size-4"></span>
+                                    </button>
+                                    {{ $comment['likes'] }}
+                                </div>
+                                <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'text-red-700' : 'text-neutral-500' }}">
+                                    <button class="flex items-center cursor-pointer" wire:click="react({{ $comment['id'] }}, 'dislike')">
+                                        <span class="{{ $reactions->has($comment['id']) && $reactions[$comment['id']] === 'dislike' ? 'icon-[tabler--thumb-down-filled]' : 'icon-[tabler--thumb-down]' }} size-4"></span>
+                                    </button>
+                                    {{ $comment['dislikes'] }}
+                                </div>
+                                <button class="text-sm text-red-700" data-toggle="block" data-target="#reply-{{ $comment['id'] }}">Balas</button>
                             </div>
-                            <button class="text-sm text-red-700">Balas</button>
                         </div>
+
+                        <form id="reply-{{ $comment['id'] }}" class="hidden border border-neutral-300 px-3 py-2.5 rounded-md has-focus:border-2 has-focus:border-red-700">
+                            <textarea required maxlength="255" class="w-full p-0 placeholder-neutral-500 text-neutral-700 border-0 focus:border-0 focus:ring-0" name="" id="" rows="2" placeholder="Tulis komentar..."></textarea>
+                            <div class="border-t border-neutral-200 pt-2.5 flex justify-end gap-2">
+                                <x-base.button size="sm" color="bordered" type="button" data-toggle="block" data-target="#reply-{{ $comment['id'] }}">Batal</x-base.button>
+                                <x-base.button size="sm" color="primary" icon="icon-[tabler--send-2]" icon-pos="right">Kirim</x-base.button>
+                            </div>
+                        </form>
+
+                        @if ($comment['replies'])
+                            <div class="space-y-1">
+                                @foreach ($comment['replies'] as $reply)                            
+                                @endforeach
+                                <button class="text-red-700 font-medium underline">Lihat komentar lainnya</button>
+                            </div>
+                        @endif
                     </div>
                 </article>
             @endforeach

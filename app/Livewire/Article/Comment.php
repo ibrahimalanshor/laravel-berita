@@ -60,7 +60,7 @@ class Comment extends Component
             ->take(10)
             ->get()
             ->map(fn ($comment) => $this->mapCommentData($comment));
-        $this->reactions = $this->user->commentReactions()
+        $this->reactions = !Auth::check() ? collect() : $this->user->commentReactions()
             ->whereIn('comment_id', $this->comments->pluck('id'))
             ->get()
             ->mapWithKeys(fn ($reaction) => [$reaction->comment_id => $reaction->reaction]);
@@ -75,7 +75,8 @@ class Comment extends Component
             'content' => $comment->content,
             'created_at' => $comment->created_at,
             'likes' => $comment->likes,
-            'dislikes' => $comment->dislikes
+            'dislikes' => $comment->dislikes,
+            'replies' => []
         ];
     }
 

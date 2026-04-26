@@ -64,6 +64,9 @@ toggles.forEach(toggle => {
         } else if (toggleType === 'grid') {
             target.classList.toggle('hidden')
             target.classList.toggle('grid')
+        } else if (toggleType === 'block') {
+            target.classList.toggle('hidden')
+            target.classList.toggle('block')
         }
     })
 })
