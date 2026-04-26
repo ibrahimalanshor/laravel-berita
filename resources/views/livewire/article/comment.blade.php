@@ -59,17 +59,11 @@
                                     </button>
                                     {{ $comment['dislikes'] }}
                                 </div>
-                                <button class="text-sm text-red-700" data-toggle="block" data-target="#reply-{{ $comment['id'] }}">Balas</button>
+                                <button class="cursor-pointer text-sm text-red-700" data-toggle="block" data-target="#reply-{{ $comment['id'] }}">Balas</button>
                             </div>
                         </div>
 
-                        <form id="reply-{{ $comment['id'] }}" class="hidden border border-neutral-300 px-3 py-2.5 rounded-md has-focus:border-2 has-focus:border-red-700">
-                            <textarea required maxlength="255" class="w-full p-0 placeholder-neutral-500 text-neutral-700 border-0 focus:border-0 focus:ring-0" name="" id="" rows="2" placeholder="Tulis komentar..."></textarea>
-                            <div class="border-t border-neutral-200 pt-2.5 flex justify-end gap-2">
-                                <x-base.button size="sm" color="bordered" type="button" data-toggle="block" data-target="#reply-{{ $comment['id'] }}">Batal</x-base.button>
-                                <x-base.button size="sm" color="primary" icon="icon-[tabler--send-2]" icon-pos="right">Kirim</x-base.button>
-                            </div>
-                        </form>
+                        <livewire:comment.reply-form :comment-id="$comment['id']" />
 
                         @if ($comment['replies'])
                             <div class="space-y-1">

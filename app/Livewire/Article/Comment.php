@@ -56,6 +56,8 @@ class Comment extends Component
     public function mount()
     {        
         $this->comments = $this->article->comments()
+            ->whereNull('reply_id')
+            ->with(['replies' => fn ($reply) => $reply->limit(5)])
             ->latest()
             ->take(10)
             ->get()
