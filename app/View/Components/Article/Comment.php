@@ -24,6 +24,13 @@ class Comment extends Component
      * @var mixed
      */
     public Collection $reactions;
+    
+    /**
+     * total
+     *
+     * @var mixed
+     */
+    public $total;
 
     /**
      * Create a new component instance.
@@ -31,10 +38,13 @@ class Comment extends Component
     public function __construct(public Article $article)
     {
         $user = Auth::user();
-        $this->comments = $article->comments()
-            ->whereNull('reply_id')
-            ->with('replies')
-            ->take(10)
+
+        $query = $article->comments()
+            ->whereNull('reply_id');
+
+        $this->total = $query->count();
+        $this->comments = $query->with('replies')
+            ->take(2)
             ->latest()
             ->get();
 

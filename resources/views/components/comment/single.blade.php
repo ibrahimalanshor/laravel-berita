@@ -31,7 +31,7 @@
                     </button>
                     {{ $comment->dislikes }}
                 </div>
-                <button class="cursor-pointer text-sm text-red-700" data-reply-comment="{{ $comment->reply_id ?? $comment->id }}" data-mention="{{ $comment->name }}" data-mention-id="{{ $comment->id }}">Balas</button>
+                <button type="button" class="cursor-pointer text-sm text-red-700" data-reply-comment="{{ $comment->reply_id ?? $comment->id }}" data-mention="{{ $comment->name }}" data-mention-id="{{ $comment->id }}">Balas</button>
             </form>
         </div>
 
