@@ -135,4 +135,67 @@ class ArticleController extends Controller
 
         return back()->with('message', 'Artikel ditambahkan ke favorit');
     }
+    
+    /**
+     * comment
+     *
+     * @param  mixed $article
+     * @param  mixed $request
+     * @return void
+     */
+    public function comment(Article $article, Request $request)
+    {
+        $request->validate([
+            'content' => ['required', 'string', 'min:0', 'max:255'],
+            'reply_id' => ['nullable', 'integer'],
+            'mention_id' => ['nullable', 'integer']
+        ]);
+
+        $user = $request->user();
+        $replyId = $request->input('reply_id');
+        $mentionId = $request->input('mention_id');
+
+        $replyName = null;
+
+        if ($replyId) {
+            $reply = $article->comments()
+                ->where('id', $replyId)
+                ->whereNull('reply_id')
+                ->first();
+
+            abort_if(!$reply, 400);
+
+            $replyName = $reply->name;
+        }
+
+        if ($mentionId) {
+            abort_if(!$replyId, 400);
+
+            if ($mentionId !== $replyId) {
+                $mention = $article->comments()
+                    ->where('id', $mentionId)
+                    ->where('reply_id', $replyId)
+                    ->first();
+
+                abort_if(!$mention, 400);
+
+                $replyName = $mention->name;
+            }
+        }
+        
+        $article->comments()
+            ->create([
+                'user_id' => $user->id,
+                'reply_id' => $replyId,
+                'avatar_url' => $user->avatar_url,
+                'name' => $user->name,
+                'reply_name' => $replyName,
+                'content' => $request->input('content'),
+                'likes' => 0,
+                'dislikes' => 0,
+                'replies_count' => 0
+            ]);
+
+        return back();
+    }
 }

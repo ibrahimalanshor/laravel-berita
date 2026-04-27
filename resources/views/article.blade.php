@@ -82,7 +82,7 @@
             <hr class="border-neutral-200">
 
             @if (!$article->premium || ($subscription && !$subscription->expired))
-                <livewire:article.comment class="px-4 sm:px-0" :article="$article" />
+                <x-article.comment class="px-4 sm:px-0" :article="$article" />
 
                 <hr class="border-neutral-200">
             @endif

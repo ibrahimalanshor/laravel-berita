@@ -84,6 +84,8 @@ Route::controller(ArticleController::class)
                     ->name('bookmark');
                 Route::post('/favorite', 'favorite')
                     ->name('favorite');
+                Route::post('/comment', 'comment')
+                    ->name('comment');
             });
         Route::get('/', 'view')
             ->name('detail');

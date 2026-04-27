@@ -23,7 +23,6 @@ class Comment extends Model
         static::saving(function (Comment $comment) {
             if ($comment->reply_id) {
                 $comment->article_id = $comment->reply->article_id;
-                $comment->reply_name = $comment->reply->name;
             }
         });
         static::saved(function (Comment $comment) {
