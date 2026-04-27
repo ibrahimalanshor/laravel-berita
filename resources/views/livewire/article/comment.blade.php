@@ -1,4 +1,4 @@
-<section {{ $attributes->class(!$replyId ? 'space-y-4' : 'space-y-2') }}>
+<section {{ $attributes->class(['flex flex-col', !$replyId ? 'gap-y-4' : 'gap-y-2']) }}>
     @if (!$replyId)
         <div class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
             <h2 class="font-bold text-neutral-900 text-lg">0 Komentar</h2>
@@ -11,12 +11,14 @@
     @endif
 
     @auth
-        <form id="{{ !$replyId ? 'komentar_baru' : 'reply-' . $replyId }}" class="{{ $replyId ? 'hidden px-3 py-2.5 space-y-3' : 'p-4 space-y-3' }} border border-neutral-300 rounded-md has-focus:border-red-700 has-focus:border-2 divide-y divide-neutral-200" wire:submit="submitNewComment">
-            <div class="flex items-start gap-3 pb-3">
+        <form id="{{ !$replyId ? 'komentar_baru' : 'reply-' . $replyId }}" class="{{ $replyId ? 'hidden px-3 py-2.5 space-y-3 order-last' : 'p-4 space-y-3' }} border border-neutral-300 rounded-md has-focus:border-red-700 has-focus:border-2 divide-y divide-neutral-200" wire:submit="submitNewComment">
+            <div class="flex items-start gap-3 pb-3 relative">
                 @if (!$replyId)
                     <img src="{{ $this->user->avatar_url ?? asset('avatar.svg') }}" alt="{{ $this->user?->name ?? 'Avatar pengguna' }}" class="size-8 rounded-full">
+                @else
+                    <span class="absolute left-0 w-40 truncate z-10 text-red-700">{{ '@' . $replyComment->name }}</span>
                 @endif
-                <textarea name="content" placeholder="Tulis Komentar..." maxlength="1000" rows="{{ $replyId ? '2' : '3' }}" class="p-0 align-middle w-full placeholder-neutral-500 text-neutral-700 border-0 focus:ring-0" required wire:model="newComment"></textarea>
+                <textarea name="content" placeholder="Tulis Komentar..." maxlength="1000" rows="{{ $replyId ? '2' : '3' }}" class="p-0 align-middle w-full placeholder-neutral-500 text-neutral-700 border-0 focus:ring-0 {{ $replyId ? 'indent-40' : '' }}" required wire:model="newComment"></textarea>
             </div>
             <div class="flex items-center gap-2 {{ !$replyId ? 'justify-between' : 'justify-end' }}">
                 @if (!$replyId)

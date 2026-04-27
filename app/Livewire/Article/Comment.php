@@ -17,6 +17,7 @@ class Comment extends Component
     use UpdateComment;
 
     public Article $article;
+    public CommentModel $replyComment;
     public Collection $comments;
     public Collection $reactions;
     public ?int $replyId = null;
@@ -64,6 +65,7 @@ class Comment extends Component
                 ->get()
                 ->map(fn ($comment) => $this->mapCommentData($comment));
         } else {
+            $this->replyComment = CommentModel::find($this->replyId);
             $this->comments = CommentModel::where('reply_id', $this->replyId)
                 ->oldest()
                 ->take(10)
