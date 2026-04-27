@@ -16,22 +16,23 @@
                     {{ $comment->content }}
                 </p>
             </div>
-            <div class="flex gap-4">
+            <form method="POST" action="{{ route('comment.react', ['comment' => $comment->id]) }}" class="flex gap-4">
+                @csrf
                 <span class="text-sm text-neutral-500">{{ formatDate($comment->created_at) }}</span>
                 <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment->id) && $reactions[$comment->id] === 'like' ? 'text-red-700' : 'text-neutral-500' }}">
-                    <button class="flex items-center cursor-pointer" wire:click="react({{ $comment->id }}, 'like')">
+                    <button type="submit" class="flex items-center cursor-pointer" name="reaction" value="like">
                         <span class="{{ $reactions->has($comment->id) && $reactions[$comment->id] === 'like' ? 'icon-[tabler--thumb-up-filled]' : 'icon-[tabler--thumb-up]' }} size-4"></span>
                     </button>
                     {{ $comment->likes }}
                 </div>
                 <div class="flex items-center gap-1 text-sm {{ $reactions->has($comment->id) && $reactions[$comment->id] === 'dislike' ? 'text-red-700' : 'text-neutral-500' }}">
-                    <button class="flex items-center cursor-pointer" wire:click="react({{ $comment->id }}, 'dislike')">
+                    <button type="submit" class="flex items-center cursor-pointer" name="reaction" value="dislike">
                         <span class="{{ $reactions->has($comment->id) && $reactions[$comment->id] === 'dislike' ? 'icon-[tabler--thumb-down-filled]' : 'icon-[tabler--thumb-down]' }} size-4"></span>
                     </button>
                     {{ $comment->dislikes }}
                 </div>
                 <button class="cursor-pointer text-sm text-red-700" data-reply-comment="{{ $comment->reply_id ?? $comment->id }}" data-mention="{{ $comment->name }}" data-mention-id="{{ $comment->id }}">Balas</button>
-            </div>
+            </form>
         </div>
 
         @if ($comment->replies->count())

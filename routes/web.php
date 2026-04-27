@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeController;
@@ -72,6 +73,14 @@ Route::controller(SubscribeController::class)
         Route::post('/', 'checkout')
             ->middleware('auth')
             ->name('checkout');
+    });
+
+Route::controller(CommentController::class)
+    ->prefix('comments/')
+    ->name('comment.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::post('/{comment}/react', 'react')->name('react'); 
     });
     
 Route::controller(ArticleController::class)

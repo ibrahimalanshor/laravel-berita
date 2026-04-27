@@ -5,7 +5,7 @@ namespace App\View\Components\Article;
 use App\Models\Article;
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
