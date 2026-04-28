@@ -16,7 +16,7 @@ class Form extends Component
      *
      * @var mixed
      */
-    public User $user;
+    public ?User $user;
 
     /**
      * Create a new component instance.

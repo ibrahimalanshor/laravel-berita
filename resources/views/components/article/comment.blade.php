@@ -46,7 +46,7 @@
         const loadMoreCommentButton = document.querySelector('#load-more-comment')
 
         textarea.addEventListener('input', () => {
-            wordLeft.textContent = 1000 - textarea.value.trim().length + ' karakter tersisa'
+            wordLeft.textContent = 255 - textarea.value.trim().length + ' karakter tersisa'
         })
 
         replyButtons.forEach(button => {

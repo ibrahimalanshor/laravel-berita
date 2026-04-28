@@ -10,11 +10,11 @@
         @else
             <span class="absolute left-0 truncate z-10 text-red-700 mention"></span>
         @endif
-        <textarea name="content" placeholder="Tulis Komentar..." maxlength="1000" rows="{{ $type == 'reply' ? '2' : '3' }}" class="p-0 align-middle w-full placeholder-neutral-500 text-neutral-700 border-0 focus:ring-0" required></textarea>
+        <textarea name="content" placeholder="Tulis Komentar..." maxlength="255" rows="{{ $type == 'reply' ? '2' : '3' }}" class="p-0 align-middle w-full placeholder-neutral-500 text-neutral-700 border-0 focus:ring-0" required></textarea>
     </div>
     <div class="flex items-center gap-2 {{ $type === 'create' ? 'justify-between' : 'justify-end' }}">
         @if ($type === 'create')
-            <p class="text-sm text-neutral-500 word_left">1000 karakter tersisa</p>
+            <p class="text-sm text-neutral-500 word_left">255 karakter tersisa</p>
         @else
             <x-base.button type="button" color="bordered" size="sm" data-cancel-reply="{{ $reply->id }}">Batal</x-base.button>
         @endif
