@@ -34,12 +34,18 @@
         <div>
             <div>
                 <p class="font-bold text-neutral-900">{{ $comment->name }}</p>
-                <p class="text-neutral-700">
-                    @if ($comment->reply_name)
-                        <span class="text-red-700">{{ '@' . $comment->reply_name }}</span>
-                    @endif
-                    {{ $comment->content }}
-                </p>
+                @if ($comment->reported)
+                    <x-base.alert color="light" size="sm" class="italic my-1">
+                        <p>Komentar ini telah dihapus oleh moderator karena melanggar pedoman komunitas.</p>
+                    </x-base.alert>
+                @else
+                    <p class="text-neutral-700">
+                        @if ($comment->reply_name)
+                            <span class="text-red-700">{{ '@' . $comment->reply_name }}</span>
+                        @endif
+                        {{ $comment->content }}
+                    </p>
+                @endif
             </div>
             <form method="POST" action="{{ route('comment.react', ['comment' => $comment->id]) }}" class="flex gap-4">
                 @csrf
