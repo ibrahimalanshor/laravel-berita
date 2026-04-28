@@ -44,7 +44,7 @@ class Comment extends Component
 
         $this->total = $query->count();
         $this->comments = $query->with('replies')
-            ->take(2)
+            ->take(10)
             ->latest()
             ->get();
 

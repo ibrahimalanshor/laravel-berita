@@ -78,9 +78,11 @@ Route::controller(SubscribeController::class)
 Route::controller(CommentController::class)
     ->prefix('comments/')
     ->name('comment.')
-    ->middleware('auth')
     ->group(function () {
-        Route::post('/{comment}/react', 'react')->name('react'); 
+        Route::get('/load-more', 'loadMore')->name('load-more');
+        Route::post('/{comment}/react', 'react')
+            ->middleware('auth')
+            ->name('react'); 
     });
     
 Route::controller(ArticleController::class)
