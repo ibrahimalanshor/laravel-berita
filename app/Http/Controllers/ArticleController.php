@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\SubscriptionPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {    
@@ -145,6 +146,10 @@ class ArticleController extends Controller
      */
     public function comment(Article $article, Request $request)
     {
+        if ($article->premium) {
+            Gate::authorize('subscribed');
+        }
+
         $request->validate([
             'content' => ['required', 'string', 'min:0', 'max:255'],
             'reply_id' => ['nullable', 'integer'],

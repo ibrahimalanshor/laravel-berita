@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -21,6 +22,10 @@ class CommentController extends Controller
      */
     public function react(Comment $comment, Request $request, CommentService $commentService)
     {
+        if ($comment->article->premium) {
+            Gate::authorize('subscribed');
+        }
+        
         $request->validate([
             'reaction' => ['required', 'in:like,dislike']
         ]);
@@ -45,6 +50,10 @@ class CommentController extends Controller
         ]);
 
         $article = Article::find($request->input('article_id'));
+
+        if ($article->premium) {
+            Gate::authorize('subscribed');
+        }
 
         $user = $request->user();
         $replyId = $request->input('reply_id');
