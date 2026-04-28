@@ -49,7 +49,37 @@
             wordLeft.textContent = 255 - textarea.value.trim().length + ' karakter tersisa'
         })
 
-        replyButtons.forEach(button => {
+        replyButtons.forEach(button => addReplyButtonEvent(button))
+        cancelReplyButtons.forEach(button => addCancelReplyButtonEvent(button))
+
+        loadMoreButtons.forEach(button => {
+            const commentList = document.querySelector(button.dataset.loadMore)
+
+            button.addEventListener('click', async () => {
+                const page = +button.dataset.page
+                const replyId = button.dataset.replyId
+
+                const res = await fetch(`{{ route('comment.load-more', ['article_id' => $article->id]) }}&page=${page + 1}&reply_id=${replyId ?? ''}`)
+                const html = await res.text()
+
+                commentList.insertAdjacentHTML('beforeend', html)
+
+                const replyButtons = Array.from(commentList.querySelectorAll('[data-reply-comment]'))
+                    .filter(button => !button.dataset.bound)
+                    .forEach(button => addReplyButtonEvent(button))
+                const cancelButtons = Array.from(commentList.querySelectorAll('[data-cancel-reply]'))
+                    .filter(button => !button.dataset.bound)
+                    .forEach(button => addCancelReplyButtonEvent(button))
+
+                if (commentList.childElementCount >= +button.dataset.total) {
+                    button.remove()
+                } else {
+                    button.dataset.page++
+                }
+            })
+        })
+
+        function addReplyButtonEvent(button) {
             const replyForm = document.querySelector(`#reply-${button.dataset.replyComment}`)
             const mention = button.dataset.mention
             const mentionId = button.dataset.mentionId
@@ -69,37 +99,19 @@
                     textarea.focus()
                 })
             })
-        })
 
-        cancelReplyButtons.forEach(button => {
+            button.dataset.bound = true
+        }
+
+        function addCancelReplyButtonEvent(button) {
             const replyForm = document.querySelector(`#reply-${button.dataset.cancelReply}`)
 
             button.addEventListener('click', () => {
                 replyForm.classList.add('hidden')
                 replyForm.querySelector('textarea').value = ''
             })
-        })
 
-        loadMoreButtons.forEach(button => {
-            const commentList = document.querySelector(button.dataset.loadMore)
-
-            button.addEventListener('click', async () => {
-                const page = +button.dataset.page
-                const replyId = button.dataset.replyId
-
-                const res = await fetch(`{{ route('comment.load-more', ['article_id' => $article->id]) }}&page=${page + 1}&reply_id=${replyId ?? ''}`)
-                const html = await res.text()
-
-                commentList.insertAdjacentHTML('beforeend', html)
-
-                console.log(button.dataset.total)
-
-                if (commentList.childElementCount >= +button.dataset.total) {
-                    button.remove()
-                } else {
-                    button.dataset.page++
-                }
-            })
-        })
+            button.dataset.bound = true
+        }
     </script>
 @endpush
