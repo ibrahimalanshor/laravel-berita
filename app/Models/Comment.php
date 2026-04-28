@@ -13,7 +13,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = ['article_id', 'user_id', 'reply_id', 'name', 'avatar_url', 'content', 'likes', 'dislikes', 'reply_name'];
+    protected $fillable = ['article_id', 'user_id', 'reply_id', 'name', 'avatar_url', 'content', 'likes', 'dislikes', 'reply_name', 'reported_at', 'report_type', 'reporter_id'];
 
     /**
      * The "booted" method of the model.

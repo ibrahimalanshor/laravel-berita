@@ -34,6 +34,29 @@ class CommentController extends Controller
 
         return back()->withFragment('komentar');
     }
+
+    public function report(Comment $comment, Request $request)
+    {
+        if ($comment->article->premium) {
+            Gate::authorize('subscribed');
+        }
+
+        $request->validate([
+            'report_type' => ['required', 'in:spam,hate_speech,hoax,toxic']
+        ]);
+
+        $user = $request->user();
+
+        $comment->update([
+            'reported_at' => now(),
+            'report_type' => $request->input('report_type'),
+            'reporter_id' => $user->id
+        ]);
+
+        return back()
+            ->with('message', 'Komentar berhasil dilaporkan')
+            ->withFragment('komentar');
+    }
     
     /**
      * loadMore

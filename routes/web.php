@@ -80,9 +80,15 @@ Route::controller(CommentController::class)
     ->name('comment.')
     ->group(function () {
         Route::get('/load-more', 'loadMore')->name('load-more');
-        Route::post('/{comment}/react', 'react')
+
+        Route::prefix('{comment}/')
             ->middleware('auth')
-            ->name('react'); 
+            ->group(function () {
+                Route::post('/react', 'react')
+                    ->name('react'); 
+                Route::post('/report', 'report')
+                    ->name('report'); 
+            });
     });
     
 Route::controller(ArticleController::class)

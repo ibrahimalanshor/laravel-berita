@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('avatar_url');
             $table->string('name');
             $table->string('reply_name')->nullable();
+            $table->string('report_type')->nullable();
             $table->string('content');
             $table->unsignedSmallInteger('likes')->default(0);
             $table->unsignedSmallInteger('dislikes')->default(0);
@@ -23,6 +24,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->foreignId('reply_id')->nullable()->constrained('comments')->cascadeOnDelete();
+            $table->foreignId('reporter_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp('reported_at')->nullable();
             $table->timestamps();
         });
     }
