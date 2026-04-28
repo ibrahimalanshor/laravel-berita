@@ -74,6 +74,16 @@ class Comment extends Model
     }
     
     /**
+     * reports
+     *
+     * @return HasMany
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(CommentReport::class);
+    }
+    
+    /**
      * reported
      *
      * @return Attribute

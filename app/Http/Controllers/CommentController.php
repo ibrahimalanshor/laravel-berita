@@ -34,7 +34,14 @@ class CommentController extends Controller
 
         return back()->withFragment('komentar');
     }
-
+    
+    /**
+     * report
+     *
+     * @param  mixed $comment
+     * @param  mixed $request
+     * @return void
+     */
     public function report(Comment $comment, Request $request)
     {
         if ($comment->article->premium) {
@@ -47,11 +54,15 @@ class CommentController extends Controller
 
         $user = $request->user();
 
-        $comment->update([
-            'reported_at' => now(),
-            'report_type' => $request->input('report_type'),
-            'reporter_id' => $user->id
-        ]);
+        $comment->reports()
+            ->updateOrCreate(
+                [
+                    'user_id' => $user->id
+                ],
+                [
+                    'report_type' => $request->input('report_type'),
+                ]
+            );
 
         return back()
             ->with('message', 'Komentar berhasil dilaporkan')

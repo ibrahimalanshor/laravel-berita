@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->foreignId('reply_id')->nullable()->constrained('comments')->cascadeOnDelete();
-            $table->foreignId('reporter_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('reported_at')->nullable();
             $table->timestamps();
         });
