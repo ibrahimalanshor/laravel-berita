@@ -30,7 +30,7 @@
 
             @if ($comments->count() < $total)
                 <div class="flex items-center justify-center">
-                    <x-base.button id="load-more-comment" data-total="{{ $total }}" data-page="1" size="sm" class="text-sm" color="bordered" icon="icon-[tabler--reload]">Lebih banyak</x-base.button>
+                    <x-base.button data-load-more="#comment-list" data-total="{{ $total }}" data-page="1" size="sm" class="text-sm" color="bordered" icon="icon-[tabler--reload]">Lebih banyak</x-base.button>
                 </div>
             @endif
         @endif
@@ -43,7 +43,7 @@
         const wordLeft = document.querySelector('#komentar_baru .word_left')
         const replyButtons = document.querySelectorAll('[data-reply-comment]')
         const cancelReplyButtons = document.querySelectorAll('[data-cancel-reply]')
-        const loadMoreCommentButton = document.querySelector('#load-more-comment')
+        const loadMoreButtons = document.querySelectorAll('[data-load-more]')
 
         textarea.addEventListener('input', () => {
             wordLeft.textContent = 255 - textarea.value.trim().length + ' karakter tersisa'
@@ -80,23 +80,26 @@
             })
         })
 
-        if (loadMoreCommentButton) {
-            const commentList = document.querySelector('#comment-list')
+        loadMoreButtons.forEach(button => {
+            const commentList = document.querySelector(button.dataset.loadMore)
 
-            loadMoreCommentButton.addEventListener('click', async () => {
-                const page = +loadMoreCommentButton.dataset.page
+            button.addEventListener('click', async () => {
+                const page = +button.dataset.page
+                const replyId = button.dataset.replyId
 
-                const res = await fetch(`{{ route('comment.load-more', ['article_id' => $article->id]) }}&page=${page + 1}`)
+                const res = await fetch(`{{ route('comment.load-more', ['article_id' => $article->id]) }}&page=${page + 1}&reply_id=${replyId ?? ''}`)
                 const html = await res.text()
 
                 commentList.insertAdjacentHTML('beforeend', html)
 
-                if (commentList.childElementCount >= loadMoreCommentButton.dataset.total) {
-                    loadMoreCommentButton.remove()
+                console.log(button.dataset.total)
+
+                if (commentList.childElementCount >= +button.dataset.total) {
+                    button.remove()
                 } else {
-                    loadMoreCommentButton.dataset.page++
+                    button.dataset.page++
                 }
             })
-        }
+        })
     </script>
 @endpush

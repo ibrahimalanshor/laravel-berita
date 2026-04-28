@@ -43,7 +43,7 @@ class Comment extends Component
             ->whereNull('reply_id');
 
         $this->total = $query->count();
-        $this->comments = $query->with('replies')
+        $this->comments = $query->with(['replies' => fn ($reply) => $reply->take(3)])
             ->take(10)
             ->latest()
             ->get();

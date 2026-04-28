@@ -36,9 +36,15 @@
         </div>
 
         @if ($comment->replies->count())
-            @foreach ($comment->replies as $reply)
-                <x-comment.single :comment="$reply" :reactions="$reactions" />
-            @endforeach
+            <div id="comment-list-{{ $comment->id }}" class="space-y-2">
+                @foreach ($comment->replies as $reply)
+                    <x-comment.single :comment="$reply" :reactions="$reactions" />
+                @endforeach
+            </div>
+
+            @if ($comment->replies->count() < $comment->replies_count)
+                <button class="text-red-700 font-medium cursor-pointer" data-load-more="#comment-list-{{ $comment->id }}" data-reply-id="{{ $comment->id }}" data-total="{{ $comment->replies_count }}" data-page="1">Lihat Lebih banyak</button>
+            @endif
         @endif
 
         @if (!$comment->reply_id)

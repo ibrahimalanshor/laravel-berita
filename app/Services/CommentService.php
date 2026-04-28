@@ -48,7 +48,15 @@ class CommentService
         return $comment->reactions()
             ->firstWhere('user_id', $user->id);
     }
-
+    
+    /**
+     * addReaction
+     *
+     * @param  mixed $comment
+     * @param  mixed $user
+     * @param  mixed $reaction
+     * @return void
+     */
     private function addReaction(Comment $comment, User $user, string $reaction)
     {
         DB::transaction(function () use ($comment, $user, $reaction) {
@@ -62,7 +70,15 @@ class CommentService
                 ]);
         });
     }
-
+    
+    /**
+     * removeReaction
+     *
+     * @param  mixed $comment
+     * @param  mixed $userReaction
+     * @param  mixed $reaction
+     * @return void
+     */
     private function removeReaction(Comment $comment, CommentReaction $userReaction, string $reaction)
     {
         DB::transaction(function () use ($comment, $userReaction, $reaction) {
@@ -72,7 +88,15 @@ class CommentService
             $userReaction->delete();
         });
     }
-
+    
+    /**
+     * switchReaction
+     *
+     * @param  mixed $comment
+     * @param  mixed $userReaction
+     * @param  mixed $reaction
+     * @return void
+     */
     private function switchReaction(Comment $comment, CommentReaction $userReaction, string $reaction)
     {
         DB::transaction(function() use ($comment, $reaction, $userReaction) {

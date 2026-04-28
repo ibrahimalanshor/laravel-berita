@@ -29,24 +29,34 @@ class CommentController extends Controller
 
         return back();
     }
-
+    
+    /**
+     * loadMore
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function loadMore(Request $request)
     {
         $request->validate([
             'article_id' => ['required', 'exists:articles,id'],
+            'reply_id' => ['nullable', 'exists:comments,id'],
             'page' => ['required', 'integer', 'min:1']
         ]);
 
         $article = Article::find($request->input('article_id'));
 
         $user = $request->user();
-        $skip = ($request->input('page') - 1) * 10;
+        $replyId = $request->input('reply_id');
+        $perPage = ($replyId ? 3 : 10);
+
+        $skip = ($request->input('page') - 1) * $perPage;
 
         $comments = $article->comments()
-            ->whereNull('reply_id')
+            ->when($replyId, fn ($query) => $query->where('reply_id', $replyId), fn ($query) => $query->whereNull('reply_id'))
             ->with('replies')
             ->skip($skip)
-            ->take(10)
+            ->take($perPage)
             ->latest()
             ->get();
 
