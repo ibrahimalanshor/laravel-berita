@@ -34,7 +34,7 @@
     @endif
 </section>
 
-@if ($user->subscription->expired)
+@if ($user->subscription && $user->subscription->expired)
     <form id="perpanjang_langganan" class="border border-neutral-300 rounded-md p-4 space-y-4" method="POST" action="{{ route('subscribe.checkout') }}">
         @csrf
         <h2 class="font-bold text-neutral-900 text-lg">Perpanjang Langganan</h2>
