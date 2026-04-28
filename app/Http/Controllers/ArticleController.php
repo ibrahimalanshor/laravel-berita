@@ -196,6 +196,6 @@ class ArticleController extends Controller
                 'replies_count' => 0
             ]);
 
-        return back();
+        return back()->withFragment('komentar');
     }
 }

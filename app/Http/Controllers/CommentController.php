@@ -27,7 +27,7 @@ class CommentController extends Controller
 
         $commentService->react($comment, $request->user(), $request->input('reaction'));
 
-        return back();
+        return back()->withFragment('komentar');
     }
     
     /**

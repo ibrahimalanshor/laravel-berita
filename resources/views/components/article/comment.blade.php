@@ -1,4 +1,4 @@
-<section class="px-4 sm:p-0">
+<section id="komentar" class="px-4 scroll-mt-20 sm:p-0">
     <div class="flex flex-col gap-2 mb-2 lg:flex-row lg:items-center lg:justify-between">
         <h2 class="font-bold text-neutral-900 text-lg">{{ $total }} Komentar</h2>
         @guest
