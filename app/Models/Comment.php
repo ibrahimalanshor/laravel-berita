@@ -20,16 +20,26 @@ class Comment extends Model
      */
     protected static function booted(): void
     {
-        static::saving(function (Comment $comment) {
+        static::creating(function (Comment $comment) {
             if ($comment->reply_id) {
                 $comment->article_id = $comment->reply->article_id;
             }
         });
-        static::saved(function (Comment $comment) {
+        static::created(function (Comment $comment) {
             if ($comment->reply_id) {
                 $comment->reply->increment('replies_count');
             }
         });
+    }
+    
+    /**
+     * article
+     *
+     * @return BelongsTo
+     */
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
     }
     
     /**
