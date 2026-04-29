@@ -224,7 +224,8 @@ class HomeController extends Controller
         ]);
 
         $q = $request->input('q');
-        $articles = Article::paginate(10)
+        $articles = Article::where(fn ($query) => $query->whereLike('title', "%$q%")->orWhereLike('content', "%$q%"))
+            ->paginate(10)
             ->withQueryString();
 
         return view('search', [

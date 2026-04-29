@@ -19,13 +19,17 @@
     <body>
         <div class="fixed inset-0 bg-black/50 hidden z-20" id="app-overlay"></div>
         
-        <x-includes.navbar />
+        <div class="flex flex-col justify-between min-h-screen">
+            <div>
+                <x-includes.navbar />
 
-        <main class="pb-4">
-            @yield('content')
-        </main>
+                <main class="pb-4">
+                    @yield('content')
+                </main>
+            </div>
 
-        <x-includes.footer />
+            <x-includes.footer />
+        </div>
 
         @livewireScripts
 
