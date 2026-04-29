@@ -73,7 +73,13 @@
                                 <button class="lg:hover:text-neutral-400">{{ $menu }}</button>
                             </form>
                         @else
-                            <a href="{{ $url }}" class="lg:hover:text-neutral-400">{{ $menu }}</a>
+                            <a href="{{ $url }}" class="flex items-center justify-between lg:hover:text-neutral-400">
+                                {{ $menu }}
+
+                                @if ($menu === 'Notifikasi')
+                                    <x-base.badge-pill>15</x-base.badge-pill>
+                                @endif
+                            </a>
                         @endif
                     @endforeach
                 </div>
@@ -129,12 +135,15 @@
                 </x-base.button>
             @else
                 <div class="hidden sm:flex items-center relative">
-                    <button class="open-user-navbar-dropdown flex items-center cursor-pointer" aria-label="Buka Profil" data-toggle="dropdown" data-target="#user-navbar-dropdown">
+                    <button class="open-user-navbar-dropdown flex items-center cursor-pointer relative" aria-label="Buka Profil" data-toggle="dropdown" data-target="#user-navbar-dropdown">
                         @php
                             $user = auth()->user()
                         @endphp
 
                         <img src="{{ $user->avatar_url ?? asset('avatar.svg') }}" alt="{{ $user->name }}" class="size-8 rounded-full">
+                        <x-base.badge-pill class="absolute -top-1 -right-1">
+                            15
+                        </x-base.badge-pill>
                     </button>
 
                     <div
@@ -148,6 +157,7 @@
                                 'Profil' => 'icon-[tabler--user]',
                                 'Baca Nanti' => 'icon-[tabler--bookmark]',
                                 'Artikel Favorit' => 'icon-[tabler--heart]',
+                                'Notifikasi' => 'icon-[tabler--bell]',
                                 'Logout' => 'icon-[tabler--logout]'
                             ]
                         @endphp
@@ -161,9 +171,15 @@
                                     </button>
                                 </form>
                             @else
-                                <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 hover:bg-neutral-100">
+                                <a href="{{ $url }}" class="block px-2 py-1 whitespace-nowrap flex items-center gap-2 relative hover:bg-neutral-100">
                                     <span class="{{ $menuIcon[$menu] }} size-4"></span>
                                     {{ $menu }}
+
+                                    @if ($menu === 'Notifikasi')
+                                        <x-base.badge-pill class="absolute right-2">
+                                            15
+                                        </x-base.badge-pill>
+                                    @endif
                                 </a>
                             @endif
                         @endforeach

@@ -11,9 +11,11 @@
         <hr class="border-neutral-200">
 
         <div class="grid grid-cols-1 gap-4">
-            @foreach ($articles as $article)
+            @forelse ($articles as $article)
                 <x-article.card :article="$article" type="search" />
-            @endforeach
+            @empty
+                <p class="text-neutral-700">Tidak ada berita dengan kata kunci "{{ $q }}" ditemukan.</p>
+            @endforelse
         </div>
 
         {{ $articles->links('article.pagination') }}

@@ -59,6 +59,7 @@ class Navbar extends Component
 
         $this->userMenus = [
             'Profil' => route('profile.index'),
+            'Notifikasi' => route('profile.bookmark'),
             'Baca Nanti' => route('profile.bookmark'),
             'Artikel Favorit' => route('profile.favourite'),
             'Logout' => route('profile.favourite')
