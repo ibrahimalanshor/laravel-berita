@@ -39,18 +39,24 @@
 
 @push('scripts')
     <script>
-        const textarea = document.querySelector('#komentar_baru textarea')
-        const wordLeft = document.querySelector('#komentar_baru .word_left')
-        const replyButtons = document.querySelectorAll('[data-reply-comment]')
-        const cancelReplyButtons = document.querySelectorAll('[data-cancel-reply]')
+        @auth
+            const textarea = document.querySelector('#komentar_baru textarea')
+            const wordLeft = document.querySelector('#komentar_baru .word_left')
+
+            if (textarea) {
+                textarea.addEventListener('input', () => {
+                    wordLeft.textContent = 255 - textarea.value.trim().length + ' karakter tersisa'
+                })
+            }
+
+            const replyButtons = document.querySelectorAll('[data-reply-comment]')
+            const cancelReplyButtons = document.querySelectorAll('[data-cancel-reply]')
+
+            replyButtons.forEach(button => addReplyButtonEvent(button))
+            cancelReplyButtons.forEach(button => addCancelReplyButtonEvent(button))
+        @endauth
+        
         const loadMoreButtons = document.querySelectorAll('[data-load-more]')
-
-        textarea.addEventListener('input', () => {
-            wordLeft.textContent = 255 - textarea.value.trim().length + ' karakter tersisa'
-        })
-
-        replyButtons.forEach(button => addReplyButtonEvent(button))
-        cancelReplyButtons.forEach(button => addCancelReplyButtonEvent(button))
 
         loadMoreButtons.forEach(button => {
             const commentList = document.querySelector(button.dataset.loadMore)
@@ -80,38 +86,42 @@
         })
 
         function addReplyButtonEvent(button) {
-            const replyForm = document.querySelector(`#reply-${button.dataset.replyComment}`)
-            const mention = button.dataset.mention
-            const mentionId = button.dataset.mentionId
+            @auth
+                const replyForm = document.querySelector(`#reply-${button.dataset.replyComment}`)
+                const mention = button.dataset.mention
+                const mentionId = button.dataset.mentionId
 
-            button.addEventListener('click', () => {
-                const mentionSpan = replyForm.querySelector('.mention')
-                const mentionInput = replyForm.querySelector('[name=mention_id]')
+                button.addEventListener('click', () => {
+                    const mentionSpan = replyForm.querySelector('.mention')
+                    const mentionInput = replyForm.querySelector('[name=mention_id]')
 
-                replyForm.classList.remove('hidden')
-                mentionSpan.innerHTML = `@${mention}`
-                mentionInput.value = mentionId
+                    replyForm.classList.remove('hidden')
+                    mentionSpan.innerHTML = `@${mention}`
+                    mentionInput.value = mentionId
 
-                requestAnimationFrame(() => {
-                    const textarea = replyForm.querySelector('textarea')
+                    requestAnimationFrame(() => {
+                        const textarea = replyForm.querySelector('textarea')
 
-                    textarea.style.textIndent = `${mentionSpan.offsetWidth + 8}px`
-                    textarea.focus()
+                        textarea.style.textIndent = `${mentionSpan.offsetWidth + 8}px`
+                        textarea.focus()
+                    })
                 })
-            })
 
-            button.dataset.bound = true
+                button.dataset.bound = true
+            @endauth
         }
 
         function addCancelReplyButtonEvent(button) {
-            const replyForm = document.querySelector(`#reply-${button.dataset.cancelReply}`)
+            @auth
+                const replyForm = document.querySelector(`#reply-${button.dataset.cancelReply}`)
 
-            button.addEventListener('click', () => {
-                replyForm.classList.add('hidden')
-                replyForm.querySelector('textarea').value = ''
-            })
+                button.addEventListener('click', () => {
+                    replyForm.classList.add('hidden')
+                    replyForm.querySelector('textarea').value = ''
+                })
 
-            button.dataset.bound = true
+                button.dataset.bound = true
+            @endauth
         }
     </script>
 @endpush

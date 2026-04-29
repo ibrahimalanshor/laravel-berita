@@ -33,6 +33,8 @@ toggles.forEach(toggle => {
         const toggleType = toggle.dataset.toggle
         const target = document.querySelector(toggle.dataset.target)
 
+        toggle.classList.toggle('active')
+
         if (toggleType === 'drawer') {
             if (target.classList.contains('hidden')) {
                 appOverlay.classList.remove('hidden')
