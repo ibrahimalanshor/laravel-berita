@@ -88,6 +88,8 @@ Route::controller(CommentController::class)
                     ->name('react'); 
                 Route::post('/report', 'report')
                     ->name('report'); 
+                Route::delete('/delete', 'delete')
+                    ->name('delete'); 
             });
     });
     

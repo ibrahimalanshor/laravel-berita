@@ -70,6 +70,30 @@ class CommentController extends Controller
     }
     
     /**
+     * delete
+     *
+     * @param  mixed $comment
+     * @param  mixed $request
+     * @return void
+     */
+    public function delete(Comment $comment, Request $request)
+    {
+        if ($comment->article->premium) {
+            Gate::authorize('subscribed');
+        }
+
+        $user = $request->user();
+
+        abort_if($user->id !== $comment->user_id, 403);
+
+        $comment->delete();
+
+        return back()
+            ->with('message', 'Komentar berhasil dihapus')
+            ->withFragment('komentar');
+    }
+    
+    /**
      * loadMore
      *
      * @param  mixed $request

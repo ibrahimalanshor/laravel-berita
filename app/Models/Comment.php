@@ -31,6 +31,11 @@ class Comment extends Model
                 $comment->reply->increment('replies_count');
             }
         });
+        static::deleted(function (Comment $comment) {
+            if ($comment->reply_id) {
+                $comment->reply->decrement('replies_count');
+            }
+        });
     }
     
     /**
