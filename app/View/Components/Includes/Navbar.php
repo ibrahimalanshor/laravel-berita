@@ -47,6 +47,13 @@ class Navbar extends Component
      * @var mixed
      */
     public ?Subscription $subscription;
+    
+    /**
+     * notificationCount
+     *
+     * @var mixed
+     */
+    public int $notificationCount = 0;
 
     /**
      * Create a new component instance.
@@ -72,14 +79,7 @@ class Navbar extends Component
         }
 
         $this->setSubscribed();
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
-    {
-        return view('components.includes.navbar');
+        $this->setNotificationCount();
     }
 
     private function setSubscribed()
@@ -92,5 +92,27 @@ class Navbar extends Component
         $user = Auth::user();
 
         $this->subscription = $user->subscription;
+    }
+
+    private function setNotificationCount()
+    {
+        if (!Auth::check()) {
+            $this->notificationCount = 0;
+
+            return;
+        }
+
+        $user = Auth::user();
+
+        $this->notificationCount = $user->unreadNotifications
+            ->count();
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.includes.navbar');
     }
 }

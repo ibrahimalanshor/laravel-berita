@@ -76,8 +76,8 @@
                             <a href="{{ $url }}" class="flex items-center justify-between lg:hover:text-neutral-400">
                                 {{ $menu }}
 
-                                @if ($menu === 'Notifikasi')
-                                    <x-base.badge-pill>15</x-base.badge-pill>
+                                @if ($menu === 'Notifikasi' && $notificationCount > 0)
+                                    <x-base.badge-pill>{{ $notificationCount }}</x-base.badge-pill>
                                 @endif
                             </a>
                         @endif
@@ -141,9 +141,11 @@
                         @endphp
 
                         <img src="{{ $user->avatar_url ?? asset('avatar.svg') }}" alt="{{ $user->name }}" class="size-8 rounded-full">
-                        <x-base.badge-pill class="absolute -top-1 -right-1">
-                            15
-                        </x-base.badge-pill>
+                        @if ($notificationCount > 0)
+                            <x-base.badge-pill class="absolute -top-1 -right-1">
+                                {{ $notificationCount }}
+                            </x-base.badge-pill>
+                        @endif
                     </button>
 
                     <div
@@ -175,9 +177,9 @@
                                     <span class="{{ $menuIcon[$menu] }} size-4"></span>
                                     {{ $menu }}
 
-                                    @if ($menu === 'Notifikasi')
+                                    @if ($menu === 'Notifikasi' && $notificationCount > 0)
                                         <x-base.badge-pill class="absolute right-2">
-                                            15
+                                            {{ $notificationCount }}
                                         </x-base.badge-pill>
                                     @endif
                                 </a>
