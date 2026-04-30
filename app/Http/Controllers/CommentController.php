@@ -124,7 +124,7 @@ class CommentController extends Controller
             ->with('replies')
             ->skip($skip)
             ->take($perPage)
-            ->latest()
+            ->when($replyId, fn ($query) => $query->oldest(), fn ($query) => $query->latest())
             ->get();
 
         $allCommentId = $comments->flatMap(function ($comment) {
