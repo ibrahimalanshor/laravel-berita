@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <img src="{{ $comment->avatar_url }}" alt="{{ $comment->name }}" class="size-8 rounded-full mt-1">
+    <img src="{{ $comment->avatar_url ?? asset('avatar.svg') }}" alt="{{ $comment->name }}" class="size-8 rounded-full mt-1">
     <div class="grow space-y-2">
         <div>
             <div>
