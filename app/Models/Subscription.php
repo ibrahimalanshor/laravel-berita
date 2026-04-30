@@ -30,6 +30,16 @@ class Subscription extends Model
     ];
     
     /**
+     * user
+     *
+     * @return void
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    /**
      * package
      *
      * @return void

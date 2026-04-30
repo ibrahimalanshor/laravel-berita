@@ -2,20 +2,20 @@
 
 namespace App\Notifications;
 
-use App\Models\Comment;
+use App\Models\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CommentReacted extends Notification implements ShouldQueue
+class SubscriptionExpired extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Comment $comment, public string $reaction)
+    public function __construct(public Subscription $subscription)
     {
         //
     }
@@ -27,7 +27,7 @@ class CommentReacted extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['broadcast', 'database'];
+        return ['database'];
     }
 
     /**
@@ -38,9 +38,8 @@ class CommentReacted extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'user_name' => $this->comment->name,
-            'reaction' => $this->reaction,
-            'article_url' => route('article.detail', ['article' => $this->comment->article->slug])
+            'period' => $this->subscription->period,
+            'end_at' => $this->subscription->end_at,
         ];
     }
 }
