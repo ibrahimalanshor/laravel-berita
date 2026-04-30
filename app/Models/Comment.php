@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\CommentReplied;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +30,10 @@ class Comment extends Model
         static::created(function (Comment $comment) {
             if ($comment->reply_id) {
                 $comment->reply->increment('replies_count');
+
+                if ($comment->user_id !== $comment->reply->user_id) {
+                    $comment->reply->user->notify(new CommentReplied($comment));
+                }
             }
         });
         static::deleted(function (Comment $comment) {
@@ -46,6 +51,16 @@ class Comment extends Model
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
+    }
+    
+    /**
+     * user
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
     
     /**

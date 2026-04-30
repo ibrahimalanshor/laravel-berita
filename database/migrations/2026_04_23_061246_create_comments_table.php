@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('avatar_url');
+            $table->string('avatar_url')->nullable();
             $table->string('name');
             $table->string('reply_name')->nullable();
             $table->string('report_type')->nullable();
