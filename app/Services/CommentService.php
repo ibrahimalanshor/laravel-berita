@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Comment;
 use App\Models\CommentReaction;
 use App\Models\User;
+use App\Notifications\CommentReacted;
 use Illuminate\Support\Facades\DB;
 
 class CommentService
@@ -68,6 +69,10 @@ class CommentService
                     'user_id' => $user->id,
                     'reaction' => $reaction
                 ]);
+
+            if ($comment->user_id !== $user->id) {
+                $comment->user->notify(new CommentReacted($comment, $reaction));
+            }
         });
     }
     
@@ -108,6 +113,10 @@ class CommentService
             $userReaction->update([
                 'reaction' => $reaction
             ]);
+
+            if ($comment->user_id !== $userReaction->user_id) {
+                $comment->user->notify(new CommentReacted($comment, $reaction));
+            }
         });
     }
 }

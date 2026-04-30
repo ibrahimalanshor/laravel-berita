@@ -5,16 +5,17 @@ namespace App\Notifications;
 use App\Models\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CommentReplied extends Notification implements ShouldQueue
+class CommentReacted extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Comment $comment)
+    public function __construct(public Comment $comment, public string $reaction)
     {
         //
     }
@@ -38,7 +39,7 @@ class CommentReplied extends Notification implements ShouldQueue
     {
         return [
             'user_name' => $this->comment->name,
-            'content' => $this->comment->content,
+            'reaction' => $this->reaction,
             'article_url' => route('article.detail', ['article' => $this->comment->article->slug])
         ];
     }
