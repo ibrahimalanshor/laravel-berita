@@ -12,6 +12,12 @@
                     'route' => 'profile.index'
                 ],
                 [
+                    'name' => 'Notifikasi',
+                    'url' => route('profile.notification'),
+                    'icon' => 'icon-[tabler--bell-ringing]',
+                    'route' => 'profile.notification'
+                ],
+                [
                     'name' => 'Artikel Baca Nanti',
                     'url' => route('profile.bookmark'),
                     'icon' => 'icon-[tabler--bookmark]',
@@ -26,7 +32,7 @@
                 [
                     'name' => 'Langganan',
                     'url' => route('profile.subscription'),
-                    'icon' => 'icon-[tabler--bell-ringing]',
+                    'icon' => 'icon-[tabler--credit-card]',
                     'route' => 'profile.subscription'
                 ],
                 [

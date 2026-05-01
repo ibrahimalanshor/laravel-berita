@@ -132,4 +132,26 @@ class ProfileController extends Controller
             'current_route' => $currentRoute
         ]);
     }
+
+    /**
+     * notification
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function notification(Request $request)
+    {
+        $currentRoute = Route::currentRouteName();
+        $notifications = $request->user()
+            ->notifications()
+            ->paginate(10);
+
+        return view('profile.notification', [
+            'title' => 'Status Langganan - Lararita',
+            'description' => 'Status langganan yang aktif',
+            'user' => $request->user(),
+            'notifications' => $notifications,
+            'current_route' => $currentRoute
+        ]);
+    }
 }

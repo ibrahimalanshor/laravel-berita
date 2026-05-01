@@ -46,6 +46,8 @@ Route::controller(ProfileController::class)
             ->name('favourite');
         Route::get('subscription', 'subscription')
             ->name('subscription');
+        Route::get('notification', 'notification')
+            ->name('notification');
     });
 
 Route::get('search', [HomeController::class, 'search'])
