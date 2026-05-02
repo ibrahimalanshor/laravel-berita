@@ -19,4 +19,16 @@ class NotificationController extends Controller
 
         return redirect()->route('profile.subscription');
     }
+
+    public function readAll(Request $request)
+    {   
+        $request->user()
+            ->notifications()
+            ->unread()
+            ->update([
+                'read_at' => now()
+            ]);
+
+        return back();
+    }
 }

@@ -11,9 +11,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('home')
     ->get('/', [HomeController::class, 'index']);
-Route::post('/notifications/{notification}', [NotificationController::class, 'read'])
+
+Route::controller(NotificationController::class)
     ->middleware('auth')
-    ->name('notification.read');
+    ->prefix('/notification')
+    ->name('notification.')
+    ->group(function () {
+        Route::post('/read-all', 'readAll')
+            ->name('read-all');
+        Route::post('/{notification}', 'read')
+            ->name('read'); 
+    });
 
 Route::controller(AuthController::class)
     ->group(function () {

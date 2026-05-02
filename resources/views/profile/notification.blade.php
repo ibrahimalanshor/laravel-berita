@@ -2,8 +2,15 @@
 
 @section('profile-content')
 <section class="border border-neutral-300 rounded-md">
-    <div class="p-4">
+    <div class="p-4 flex items-center justify-between">
         <h1 class="font-bold text-neutral-900 text-lg">Notifikasi ({{ $notifications->total() }})</h1>
+
+        @if ($notifications->total())
+            <form action="{{ route('notification.read-all') }}" method="POST">
+                @csrf
+                <x-base.button size="sm" color="primary" icon="icon-[tabler--check]">Baca semua</x-base.button>
+            </form>
+        @endif
     </div>
 
     <div class="divide-y divide-neutral-200 border-t border-neutral-200">
@@ -19,7 +26,7 @@
                 'App\Notifications\SubscriptionExpired' => 'bg-yellow-100 text-yellow-600'
             ];
         @endphp
-        @foreach ($notifications as $notification)
+        @forelse ($notifications as $notification)
             @if ($notification->unread())
                 <form action="{{ route('notification.read', ['notification' => $notification->id]) }}" method="POST">
                 @csrf
@@ -63,7 +70,9 @@
             @else
                 </div>
             @endif
-        @endforeach
+        @empty
+            <p class="p-4 text-neutral-500">Tidak ada notifikasi.</p>
+        @endforelse
     </div>
 </section>
 
