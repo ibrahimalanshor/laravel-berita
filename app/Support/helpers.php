@@ -32,5 +32,11 @@ function setting(string $key): ?string
  */
 function formatDate(string $date, string $format = 'l, d M Y'): string
 {
-    return Carbon::parse($date)->format($format);
+    $dateTime = Carbon::parse($date);
+
+    if ($dateTime->diffInDays() > 1) {
+        return $dateTime->format($format);
+    }
+
+    return $dateTime->locale('id')->diffForHumans();
 }
