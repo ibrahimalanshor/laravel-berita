@@ -144,6 +144,7 @@ class ProfileController extends Controller
         $currentRoute = Route::currentRouteName();
         $notifications = $request->user()
             ->notifications()
+            ->unread()
             ->paginate(10);
 
         return view('profile.notification', [

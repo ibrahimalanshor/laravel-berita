@@ -4,12 +4,16 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('home')
     ->get('/', [HomeController::class, 'index']);
+Route::post('/notifications/{notification}', [NotificationController::class, 'read'])
+    ->middleware('auth')
+    ->name('notification.read');
 
 Route::controller(AuthController::class)
     ->group(function () {

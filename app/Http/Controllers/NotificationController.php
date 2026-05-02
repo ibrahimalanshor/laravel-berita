@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
+
+class NotificationController extends Controller
+{
+    public function read(DatabaseNotification $notification)
+    {
+        abort_if($notification->read(), 403);
+
+        $notification->markAsRead();
+
+        if ($notification->type === 'App\Notifications\CommentReacted' || $notification->type === 'App\Notifications\CommentReplied') {
+            return redirect($notification->data['article_url']);
+        }
+
+        return redirect()->route('profile.subscription');
+    }
+}

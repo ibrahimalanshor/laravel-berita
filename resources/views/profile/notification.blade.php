@@ -1,10 +1,12 @@
 @extends('layouts.profile')
 
 @section('profile-content')
-<section class="border border-neutral-300 rounded-md p-4 space-y-4">
-    <h1 class="font-bold text-neutral-900 text-lg">Notifikasi ({{ $notifications->total() }})</h1>
+<section class="border border-neutral-300 rounded-md">
+    <div class="p-4">
+        <h1 class="font-bold text-neutral-900 text-lg">Notifikasi ({{ $notifications->total() }})</h1>
+    </div>
 
-    <div class="space-y-4">
+    <div class="divide-y divide-neutral-200 border-t border-neutral-200">
         @php
             $icons = [
                 'App\Notifications\CommentReacted' => 'icon-[tabler--thumb-up-filled]',
@@ -18,34 +20,52 @@
             ];
         @endphp
         @foreach ($notifications as $notification)
-            <div class="flex items-start gap-4">
-                <div class="mt-1 {{ $iconColors[$notification->type] }} size-10 shrink-0 rounded-full flex items-center justify-center">
-                    <span class="{{ $icons[$notification->type] }} size-4"></span>
-                </div>
-
+            @if ($notification->unread())
+                <form action="{{ route('notification.read', ['notification' => $notification->id]) }}" method="POST">
+                @csrf
+            @else
                 <div>
-                    @if ($notification->type === 'App\Notifications\CommentReacted')
-                        <a href="{{ $notification->data['article_url'] }}" class="text-neutral-700 hover:underline">
-                            <span class="font-medium text-neutral-900">{{ $notification->data['user_name'] }}</span>
-                            {{ $notification->data['reaction'] === 'like' ? 'menyukai' : 'tidak menyukai' }} komentar anda.
-                        </a>
-                    @elseif ($notification->type === 'App\Notifications\CommentReplied')
-                        <a href="{{ $notification->data['article_url'] }}" class="text-neutral-700 line-clamp-3 hover:underline">
-                            <span class="font-medium text-neutral-900">{{ $notification->data['user_name'] }}</span>
-                            <span>membalas komentar anda</span>
-                            <span class="text-neutral-500">
-                                "{{ $notification->data['content'] }}".
-                            </span>
-                        </a>
-                    @else
-                        <a href="{{ route('profile.subscription') }}" class="text-neutral-700 hover:underline">Langganan premium {{ $notification->data['period'] === 'month' ? 'bulanan' : 'tahunan' }} anda akan habis besok. Segera perpanjang.</a>
-                    @endif
-                    <p class="text-sm text-neutral-500">{{ formatDate($notification->created_at, 'd M Y H:m') }}</p>
-                </div>
-            </div>
-        @endforeach
+            @endif
+                <{{ $notification->unread() ? 'button' : 'div' }} class="flex items-start text-left gap-4 {{ $notification->read() ? '' : 'bg-neutral-50 cursor-pointer' }} w-full p-4" type="sbumit">
+                    <div class="mt-1 {{ $iconColors[$notification->type] }} size-10 shrink-0 rounded-full flex items-center justify-center">
+                        <span class="{{ $icons[$notification->type] }} size-4"></span>
+                    </div>
 
-        {{ $notifications->links('article.pagination') }}
+                    <div>
+                        @php
+                            if ($notification->type === 'App\Notifications\CommentReacted' || $notification->type === 'App\Notifications\CommentReplied') {
+                                $link = $notification->data['article_url'];
+                            } else {
+                                $link = route('profile.subscription');
+                            }
+                        @endphp
+                        @if ($notification->type === 'App\Notifications\CommentReacted')
+                            <{{ $notification->read() ? 'a href="' . $link . '"' : 'p' }} class="text-neutral-700">
+                                <span class="font-medium text-neutral-900">{{ $notification->data['user_name'] }}</span>
+                                {{ $notification->data['reaction'] === 'like' ? 'menyukai' : 'tidak menyukai' }} komentar anda.
+                            </{{ $notification->read() ? 'a' : 'p' }}>
+                        @elseif ($notification->type === 'App\Notifications\CommentReplied')
+                            <{{ $notification->read() ? 'a href="' . $link . '"' : 'p' }} class="text-neutral-700">
+                                <span class="font-medium text-neutral-900">{{ $notification->data['user_name'] }}</span>
+                                <span>membalas komentar anda</span>
+                                <span class="text-neutral-500">
+                                    "{{ $notification->data['content'] }}".
+                                </span>
+                            </{{ $notification->read() ? 'a' : 'p' }}>
+                        @else
+                            <{{ $notification->read() ? 'a href="' . $link . '"' : 'p' }} class="text-neutral-700">Langganan premium {{ $notification->data['period'] === 'month' ? 'bulanan' : 'tahunan' }} anda akan habis besok. Segera perpanjang.</{{ $notification->read() ? 'a' : 'p' }}>
+                        @endif
+                        <p class="text-sm text-neutral-500">{{ formatDate($notification->created_at, 'd M Y H:m') }}</p>
+                    </div>
+                </{{ $notification->unread() ? 'button' : 'div' }}>
+            @if ($notification->unread())
+                </form>
+            @else
+                </div>
+            @endif
+        @endforeach
     </div>
 </section>
+
+{{ $notifications->links('article.pagination') }}
 @endsection
