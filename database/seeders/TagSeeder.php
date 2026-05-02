@@ -14,17 +14,8 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = [
-            'AS-Israel Serang Iran',
-            'Board of Peace',
-            'Serangan ke Aktivis KontraS',
-        ];
-
-        foreach ($tags as $tag) {
-            Tag::create([
-                'slug' => Str::slug($tag),
-                'name' => $tag
-            ]);
-        }
+        Tag::factory()
+            ->count(20)
+            ->create();
     }
 }

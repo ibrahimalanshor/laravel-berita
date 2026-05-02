@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             AuthorSeeder::class,
             TagSeeder::class,
+            ArticleCategorySeeder::class,
             ArticleSeeder::class,
             PageSeeder::class,
             MenuSeeder::class,
