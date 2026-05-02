@@ -18,17 +18,6 @@
             ];
         @endphp
         @foreach ($notifications as $notification)
-            @php
-                if ($notification->type === 'App\Notifications\CommentReacted') {
-                    $reaction = $notification->data['reaction'] === 'like' ? 'menyukai' : 'tidak menyukai';
-                    $message = "{$notification->data['user_name']} $reaction komentar anda";
-                } else if ($notification->type === 'App\Notifications\CommentReplied') {
-                    $message = "{$notification->data['user_name']} membalas komentar anda \"{$notification->data['content']}\"";
-                } else {
-                    $message = "Langganan {$notification->data['period']} akan habis pada {$notification->data['end_at']}";
-                }
-            @endphp
-
             <div class="flex items-start gap-4">
                 <div class="mt-1 {{ $iconColors[$notification->type] }} size-10 shrink-0 rounded-full flex items-center justify-center">
                     <span class="{{ $icons[$notification->type] }} size-4"></span>
@@ -55,6 +44,8 @@
                 </div>
             </div>
         @endforeach
+
+        {{ $notifications->links('article.pagination') }}
     </div>
 </section>
 @endsection
