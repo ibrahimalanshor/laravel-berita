@@ -50,9 +50,9 @@ class Card extends Component
                 'title' => 'text-lg/6',
                 'title-normal' => 'sm:text-base/5',
                 'title-featured' => 'sm:text-xl lg:text-2xl',
-                'thumbnail' => 'rounded-lg w-full h-[225px] object-cover sm:rounded-none',
-                'thumbnail-normal' => 'sm:h-[100px] lg:h-[125px]',
-                'thumbnail-featured' => 'sm:h-[260px]',
+                'thumbnail' => 'rounded-lg w-full aspect-4/3 object-cover sm:rounded-none sm:aspect-16/9',
+                'thumbnail-normal' => '',
+                'thumbnail-featured' => '',
                 'thumbnail-link' => '',
                 'content' => '
                     absolute inset-0 p-4 flex flex-col gap-1 justify-end bg-linear-to-b from-transparent to-black/80 rounded-lg text-white
