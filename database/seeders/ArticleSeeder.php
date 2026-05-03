@@ -11,6 +11,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Image;
 
 class ArticleSeeder extends Seeder
 {
@@ -27,8 +29,6 @@ class ArticleSeeder extends Seeder
         collect()
             ->range(0, 49)
             ->each(function ($i) use ($categories, $authors, $tags, $files) {
-                Storage::put('articles/' . $files[$i], file_get_contents(storage_path('app/articles/' . $files[$i])));
-
                 $title = fake()->sentence(rand(6, 9));
                 $publishedAt = fake()->dateTimeThisYear();
 
@@ -38,7 +38,7 @@ class ArticleSeeder extends Seeder
                     'slug' => Str::slug($title),
                     'category_id' => $categories->random(),
                     'published_at' => $publishedAt,
-                    'thumbnail_url' => Storage::url('articles/' . $files[$i]),
+                    'thumbnails' => $this->getThumbnails($title, storage_path('app/articles/' . $files[$i])),
                     'thumbnail_caption' => fake()->paragraph(),
                     'summary' => fake()->paragraph(),
                     'content' => $this->getContent($publishedAt),
@@ -74,5 +74,47 @@ class ArticleSeeder extends Seeder
 </p>
 $body
 EOD;
+    }
+
+    private function getThumbnails(string $title, string $filePath): array
+    {
+        $fileName = Str::of($title)->slug('_');
+
+        if (!file_exists(storage_path('app/article_resizes'))) {
+            mkdir(storage_path('app/article_resizes'));
+        }
+
+        Storage::put('articles/' . $fileName . '.jpg', file_get_contents($filePath));
+
+        $widths = [400, 800, 1200];
+
+        foreach ($widths as $width) {
+            $resizeFileName = $fileName . '-' . $width . '.jpg';
+            $resizePath = storage_path('app/article_resizes/' . $resizeFileName);
+
+            Image::load($filePath)
+                ->fit(Fit::Crop, $width, (int) round($width * 9 / 16))
+                ->optimize()
+                ->save($resizePath);
+
+            Storage::put('articles/' . $resizeFileName, file_get_contents($resizePath));
+        }
+
+        // remove local files
+
+        $widthFileurl = collect($widths)
+            ->mapWithKeys(function ($width) use ($fileName) {
+                $resizeFileName = $fileName . '-' . $width . '.jpg';
+
+                return [
+                    $width => Storage::url('articles/' . $resizeFileName)
+                ];
+            })
+            ->toArray();
+
+        return [
+            'original' => Storage::url('articles/' . $fileName . '.jpg'),
+            ...$widthFileurl
+        ];
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('title')->unique();
             $table->string('summary');
-            $table->string('thumbnail_url');
+            $table->json('thumbnails');
             $table->string('thumbnail_caption');
             $table->boolean('featured')->default(false);
             $table->boolean('premium')->default(false);

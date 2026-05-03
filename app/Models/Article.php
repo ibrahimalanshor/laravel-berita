@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
-{    
+{        
+    /**
+     * casts
+     *
+     * @return array
+     */
+    protected function casts(): array
+    {
+        return [
+            'thumbnails' => 'array'
+        ];
+    }
+
     /**
      * category
      *

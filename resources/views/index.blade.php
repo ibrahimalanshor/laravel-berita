@@ -14,7 +14,7 @@
         </section>
     </x-base.container>
 
-    <div class="flex flex-col">
+    {{-- <div class="flex flex-col">
         <x-article.section class="lg:order-last">
             <x-base.container class="space-y-2 lg:space-y-4">
                 <x-article.section-title :read-more-url="route('news')">Berita Terbaru</x-article.section-title>
@@ -88,7 +88,7 @@
                 </div>
             </x-base.container>
         </x-article.section>
-    @endforeach
+    @endforeach --}}
 @endsection
 
 @push('scripts')
