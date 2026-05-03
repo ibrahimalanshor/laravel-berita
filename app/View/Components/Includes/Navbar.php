@@ -75,7 +75,7 @@ class Navbar extends Component
         $this->displayTag = Route::currentRouteName() === 'home';
 
         if ($this->displayTag) {
-            $this->tags = Tag::get();
+            $this->tags = Tag::take(5)->get();
         }
 
         $this->setSubscribed();
