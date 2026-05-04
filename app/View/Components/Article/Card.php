@@ -66,7 +66,7 @@ class Card extends Component
                     return "$fileUrl {$width}w";
                 })
                 ->join(', ');
-        } else if ($this->type === 'flash' || $this->type === 'article-category') {
+        } else if ($this->type === 'flash' || $this->type === 'article-category' || $this->type === 'bookmark' || $this->type === 'favorite') {
             $this->thumbnailSet = collect($this->article->thumbnails['4x4'])
                 ->map(function ($fileUrl, $width) {
                     return "$fileUrl {$width}w";
@@ -108,7 +108,7 @@ class Card extends Component
             } else {
                 $this->thumbnailSizes = "(max-width:640px) 80vw, 20vw";
             }
-        } else if ($this->type === 'flash' || $this->type === 'article-category') {
+        } else if ($this->type === 'flash' || $this->type === 'article-category' || $this->type === 'bookmark' || $this->type === 'favorite') {
             $this->thumbnailSizes = "10vw";
         } else if ($this->type === 'editor') {
             $this->thumbnailSizes = "(max-width:640px) 80vw, (max-width:1280px) 20vw, 15vw";
@@ -325,7 +325,7 @@ class Card extends Component
                 'title' => 'text-base/5 line-clamp-2',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'w-16 h-16 object-cover',
+                'thumbnail' => 'w-16 aspect-square object-cover',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'relative',
