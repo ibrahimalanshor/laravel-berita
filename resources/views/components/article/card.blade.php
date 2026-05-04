@@ -1,9 +1,10 @@
 <article {{ $attributes->class($classList['container']) }}>
     <a @class(['block shrink-0', $classList['thumbnail-link']]) href="{{ route('article.detail', ['article' => $article]) }}">
         <img
-            src="{{ $article->thumbnail_url }}"
+            srcset="{{ $thumbnailSet }}"
             alt="{{ $article->title }}"
             class="{{ $classList['thumbnail'] }} {{ $featured ? $classList['thumbnail-featured'] : $classList['thumbnail-normal']}}"
+            sizes="{{ $thumbnailSizes }}"
         >
 
         @if ($article->premium)

@@ -14,6 +14,20 @@ class Card extends Component
      * @var mixed
      */
     public $classList;
+    
+    /**
+     * thumbnailSet
+     *
+     * @var mixed
+     */
+    public $thumbnailSet;
+    
+    /**
+     * thumbnailSizes
+     *
+     * @var mixed
+     */
+    public $thumbnailSizes;
 
     /**
      * Create a new component instance.
@@ -26,6 +40,9 @@ class Card extends Component
     )
     {
         $this->classList = $this->getClassList($type);
+
+        $this->setThumbnailSet();
+        $this->setThumbnailSizes();
     }
 
     /**
@@ -34,6 +51,60 @@ class Card extends Component
     public function render(): View|Closure|string
     {
         return view('components.article.card');
+    }
+    
+    /**
+     * setThumbnailSet
+     *
+     * @return void
+     */
+    private function setThumbnailSet()
+    {
+        if ($this->type === 'highlight' || $this->type === 'editor') {
+            $this->thumbnailSet = collect($this->article->thumbnails['16x9'])
+                ->map(function ($fileUrl, $width) {
+                    return "$fileUrl {$width}w";
+                })
+                ->join(', ');
+        } else if ($this->type === 'flash') {
+            $this->thumbnailSet = collect($this->article->thumbnails['4x4'])
+                ->map(function ($fileUrl, $width) {
+                    return "$fileUrl {$width}w";
+                })
+                ->join(', ');
+        } else if ($this->type === 'category') {
+            $this->thumbnailSet = collect($this->article->thumbnails)
+                ->except('original')
+                ->flatMap(function ($items) {
+                    return collect($items)
+                        ->map((function ($fileUrl, $width) {
+                            return "$fileUrl {$width}w";
+                        }));
+                })
+                ->join(', ');
+        }
+    }
+    
+    /**
+     * setThumbnailSizes
+     *
+     * @return void
+     */
+    private function setThumbnailSizes()
+    {
+        if ($this->type === 'highlight') {
+            if ($this->featured) {
+                $this->thumbnailSizes = "(max-width:640px) 80vw, (max-width:1280px) 50vw, 40vw";
+            } else {
+                $this->thumbnailSizes = "(max-width:640px) 80vw, 20vw";
+            }
+        } else if ($this->type === 'flash') {
+            $this->thumbnailSizes = "10vw";
+        } else if ($this->type === 'editor') {
+            $this->thumbnailSizes = "(max-width:640px) 80vw, (max-width:1280px) 20vw, 15vw";
+        } else if ($this->type === 'category') {
+            $this->thumbnailSizes = "(max-width:640px) 10vw, (max-width:1280px) 20vw, 15vw";
+        }
     }
     
     /**
@@ -96,7 +167,7 @@ class Card extends Component
                 'title' => 'text-base/5',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'w-21 h-21 shrink-0 object-cover',
+                'thumbnail' => 'w-21 aspect-square shrink-0 object-cover',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'relative',
@@ -116,7 +187,7 @@ class Card extends Component
                 'title' => 'text-sm sm:text-base/5',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'w-21 h-21 shrink-0 object-cover rounded sm:h-[75px] lg:h-[105px] sm:w-full sm:rounded-none',
+                'thumbnail' => 'w-21 aspect-square shrink-0 object-cover rounded sm:w-auto sm:aspect-16/9 sm:w-full sm:rounded-none',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'sm:w-full relative',
@@ -255,7 +326,7 @@ class Card extends Component
             'title' => 'text-base/5',
             'title-normal' => '',
             'title-featured' => '',
-            'thumbnail' => 'h-[175px] w-full object-cover sm:h-[75px] lg:h-[105px]',
+            'thumbnail' => 'aspect-16/9 w-full object-cover',
             'thumbnail-normal' => '',
             'thumbnail-featured' => '',
             'thumbnail-link' => 'relative',
