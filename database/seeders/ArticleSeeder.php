@@ -86,35 +86,49 @@ EOD;
 
         Storage::put('articles/' . $fileName . '.jpg', file_get_contents($filePath));
 
-        $widths = [400, 800, 1200];
+        $widths = [
+            100 => '4x4',
+            400 => '16x9',
+            800 => '16x9',
+            1200 => '16x9'
+        ];
 
-        foreach ($widths as $width) {
-            $resizeFileName = $fileName . '-' . $width . '.jpg';
+        foreach ($widths as $width => $ratio) {
+            $resizeFileName = $fileName . '-' . $width . '-' . $ratio . '.jpg';
             $resizePath = storage_path('app/article_resizes/' . $resizeFileName);
 
-            Image::load($filePath)
-                ->fit(Fit::Crop, $width, (int) round($width * 9 / 16))
-                ->optimize()
-                ->save($resizePath);
+            if ($ratio === '4x4') {
+                Image::load($filePath)
+                    ->fit(Fit::Crop, $width, $width)
+                    ->optimize()
+                    ->save($resizePath);
+            } else {
+                Image::load($filePath)
+                    ->fit(Fit::Crop, $width, (int) round($width * 9 / 16))
+                    ->optimize()
+                    ->save($resizePath);
+            }
 
             Storage::put('articles/' . $resizeFileName, file_get_contents($resizePath));
+
+            unlink($resizePath);
         }
 
-        // remove local files
-
-        $widthFileurl = collect($widths)
-            ->mapWithKeys(function ($width) use ($fileName) {
-                $resizeFileName = $fileName . '-' . $width . '.jpg';
+        return collect($widths)
+            ->map(function ($ratio, $width) use ($fileName) {
+                $resizeFileName = $fileName . '-' . $width . '-' . $ratio . '.jpg';
 
                 return [
-                    $width => Storage::url('articles/' . $resizeFileName)
+                    'ratio' => $ratio,
+                    'width' => $width,
+                    'file_url' => Storage::url('articles/' . $resizeFileName)
                 ];
             })
+            ->groupBy('ratio')
+            ->map(function ($items) {
+                return $items->mapWithKeys(fn ($item) => [$item['width'] => $item['file_url']]);
+            })
+            ->union(['original' => Storage::url('articles/' . $fileName . '.jpg')])
             ->toArray();
-
-        return [
-            'original' => Storage::url('articles/' . $fileName . '.jpg'),
-            ...$widthFileurl
-        ];
     }
 }
