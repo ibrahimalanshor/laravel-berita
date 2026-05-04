@@ -32,7 +32,7 @@
                 </header>
 
                 <figure>
-                    <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" class="w-full object-cover">
+                    <img src="{{ $article->thumbnails['16x9'][800] }}" alt="{{ $article->title }}" class="w-full object-cover">
 
                     <figcaption class="text-xs text-neutral-700 mt-1">{{ $article->thumbnail_caption }}</figcaption>
                 </figure>
