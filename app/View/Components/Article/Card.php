@@ -82,6 +82,16 @@ class Card extends Component
                         }));
                 })
                 ->join(', ');
+        } else if ($this->type === 'category-detail') {
+            $this->thumbnailSet = collect([
+                $this->article->thumbnails['4x4'][100] . ' 100w',
+                $this->article->thumbnails['16x9'][400] . ' 400w'
+            ])->join(', ');
+        } else if ($this->type === 'highlight-sidebar' || $this->type === 'editor-sidebar') {
+            $this->thumbnailSet = collect([
+                $this->article->thumbnails['4x4'][100] . ' 100w',
+                $this->article->thumbnails['16x9'][800] . ' 800w'
+            ])->join(', ');
         }
     }
     
@@ -104,6 +114,10 @@ class Card extends Component
             $this->thumbnailSizes = "(max-width:640px) 80vw, (max-width:1280px) 20vw, 15vw";
         } else if ($this->type === 'category') {
             $this->thumbnailSizes = "(max-width:640px) 10vw, (max-width:1280px) 20vw, 15vw";
+        } else if ($this->type === 'category-detail') {
+            $this->thumbnailSizes = "(max-width:1024px) 5vw, 20vw";
+        } else if ($this->type === 'highlight-sidebar' || $this->type === 'editor-sidebar') {
+            $this->thumbnailSizes = "(max-width:640px) 80vw, 1vw";
         }
     }
     
@@ -144,7 +158,7 @@ class Card extends Component
                 'title' => 'text-lg/6 sm:text-sm',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'rounded-lg w-full h-[225px] object-cover sm:rounded-none sm:w-18 sm:h-18',
+                'thumbnail' => 'rounded-lg aspect-4/3 object-cover sm:rounded-none sm:w-18 sm:aspect-square',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'relative',
@@ -227,7 +241,7 @@ class Card extends Component
                 'title' => 'text-base/5',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'w-21 h-21 shrink-0 object-cover lg:w-[200px] lg:h-[120px]',
+                'thumbnail' => 'w-21 aspect-square shrink-0 object-cover lg:w-[200px] lg:aspect-16/9',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'relative',
@@ -267,7 +281,7 @@ class Card extends Component
                 'title' => 'text-base/5 sm:text-sm',
                 'title-normal' => '',
                 'title-featured' => '',
-                'thumbnail' => 'h-[175px] w-full object-cover sm:rounded-none sm:w-18 sm:h-18',
+                'thumbnail' => 'aspect-16/9 w-full object-cover sm:rounded-none sm:w-18 sm:aspect-square',
                 'thumbnail-normal' => '',
                 'thumbnail-featured' => '',
                 'thumbnail-link' => 'relative',

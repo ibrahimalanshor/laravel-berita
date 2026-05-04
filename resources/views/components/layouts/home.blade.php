@@ -23,7 +23,7 @@
             <div>
                 <x-includes.navbar />
 
-                <main class="pb-4">
+                <main class="pb-16">
                     @yield('content')
                 </main>
             </div>

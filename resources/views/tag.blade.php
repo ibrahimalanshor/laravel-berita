@@ -21,13 +21,15 @@
     <section class="space-y-4 px-4 lg:border-b-0 sm:col-span-3 sm:px-0">
         <x-article.section-title>Berita Terbaru {{ $tag->name }}</x-article.section-title>
 
-        <div class="grid grid-cols-1 gap-4 lg:gap-6">
-            @foreach ($articles as $article)
-                <x-article.card :article="$article" type="category-detail" />
-            @endforeach
-        </div>
+        <div class="space-y-8">
+            <div class="grid grid-cols-1 gap-4 lg:gap-6">
+                @foreach ($articles as $article)
+                    <x-article.card :article="$article" type="category-detail" />
+                @endforeach
+            </div>
 
-        {{ $articles->links('article.pagination') }}
+            {{ $articles->links('article.pagination') }}
+        </div>
     </section>
     <x-article.sidebar class="sm:col-span-2 space-y-6 border-t border-neutral-200 pt-6 sm:border-0 sm:pt-0" />
 </x-base.container>
