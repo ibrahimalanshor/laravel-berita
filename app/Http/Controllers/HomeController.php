@@ -19,7 +19,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $highlights = Article::inRandomOrder()
+        $highlights = Article::orderBy('trending_score', 'desc')
+            ->orderBy('published_at', 'desc')
             ->take(5)
             ->with('category')
             ->get();
@@ -68,7 +69,8 @@ class HomeController extends Controller
     public function category(ArticleCategory $category)
     {
         $highlights = $category->articles()
-            ->inRandomOrder()
+            ->orderBy('trending_score', 'desc')
+            ->orderBy('published_at', 'desc')
             ->take(5)
             ->with('category')
             ->get();
@@ -157,7 +159,8 @@ class HomeController extends Controller
     public function tag(Tag $tag)
     {
         $highlights = $tag->articles()
-            ->inRandomOrder()
+            ->orderBy('trending_score', 'desc')
+            ->orderBy('published_at', 'desc')
             ->take(5)
             ->with('category')
             ->get();

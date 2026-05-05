@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
-{        
+{            
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['trending_score'];
+    
     /**
      * casts
      *

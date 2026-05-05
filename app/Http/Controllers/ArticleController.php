@@ -39,7 +39,8 @@ class ArticleController extends Controller
             ->take(6)
             ->get();
 
-        $highlightArticles = Article::inRandomOrder()
+        $highlightArticles = Article::orderBy('trending_score', 'desc')
+            ->orderBy('published_at', 'desc')
             ->take(5)
             ->with('category')
             ->get();

@@ -28,7 +28,8 @@ class Sidebar extends Component
      */
     public function __construct(public $borderedTop = true)
     {
-        $this->highlightArticles = Article::inRandomOrder()
+        $this->highlightArticles = Article::orderBy('trending_score', 'desc')
+            ->orderBy('published_at', 'desc')
             ->take(5)
             ->with('category')
             ->get();

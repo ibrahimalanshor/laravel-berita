@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('featured')->default(false);
             $table->boolean('premium')->default(false);
             $table->text('content');
+            $table->double('trending_score')->default(0);
             $table->datetime('published_at')->nullable();
             $table->foreignId('category_id')->constrained('article_categories')->restrictOnDelete();
             $table->foreignId('author_id')->constrained('authors')->restrictOnDelete();
