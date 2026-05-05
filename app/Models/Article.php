@@ -58,4 +58,14 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
+    /**
+     * dailyViews
+     *
+     * @return void
+     */
+    public function dailyViews()
+    {
+        return $this->hasMany(ArticleDailyView::class);    
+    }
 }

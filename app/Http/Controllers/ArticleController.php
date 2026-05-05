@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\SubscriptionPackage;
+use App\Services\ArticleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
-{    
+{        
     /**
      * view
      *
      * @param  mixed $article
-     * @param  mixed $subscriptionService
+     * @param  mixed $articleService
      * @return void
      */
-    public function view(Article $article)
+    public function view(Article $article, ArticleService $articleService)
     {
+        $articleService->incrementDailyView($article);
+
         $article->load('category', 'tags', 'author');
 
         $categoryArticles = $article->category
