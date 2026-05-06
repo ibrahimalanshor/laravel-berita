@@ -26,6 +26,7 @@ class ArticleController extends Controller
 
         $categoryArticles = $article->category
             ->articles()
+            ->where('id', '!=', $article->id)
             ->with('category')
             ->latest('published_at')
             ->take(6)

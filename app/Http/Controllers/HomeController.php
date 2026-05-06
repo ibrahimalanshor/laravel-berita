@@ -138,7 +138,7 @@ class HomeController extends Controller
             ->latest()
             ->get();
         $articles = Article::with('category')
-            ->skip(5)
+            ->whereNotIn('id', $latests->pluck('id'))
             ->latest()
             ->paginate(10);
 
