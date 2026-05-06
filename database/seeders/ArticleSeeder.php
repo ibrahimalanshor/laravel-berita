@@ -21,44 +21,46 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ArticleCategory::pluck('id');
-        $tags = Tag::pluck('id');
-        $authors = Author::pluck('id');
-        $files = array_values(array_diff(scandir(storage_path('app/articles')), ['.', '..', '.gitignore']));
+        Article::withoutSyncingToSearch(function () {
+            $categories = ArticleCategory::pluck('id');
+            $tags = Tag::pluck('id');
+            $authors = Author::pluck('id');
+            $files = array_values(array_diff(scandir(storage_path('app/articles')), ['.', '..', '.gitignore']));
 
-        collect()
-            ->range(0, 49)
-            ->each(function ($i) use ($categories, $authors, $tags, $files) {
-                $title = fake()->sentence(rand(6, 9));
-                $publishedAt = fake()->dateTimeThisYear();
+            collect()
+                ->range(0, 49)
+                ->each(function ($i) use ($categories, $authors, $tags, $files) {
+                    $title = fake()->sentence(rand(6, 9));
+                    $publishedAt = fake()->dateTimeThisYear();
 
-                $article = Article::create([
-                    'title' => $title,
-                    'featured' => rand(0, 5) === 2,
-                    'slug' => Str::slug($title),
-                    'category_id' => $categories->random(),
-                    'published_at' => null,
-                    'thumbnails' => $this->getThumbnails($title, storage_path('app/articles/' . $files[$i])),
-                    'thumbnail_caption' => fake()->text(100),
-                    'summary' => fake()->text(100),
-                    'content' => $this->getContent($publishedAt),
-                    'author_id' => $authors->random(),
-                    'premium' => rand(0, 5) === 1
+                    $article = Article::create([
+                        'title' => $title,
+                        'featured' => rand(0, 5) === 2,
+                        'slug' => Str::slug($title),
+                        'category_id' => $categories->random(),
+                        'published_at' => null,
+                        'thumbnails' => $this->getThumbnails($title, storage_path('app/articles/' . $files[$i])),
+                        'thumbnail_caption' => fake()->text(100),
+                        'summary' => fake()->text(100),
+                        'content' => $this->getContent($publishedAt),
+                        'author_id' => $authors->random(),
+                        'premium' => rand(0, 5) === 1
+                    ]);
+
+                    $article->tags()->attach($tags->random(3)->toArray());
+
+                    $article->update([
+                        'published_at' => $publishedAt
+                    ]);
+                });
+
+            ArticleCategory::has('articles', '>=', 5)
+                ->inRandomOrder()
+                ->limit(3)
+                ->update([
+                    'featured' => true
                 ]);
-
-                $article->tags()->attach($tags->random(3)->toArray());
-
-                $article->update([
-                    'published_at' => $publishedAt
-                ]);
-            });
-
-        ArticleCategory::has('articles', '>=', 5)
-            ->inRandomOrder()
-            ->limit(3)
-            ->update([
-                'featured' => true
-            ]);
+        });
     }
 
     private function getContent($date) : string

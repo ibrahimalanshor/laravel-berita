@@ -25,7 +25,8 @@ class Article extends Model
     protected function casts(): array
     {
         return [
-            'thumbnails' => 'array'
+            'thumbnails' => 'array',
+            'published_at' => 'datetime'
         ];
     }
 
@@ -52,6 +53,14 @@ class Article extends Model
             'tags' => $this->tags->pluck('name')->toArray(),
             'published_at' => $this->published_at?->timestamp
         ];
+    }
+
+    /**
+     * Determine if the model should be searchable.
+     */
+    public function shouldBeSearchable(): bool
+    {
+        return !is_null($this->published_at);
     }
 
     /**
