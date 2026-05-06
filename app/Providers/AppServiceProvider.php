@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
 use App\Models\User;
+use App\Observers\ArticleObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
             return !$user->subscription->expired;
         });
+
+        Article::observe(ArticleObserver::class);
     }
 }

@@ -29,4 +29,14 @@ class Tag extends Model
     {
         return $this->belongsToMany(Article::class);
     }
+    
+    /**
+     * hourlyArticles
+     *
+     * @return void
+     */
+    public function hourlyArticles()
+    {
+        return $this->hasMany(TagHourlyArticle::class);
+    }
 }

@@ -75,7 +75,10 @@ class Navbar extends Component
         $this->displayTag = Route::currentRouteName() === 'home';
 
         if ($this->displayTag) {
-            $this->tags = Tag::take(5)->get();
+            $this->tags = Tag::orderBy('trending_score', 'desc')
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
         }
 
         $this->setSubscribed();

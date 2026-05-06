@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('tag_hourly_articles', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('name')->unique();
-            $table->double('trending_score')->default(0);
+            $table->dateTime('datetime');
+            $table->unsignedInteger('articles')->default(0);
+            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->unique(['tag_id', 'datetime']);
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('tag_hourly_articles');
     }
 };

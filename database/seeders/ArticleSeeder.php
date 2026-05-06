@@ -37,7 +37,7 @@ class ArticleSeeder extends Seeder
                     'featured' => rand(0, 5) === 2,
                     'slug' => Str::slug($title),
                     'category_id' => $categories->random(),
-                    'published_at' => $publishedAt,
+                    'published_at' => null,
                     'thumbnails' => $this->getThumbnails($title, storage_path('app/articles/' . $files[$i])),
                     'thumbnail_caption' => fake()->text(100),
                     'summary' => fake()->text(100),
@@ -47,6 +47,10 @@ class ArticleSeeder extends Seeder
                 ]);
 
                 $article->tags()->attach($tags);
+
+                $article->update([
+                    'published_at' => $publishedAt
+                ]);
             });
 
         ArticleCategory::has('articles', '>=', 5)
