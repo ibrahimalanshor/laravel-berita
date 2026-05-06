@@ -39,8 +39,8 @@ class ArticleSeeder extends Seeder
                     'category_id' => $categories->random(),
                     'published_at' => $publishedAt,
                     'thumbnails' => $this->getThumbnails($title, storage_path('app/articles/' . $files[$i])),
-                    'thumbnail_caption' => fake()->paragraph(),
-                    'summary' => fake()->paragraph(),
+                    'thumbnail_caption' => fake()->text(100),
+                    'summary' => fake()->text(100),
                     'content' => $this->getContent($publishedAt),
                     'author_id' => $authors->random(),
                     'premium' => rand(0, 5) === 1

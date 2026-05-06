@@ -31,19 +31,15 @@ class CountArticleTrendingScore extends Command
             ->keyBy('article_id');
 
         $articles = Article::whereIn('id', $articleDailyViews->keys())
-            ->get();
+            ->cursor();
 
-        $updates = $articles->map(function ($article) use ($articleDailyViews) {
+        foreach ($articles as $article) {
             $dailyViews = $articleDailyViews[$article->id];
             $views = $dailyViews->views;
 
-            return [
-                'id' => $article->id,
+            $article->update([
                 'trending_score' => $views / pow((Carbon::parse($article->published_at)->diffInHours(now()) + 2), 1.5)
-            ];
-        });
-
-        DB::table('articles')
-            ->upsert($updates->toArray(), ['id'], ['trending_score']);
+            ]);
+        }
     }
 }

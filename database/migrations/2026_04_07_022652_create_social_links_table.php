@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('social_links', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type', ['facebook', 'instagram', 'twitter', 'tiktok', 'youtube']);
+            $table->enum('type', ['facebook', 'instagram', 'twitter', 'tiktok', 'youtube']);
             $table->string('url');
             $table->timestamps();
         });
