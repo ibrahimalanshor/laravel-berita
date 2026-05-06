@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 class Tag extends Model
 {    
     use HasFactory;
+    
+    /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['trending_score'];
 
     /**
      * The "booted" method of the model.

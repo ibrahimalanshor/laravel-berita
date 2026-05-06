@@ -22,7 +22,7 @@ class ArticleSeeder extends Seeder
     public function run(): void
     {
         $categories = ArticleCategory::pluck('id');
-        $tags = Tag::pluck('id')->toArray();
+        $tags = Tag::pluck('id');
         $authors = Author::pluck('id');
         $files = array_values(array_diff(scandir(storage_path('app/articles')), ['.', '..', '.gitignore']));
 
@@ -46,7 +46,7 @@ class ArticleSeeder extends Seeder
                     'premium' => rand(0, 5) === 1
                 ]);
 
-                $article->tags()->attach($tags);
+                $article->tags()->attach($tags->random(3)->toArray());
 
                 $article->update([
                     'published_at' => $publishedAt
