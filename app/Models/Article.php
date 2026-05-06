@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 
 class Article extends Model
 {            
+    use Searchable;
+
     /**
      * fillable
      *
@@ -23,6 +26,31 @@ class Article extends Model
     {
         return [
             'thumbnails' => 'array'
+        ];
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        if (config('scout.driver') === 'database') {
+            return [
+                'title' => $this->title,
+                'summary' => $this->summary,
+                'content' => $this->content,
+            ];
+        }
+
+        return [
+            'title' => $this->title,
+            'summary' => $this->summary,
+            'content' => strip_tags($this->content),
+            'category' => $this->category->name ?? null,
+            'tags' => $this->tags->pluck('name')->toArray(),
+            'published_at' => $this->published_at?->timestamp
         ];
     }
 
