@@ -27,9 +27,9 @@
             <h2 class="font-bold text-lg text-neutral-500">Navigasi</h2>
 
             <ul class="grid grid-cols-2 gap-4 font-medium">
-                @foreach ($navs as $nav)
+                @foreach ($navs as $menu)
                     <li>
-                        <a href="{{ $nav->url }}" class="hover:text-neutral-400">{{ $nav->name }}</a>
+                        <a href="{{ $menu->page ? route('page.detail', ['page' => $menu->page]) : $menu->url }}" class="hover:text-neutral-400">{{ $menu->page?->name ?? $menu->name }}</a>
                     </li>
                 @endforeach
             </ul>

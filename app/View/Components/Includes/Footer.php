@@ -42,6 +42,7 @@ class Footer extends Component
             ->get();
 
         $this->navs = Menu::where('type', 'footer_page')
+            ->with('page')
             ->take(10)
             ->get();
 
