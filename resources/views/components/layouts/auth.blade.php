@@ -4,11 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? config('app.name') }}</title>
+        <title>{{ $title ?? setting('name') }}</title>
 
         @if (isset($description))
             <meta name="description" content="{{ $description }}">
         @endif
+
+        <meta name="robots" content="noindex, nofollow">
 
         <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
 

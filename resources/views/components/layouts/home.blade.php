@@ -4,11 +4,28 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? config('app.name') }}</title>
+        <title>{{ $title ?? setting('name') }}</title>
 
         @if (isset($description))
             <meta name="description" content="{{ $description }}">
         @endif
+
+        <meta name="author" content="{{ $author ?? setting('name') }}">
+        <meta name="robots" content="{{ $robots ?? 'index, follow' }}">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="{{ $title ?? setting('name') }}">
+        <meta property="og:description" content="{{ $description ?? '' }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:image" content="{{ $banner ?? setting('banner') }}">
+        <meta property="og:site_name" content="{{ setting('name') }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $title ?? setting('name') }}">
+        <meta name="twitter:description" content="{{ $description ?? '' }}">
+        <meta name="twitter:image" content="{{ $banner ?? setting('banner') }}">
+        
+        <link rel="canonical" href="{{ url()->current() }}">
 
         <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
 

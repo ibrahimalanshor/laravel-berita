@@ -76,13 +76,15 @@ class ArticleController extends Controller
         return view('article', [
             'title' => $article->title,
             'description' => $article->summary,
+            'author' => $article->author->name,
+            'banner' => $article->thumbnails['original'],
             'article' => $article,
             'categoryArticles' => $categoryArticles,
             'relatedArticles' => $relatedArticles,
             'highlightArticles' => $highlightArticles,
             'editorArticles' => $editorArticles,
             'packages' => $packages,
-            'subscription' => $subscription
+            'subscription' => $subscription,
         ]);
     }
     

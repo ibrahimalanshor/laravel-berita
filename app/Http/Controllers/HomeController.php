@@ -234,6 +234,7 @@ class HomeController extends Controller
 
         return view('search', [
             'title' => 'Hasil Pencarian "'. $q . '" Berita dan Artikel',
+            'robots' => 'noindex, follow',
             'description' => 'Daftar Berita dan Artikel Sesuai Pencarian "'. $q . '"',
             'q' => $q,
             'articles' => $articles
