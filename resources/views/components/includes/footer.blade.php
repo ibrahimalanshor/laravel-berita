@@ -15,7 +15,7 @@
             <ul class="grid grid-cols-2 gap-4 font-medium">
                 @foreach ($menus as $menu)
                     <li>
-                        <a href="{{ $menu->url }}" class="hover:text-neutral-400">{{ $menu->name }}</a>
+                        <a href="{{ $menu->category ? route('category.detail', ['category' => $menu->category]) : $menu->url }}" class="hover:text-neutral-400">{{ $menu->category?->name ?? $menu->name }}</a>
                     </li>
                 @endforeach
             </ul>

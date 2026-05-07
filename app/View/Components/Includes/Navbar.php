@@ -61,6 +61,7 @@ class Navbar extends Component
     public function __construct()
     {
         $this->menus = Menu::where('type', 'navbar')
+            ->with('category')
             ->take(4)
             ->get();
 

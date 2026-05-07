@@ -37,6 +37,7 @@ class Footer extends Component
     public function __construct()
     {
         $this->menus = Menu::where('type', 'footer_category')
+            ->with('category')
             ->take(10)
             ->get();
 

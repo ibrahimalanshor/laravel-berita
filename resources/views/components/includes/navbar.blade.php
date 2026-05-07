@@ -89,7 +89,7 @@
 
             <div class="flex flex-col gap-2 font-medium lg:flex-row lg:gap-6">
                 @foreach ($menus as $menu)
-                    <a href="{{ $menu->url }}" class="lg:hover:text-neutral-400">{{ $menu->name }}</a>
+                    <a href="{{ $menu->category ? route('category.detail', ['category' => $menu->category]) : $menu->url }}" class="lg:hover:text-neutral-400">{{ $menu->category?->name ?? $menu->name }}</a>
                 @endforeach
             </div>
 
