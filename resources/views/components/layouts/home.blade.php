@@ -17,13 +17,13 @@
         <meta property="og:title" content="{{ $title ?? setting('name') }}">
         <meta property="og:description" content="{{ $description ?? '' }}">
         <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:image" content="{{ $banner ?? setting('banner') }}">
+        <meta property="og:image" content="{{ $banner ?? setting('banner_url') }}">
         <meta property="og:site_name" content="{{ setting('name') }}">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ $title ?? setting('name') }}">
         <meta name="twitter:description" content="{{ $description ?? '' }}">
-        <meta name="twitter:image" content="{{ $banner ?? setting('banner') }}">
+        <meta name="twitter:image" content="{{ $banner ?? setting('banner_url') }}">
         
         <link rel="canonical" href="{{ url()->current() }}">
 

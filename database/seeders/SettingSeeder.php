@@ -22,9 +22,11 @@ class SettingSeeder extends Seeder
 
         Storage::put('logo.png', file_get_contents(storage_path('app/logo.png')));
         Storage::put('icon.png', file_get_contents(storage_path('app/icon.png')));
+        Storage::put('banner.png', file_get_contents(storage_path('app/banner.png')));
 
         $setting->logo_url = Storage::url('logo.png');
         $setting->icon_url = Storage::url('icon.png');
+        $setting->banner_url = Storage::url('banner.png');
         $setting->name = config('app.name');
 
         $setting->save();

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('logo_url')->nullable();
             $table->string('icon_url')->nullable();
+            $table->string('banner_url')->nullable();
             $table->timestamps();
         });
     }

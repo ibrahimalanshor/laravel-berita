@@ -12,7 +12,7 @@ class Setting extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo_url', 'icon_url'];
+    protected $fillable = ['name', 'logo_url', 'icon_url', 'banner_url'];
 
     /**
      * The "booted" method of the model.
@@ -25,6 +25,7 @@ class Setting extends Model
                 return [
                     'logo_url' => $setting->logo_url,
                     'icon_url' => $setting->icon_url,
+                    'banner_url' => $setting->banner_url,
                     'name' => $setting->name
                 ];
             });
