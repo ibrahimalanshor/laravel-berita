@@ -15,45 +15,27 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        $navbarMenus = [
-            [
-                'name' => 'Politik',
-                'url'  => '/kategori/politik',
-            ],
-            [
-                'name' => 'Bisnis',
-                'url'  => '/kategori/bisnis',
-            ],
-            [
-                'name' => 'Ekonomi',
-                'url'  => '/kategori/ekonomi',
-            ],
-            [
-                'name' => 'Olahraga',
-                'url'  => '/kategori/olahraga',
-            ],
-        ];
-
-        $footerCategoryMenus = ArticleCategory::take(10)
+        $categoryMenus = ArticleCategory::orderBy('featured', 'desc')
+            ->orderBy('created_desc')
+            ->take(10)
             ->get();
 
-        foreach ($navbarMenus as $menu) {
+        foreach ($categoryMenus->take(4) as $category) {
             Menu::create([
                 'type' => 'navbar',
-                ...$menu
+                'category_id' => $category->id
+            ]);
+        }
+
+        foreach ($categoryMenus as $category) {
+            Menu::create([
+                'type' => 'footer_category',
+                'category_id' => $category->id
             ]);
         }
 
         $footerPageMenus = Page::take(10)
             ->get();
-
-        foreach ($footerCategoryMenus as $category) {
-            Menu::create([
-                'type' => 'footer_category',
-                'name' => $category->name,
-                'url' => route('category.detail', ['category' => $category->slug])
-            ]);
-        }
 
         foreach ($footerPageMenus as $page) {
             Menu::create([
