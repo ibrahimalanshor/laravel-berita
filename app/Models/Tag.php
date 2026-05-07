@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Tag extends Model
+class Tag extends Model implements Sitemapable
 {    
     use HasFactory;
     
@@ -45,5 +47,16 @@ class Tag extends Model
     public function hourlyArticles()
     {
         return $this->hasMany(TagHourlyArticle::class);
+    }
+    
+    /**
+     * toSitemapTag
+     *
+     * @return Url
+     */
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('tag.detail', $this))
+            ->setLastModificationDate($this->updated_at);
     }
 }

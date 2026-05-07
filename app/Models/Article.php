@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Article extends Model
+class Article extends Model implements Sitemapable
 {            
     use Searchable;
 
@@ -72,6 +74,17 @@ class Article extends Model
     public function shouldBeSearchable(): bool
     {
         return !is_null($this->published_at);
+    }
+    
+    /**
+     * toSitemapTag
+     *
+     * @return Url
+     */
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('article.detail', $this))
+            ->setLastModificationDate($this->published_at);
     }
 
     /**
