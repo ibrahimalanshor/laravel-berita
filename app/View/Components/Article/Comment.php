@@ -31,6 +31,13 @@ class Comment extends Component
      * @var mixed
      */
     public $total;
+    
+    /**
+     * sort
+     *
+     * @var mixed
+     */
+    public string $sort;
 
     /**
      * Create a new component instance.
@@ -39,13 +46,17 @@ class Comment extends Component
     {
         $user = Auth::user();
 
+        $this->sort = request('sort', 'latest');
+
         $query = $article->comments()
             ->whereNull('reply_id');
 
         $this->total = $query->count();
         $this->comments = $query->with(['replies' => fn ($reply) => $reply->take(3)])
             ->take(10)
-            ->latest()
+            ->when($this->sort === 'latest', fn ($query) => $query->latest())
+            ->when($this->sort === 'oldest', fn ($query) => $query->oldest())
+            ->when($this->sort === 'popular', fn ($query) => $query->orderByRaw('replies_count + likes DESC, created_at DESC'))
             ->get();
 
         $allCommentId = $this->comments->flatMap(function ($comment) {

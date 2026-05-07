@@ -12,7 +12,7 @@
         <x-comment.form type="create" :article="$article->slug" />
     @endauth
 
-    <div class="space-y-2">
+    <div class="space-y-4">
         @if (!$comments->count())
             <div class="flex flex-col items-center text-center gap-2">
                 <span class="icon-[tabler--bubble-text] size-12 text-neutral-300"></span>
@@ -22,6 +22,11 @@
                 </div>
             </div>
         @else
+            <form class="flex flex-wrap gap-2">
+                <x-base.button type="submit" name="sort" value="latest" color="{{ $sort === 'latest' ? 'primary' : 'bordered' }}" size="sm">Terbaru</x-base.button>
+                <x-base.button type="submit" name="sort" value="oldest" color="{{ $sort === 'oldest' ? 'primary' : 'bordered' }}" size="sm">Terlama</x-base.button>
+                <x-base.button type="submit" name="sort" value="popular" color="{{ $sort === 'popular' ? 'primary' : 'bordered' }}" size="sm">Terpopuler</x-base.button>
+            </form>
             <div class="space-y-2" id="comment-list">
                 @foreach ($comments as $comment)
                     <x-comment.single :comment="$comment" :reactions="$reactions" :article="$article->slug" />
