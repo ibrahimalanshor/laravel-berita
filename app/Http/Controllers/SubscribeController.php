@@ -33,9 +33,11 @@ class SubscribeController extends Controller
             ]
         ];
 
+        $siteName = setting('name');
+
         return view('subscribe', [
-            'title' => 'Berlangganan Lararita',
-            'description' => 'Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan Lararita',
+            'title' => "Berlangganan $siteName",
+            'description' => "Dapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan dengan berlangganan $siteName",
             'features' => $features,
             'hasSubscription' => $hasSubscription
         ]);

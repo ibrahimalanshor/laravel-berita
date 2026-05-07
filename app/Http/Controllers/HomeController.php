@@ -49,9 +49,11 @@ class HomeController extends Controller
             ->where('premium', true)
             ->get();
 
+        $siteName = setting('name');
+
         return view('index', [
-            'title' => 'Lararita - Berita Terkini, Trending dan Terpercaya',
-            'description' => 'Lararita - Berita Indonesia dan Dunia Terkini Hari Ini, Kabar Harian Terbaru Terpercaya Terlengkap Seputar Politik, Ekonomi, Travel, Teknologi, Otomotif, Bola',
+            'title' => "$siteName - Berita Terkini, Trending dan Terpercaya",
+            'description' => "$siteName - Berita Indonesia dan Dunia Terkini Hari Ini, Kabar Harian Terbaru Terpercaya Terlengkap Seputar Politik, Ekonomi, Travel, Teknologi, Otomotif, Bola",
             'highlights' => $highlights,
             'flash' => $flash,
             'editors' => $editors,
@@ -79,12 +81,14 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('category', [
             'category' => $category,
             'highlights' => $highlights,
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . ' - Lararita',
-            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . ' Lengkap dan Terpercaya di Lararita'
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . " - $siteName",
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . " Lengkap dan Terpercaya di $siteName"
         ]);
     }
     
@@ -100,10 +104,12 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('featured', [
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Pilihan Editor - Lararita',
-            'description' => 'Baca Berita dan Artikel Pilihan Editor di Lararita'
+            'title' => "Berita dan Artikel Pilihan Editor - $siteName",
+            'description' => "Baca Berita dan Artikel Pilihan Editor di $siteName"
         ]);
     }
     
@@ -119,10 +125,12 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('premium', [
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Premium - Lararita',
-            'description' => 'Baca Berita dan Artikel Premium di Lararita'
+            'title' => "Berita dan Artikel Premium - $siteName",
+            'description' => "Baca Berita dan Artikel Premium di $siteName"
         ]);
     }
     
@@ -142,11 +150,13 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('news', [
             'latests' => $latests,
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Terbaru - Lararita',
-            'description' => 'Baca Berita dan Artikel Terbaru di Lararita'
+            'title' => "Berita dan Artikel Terbaru - $siteName",
+            'description' => "Baca Berita dan Artikel Terbaru di $siteName"
         ]);
     }
     
@@ -169,12 +179,14 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('tag', [
             'tag' => $tag,
             'highlights' => $highlights,
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . ' - Lararita',
-            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . ' Lengkap dan Terpercaya di Lararita'
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . " - $siteName",
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . " Lengkap dan Terpercaya di $siteName"
         ]);
     }
     
@@ -186,9 +198,11 @@ class HomeController extends Controller
      */
     public function page(Page $page)
     {
+        $siteName = setting('name');
+
         return view('page', [
             'page' => $page,
-            'title' => $page->title . ' - Lararita',
+            'title' => $page->title . " - $siteName",
             'description' => $page->description
         ]);
     }

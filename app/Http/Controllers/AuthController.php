@@ -21,10 +21,12 @@ class AuthController extends Controller
     {
         $intended = $request->session()->get('url.intended');
         $intentedToCheckout = $intended && Str::contains($intended, 'subscribe');
+        
+        $siteName = setting('name');
 
         return view('login', [
-            'title' => 'Masuk atau Daftar - Lararita',
-            'description' => 'Masuk ke akun Anda untuk mendapatkan pengalaman terbaik dalam membaca berita di Lararita',
+            'title' => "Masuk atau Daftar - $siteName",
+            'description' => "Masuk ke akun Anda untuk mendapatkan pengalaman terbaik dalam membaca berita di $siteName",
             'intentedToCheckout' => $intentedToCheckout
         ]);
     }

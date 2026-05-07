@@ -14,12 +14,14 @@ class SocialLinkSeeder extends Seeder
      */
     public function run(): void
     {
+        $siteName = Str::slug(setting('name'), '_');
+
         $socials = [
-            'instagram' => 'http://instagram.com/lararita',
-            'facebook' => 'http://facebook.com/lararita',
-            'twitter' => 'http://x.com/lararita',
-            'tiktok' => 'http://tiktok.com/lararita',
-            'youtube' => 'http://youtube.com/@lararita'
+            'instagram' => "http://instagram.com/$siteName",
+            'facebook' => "http://facebook.com/$siteName",
+            'twitter' => "http://x.com/$siteName",
+            'tiktok' => "http://tiktok.com/$siteName",
+            'youtube' => "http://youtube.com/@$siteName"
         ];
 
         foreach ($socials as $social => $url) {

@@ -4,8 +4,8 @@
 <x-base.container>
     <section class="py-6 space-y-6 sm:py-8 lg:py-10">
         <div class="space-y-2">
-            <h1 class="font-bold text-3xl text-neutral-900">Berlangganan Lararita Premium</h1>
-            <p class="text-neutral-700">Dengan berlangganan lararita anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
+            <h1 class="font-bold text-3xl text-neutral-900">Berlangganan {{ setting('name') }} Premium</h1>
+            <p class="text-neutral-700">Dengan berlangganan {{ setting('name') }} anda akan mendapatkan manfaat-manfaat seperti notifikasi artikel terbaru, akses ke artikel premium, bebas iklan, dsb.</p>
         </div>
 
         <h2 class="sr-only">Manfaat Yang Didapatkan</h2>

@@ -19,10 +19,12 @@ class ProfileController extends Controller
     {
         $currentRoute = Route::currentRouteName();
 
+        $siteName = setting('name');
+
         return view('profile.index', [
             'user' => $request->user(),
             'current_route' => $currentRoute,
-            'title' => 'Profil Saya - Lararita',
+            'title' => "Profil Saya - $siteName",
             'description' => 'Detail informasi akun dan form edit profil pengguna'
         ]);
     }
@@ -72,8 +74,10 @@ class ProfileController extends Controller
             ->wherePivot('type', 'bookmark')
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('profile.bookmark', [
-            'title' => 'Baca Nanti - Lararita',
+            'title' => "Baca Nanti - $siteName",
             'description' => 'Daftar berita yang disimpan untuk dibaca nanti',
             'user' => $request->user(),
             'current_route' => $currentRoute,
@@ -100,8 +104,10 @@ class ProfileController extends Controller
             ->wherePivot('type', 'favorite')
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('profile.favourite', [
-            'title' => 'Artikel Favorit - Lararita',
+            'title' => "Artikel Favorit - $siteName",
             'description' => 'Daftar berita yang disimpan sebagai favorit',
             'user' => $request->user(),
             'current_route' => $currentRoute,
@@ -124,8 +130,10 @@ class ProfileController extends Controller
             ->latest('created_at')
             ->get();
 
+        $siteName = setting('name');
+
         return view('profile.subscription', [
-            'title' => 'Status Langganan - Lararita',
+            'title' => "Status Langganan - $siteName",
             'description' => 'Status langganan yang aktif',
             'user' => $request->user(),
             'subscriptions' => $subscriptions,
@@ -147,8 +155,10 @@ class ProfileController extends Controller
             ->unread()
             ->paginate(10);
 
+        $siteName = setting('name');
+
         return view('profile.notification', [
-            'title' => 'Status Langganan - Lararita',
+            'title' => "Status Langganan - $siteName",
             'description' => 'Status langganan yang aktif',
             'user' => $request->user(),
             'notifications' => $notifications,
