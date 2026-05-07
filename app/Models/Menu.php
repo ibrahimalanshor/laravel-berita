@@ -16,6 +16,11 @@ class Menu extends Model
                 $menu->name = $menu->category->name;
                 $menu->url = route('category.detail', ['category' => $menu->category]);
             }
+
+            if ($menu->page) {
+                $menu->name = $menu->page->title;
+                $menu->url = route('page.detail', ['page' => $menu->page]);
+            }
         });
     }
     
@@ -27,5 +32,15 @@ class Menu extends Model
     public function category()
     {
         return $this->belongsTo(ArticleCategory::class);
+    }
+    
+    /**
+     * page
+     *
+     * @return void
+     */
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
     }
 }

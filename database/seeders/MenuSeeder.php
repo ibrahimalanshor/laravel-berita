@@ -40,8 +40,7 @@ class MenuSeeder extends Seeder
         foreach ($footerPageMenus as $page) {
             Menu::create([
                 'type' => 'footer_page',
-                'name' => $page->title,
-                'url' => route('page.detail', ['page' => $page->slug])
+                'page_id' => $page->id
             ]);
         }
     }
