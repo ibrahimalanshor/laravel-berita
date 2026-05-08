@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Observers\ArticleObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Xendit\Configuration;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Article::observe(ArticleObserver::class);
+
+        Configuration::setXenditKey(config('services.xendit.api_key'));
     }
 }
