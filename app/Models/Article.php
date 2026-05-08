@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Support\StructuredData\Features\ArticleFeature;
+use App\Support\StructuredData\Features\Article as ArticleFeature;
 use App\Support\StructuredData\Features\Feature;
 use App\Support\StructuredData\SchemaReady;
 use Illuminate\Database\Eloquent\Builder;

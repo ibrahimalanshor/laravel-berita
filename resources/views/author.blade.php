@@ -3,7 +3,7 @@
 @section('content')
 <article class="py-6 space-y-4 max-w-prose mx-auto px-4 sm:py-8 lg:py-10">
     <div class="flex items-center gap-6">
-        <img src="{{ $author->image_url }}" alt="{{ $author->name }}" class="w-20 h-20 object-cover rounded-full shrink-0" />
+        <img src="{{ $author->image_url ?? asset('avatar.svg') }}" alt="{{ $author->name }}" class="w-20 h-20 object-cover rounded-full shrink-0" />
         <div class="space-y-2">
             <h1 class="font-bold text-neutral-900 text-3xl">{{ $author->name }}</h1>
             <div class="flex gap-2">

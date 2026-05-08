@@ -225,7 +225,8 @@ class HomeController extends Controller
             'author' => $author,
             'articles' => $articles,
             'title' => 'Profil dan Tulisan dari ' . $author->name,
-            'description' => 'Profil Penulis dan Berita Tulisan dari ' . $author->name . ' Terbaru'
+            'description' => 'Profil Penulis dan Berita Tulisan dari ' . $author->name . ' Terbaru',
+            'structuredData' => $author
         ]);
     }
     

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Support\StructuredData\Features\Feature;
-use App\Support\StructuredData\Features\PageFeature;
+use App\Support\StructuredData\Features\Page as PageFeature;
 use App\Support\StructuredData\SchemaReady;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

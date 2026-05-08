@@ -2,7 +2,7 @@
 
 namespace App\Support\StructuredData\Features;
 
-class PageFeature extends Feature
+class Page extends Feature
 {
     public function __construct(
         protected string $name,

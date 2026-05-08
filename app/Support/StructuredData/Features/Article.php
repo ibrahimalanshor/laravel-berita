@@ -2,10 +2,9 @@
 
 namespace App\Support\StructuredData\Features;
 
-use App\Support\StructuredData\Features\Feature;
 use DateTime;
 
-class ArticleFeature extends Feature
+class Article extends Feature
 {
     
     public function __construct(
