@@ -120,7 +120,8 @@ class Article extends Model implements Sitemapable, SchemaReady
                     'name' => $this->category->name,
                     'item' => route('category.detail', ['category' => $this->category])
                 ]
-            ]
+            ],
+            paywallSelector: $this->premium ? '.premium' : null
         );
     }
 

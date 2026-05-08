@@ -16,7 +16,8 @@ class Article extends Feature
         protected DateTime $publishedDate,
         protected DateTime $modifiededDate,
         protected array $authors,
-        protected array $breadcrumbs
+        protected array $breadcrumbs,
+        protected ?string $paywallSelector = null
     ) {}
 
     public function details(): array
@@ -50,6 +51,19 @@ class Article extends Feature
                         ...$breadcrumb
                     ];
                 })
+            ],
+            ...($this->paywallSelector ? $this->paywall() : [])
+        ];
+    }
+
+    public function paywall(): array
+    {
+        return [
+            'isAccessibleForFree' => false,
+            'hasPart' => [
+                '@type' => 'WebPageElement',
+                'isAccessibleForFree' => false,
+                'cssSelector'=> $this->paywallSelector
             ]
         ];
     }

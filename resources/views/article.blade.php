@@ -39,7 +39,7 @@
 
                 <div @class([
                     'prose prose-neutral prose-a:text-red-700 max-w-none',
-                    'line-clamp-[10] relative' => $article->premium && (!$subscription || $subscription->expired)
+                    'line-clamp-[10] relative premium' => $article->premium && (!$subscription || $subscription->expired)
                 ])>
                     {!! $article->content !!}
 
