@@ -203,7 +203,8 @@ class HomeController extends Controller
         return view('page', [
             'page' => $page,
             'title' => $page->title . " - $siteName",
-            'description' => $page->description
+            'description' => $page->description,
+            'structuredData' => $page
         ]);
     }
     
