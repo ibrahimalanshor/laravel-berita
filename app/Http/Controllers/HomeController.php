@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\Models\Page;
 use App\Models\Tag;
 use App\Support\StructuredData\Features\CollectionPage;
+use App\Support\StructuredData\Features\Organization;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -52,14 +53,22 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
-        return view('index', [
+        $meta = [
             'title' => "$siteName - Berita Terkini, Trending dan Terpercaya",
-            'description' => "$siteName - Berita Indonesia dan Dunia Terkini Hari Ini, Kabar Harian Terbaru Terpercaya Terlengkap Seputar Politik, Ekonomi, Travel, Teknologi, Otomotif, Bola",
+            'description' => "$siteName - Berita Indonesia dan Dunia Terkini Hari Ini, Kabar Harian Terbaru Terpercaya Terlengkap Seputar Politik, Ekonomi, Travel, Teknologi, Otomotif, Bola"
+        ];
+
+        $organizationSchema = new Organization($meta['title'], $meta['description']);
+
+        return view('index', [
+            'title' => $meta['title'],
+            'description' => $meta['description'],
             'highlights' => $highlights,
             'flash' => $flash,
             'editors' => $editors,
             'categories' => $categories,
-            'premiumArticles' => $premiumArticles
+            'premiumArticles' => $premiumArticles,
+            'structuredData' => $organizationSchema
         ]);
     }
     
