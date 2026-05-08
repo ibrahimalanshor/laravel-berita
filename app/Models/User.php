@@ -71,4 +71,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(CommentReaction::class);
     }
+    
+    /**
+     * subscriptionPayments
+     *
+     * @return void
+     */
+    public function subscriptionPayments()
+    {
+        return $this->hasMany(SubscriptionPayment::class);
+    }
 }

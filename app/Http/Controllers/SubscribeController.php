@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubscriptionPackage;
 use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,10 +60,14 @@ class SubscribeController extends Controller
             'period' => ['required', 'in:month,year']
         ]);
 
-        $subscriptionService->subscribe($user, $request->input('period'));
+        $payment = $subscriptionService->createPayment($user, $request->input('period'));
 
-        return redirect()
-            ->route('home')
-            ->with('message', 'Berlangganan berhasil! Nikmati manfaatnya sekarang.');
+        return redirect($payment->invoice_url);
+
+        // $subscriptionService->subscribe($user, $request->input('period'));
+
+        // return redirect()
+        //     ->route('home')
+        //     ->with('message', 'Berlangganan berhasil! Nikmati manfaatnya sekarang.');
     }
 }
