@@ -85,6 +85,7 @@ class ArticleController extends Controller
             'editorArticles' => $editorArticles,
             'packages' => $packages,
             'subscription' => $subscription,
+            'structuredData' => $article
         ]);
     }
     

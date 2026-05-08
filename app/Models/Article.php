@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Support\StructuredData\Features\ArticleFeature;
+use App\Support\StructuredData\Features\Feature;
+use App\Support\StructuredData\SchemaReady;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,7 +12,7 @@ use Laravel\Scout\Searchable;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
 
-class Article extends Model implements Sitemapable
+class Article extends Model implements Sitemapable, SchemaReady
 {            
     use Searchable;
 
@@ -85,6 +88,40 @@ class Article extends Model implements Sitemapable
     {
         return Url::create(route('article.detail', $this))
             ->setLastModificationDate($this->published_at);
+    }
+    
+    /**
+     * toSchema
+     *
+     * @return Feature
+     */
+    public function toSchema(): Feature
+    {
+        return new ArticleFeature(
+            headline: $this->title,
+            description: $this->summary,
+            url: route('article.detail', ['article' => $this]),
+            articleSection: $this->category->name,
+            images: [
+                $this->thumbnails['original'],
+                $this->thumbnails['16x9'][1200],
+                $this->thumbnails['16x9'][800],
+            ],
+            publishedDate: $this->published_at,
+            modifiededDate: $this->updated_at,
+            authors: [
+                [
+                    'name' => $this->author->name,
+                    'url' => route('author.detail', ['author' => $this->author])
+                ]
+            ],
+            breadcrumbs: [
+                [
+                    'name' => $this->category->name,
+                    'item' => route('category.detail', ['category' => $this->category])
+                ]
+            ]
+        );
     }
 
     /**

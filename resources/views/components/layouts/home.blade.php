@@ -6,9 +6,9 @@
 
         <title>{{ $title ?? setting('name') }}</title>
 
-        @if (isset($description))
+        @isset($description)
             <meta name="description" content="{{ $description }}">
-        @endif
+        @endisset
 
         <meta name="author" content="{{ $author ?? setting('name') }}">
         <meta name="robots" content="{{ $robots ?? 'index, follow' }}">
@@ -28,6 +28,10 @@
         <link rel="canonical" href="{{ url()->current() }}">
 
         <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
+
+        @isset($structuredData)
+            {!! generateStructuredData($structuredData) !!}
+        @endisset
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\StructuredData\SchemaReady;
+use App\Support\StructuredData\StructuredData;
 use Illuminate\Support\Carbon;
 
 /**
@@ -39,4 +41,9 @@ function formatDate(string $date, string $format = 'l, d M Y'): string
     }
 
     return $dateTime->locale('id')->diffForHumans();
+}
+
+function generateStructuredData(SchemaReady $schema): string
+{
+    return StructuredData::generate($schema->toSchema());
 }
