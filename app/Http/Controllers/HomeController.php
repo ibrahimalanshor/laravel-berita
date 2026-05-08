@@ -7,6 +7,7 @@ use App\Models\ArticleCategory;
 use App\Models\Author;
 use App\Models\Page;
 use App\Models\Tag;
+use App\Support\StructuredData\Features\CollectionPage;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -83,12 +84,25 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
+        $meta = [
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . " - $siteName",
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . " Lengkap dan Terpercaya di $siteName",
+        ];
+
+        $articleCollection = new CollectionPage(
+            name: $meta['title'],
+            description: $meta['description'],
+            url: url()->current(),
+            items: $articles->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])->toArray()
+        );
+
         return view('category', [
             'category' => $category,
             'highlights' => $highlights,
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Terbaru Seputar ' . $category->name . " - $siteName",
-            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $category->name . " Lengkap dan Terpercaya di $siteName"
+            'title' => $meta['title'],
+            'description' => $meta['description'],
+            'structuredData' => $articleCollection
         ]);
     }
     
@@ -106,10 +120,23 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
-        return view('featured', [
-            'articles' => $articles,
+        $meta = [
             'title' => "Berita dan Artikel Pilihan Editor - $siteName",
             'description' => "Baca Berita dan Artikel Pilihan Editor di $siteName"
+        ];
+
+        $articleCollection = new CollectionPage(
+            name: $meta['title'],
+            description: $meta['description'],
+            url: url()->current(),
+            items: $articles->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])->toArray()
+        );
+
+        return view('featured', [
+            'articles' => $articles,
+            'title' => $meta['title'],
+            'description' => $meta['description'],
+            'structuredData' => $articleCollection
         ]);
     }
     
@@ -127,10 +154,23 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
-        return view('premium', [
-            'articles' => $articles,
+        $meta = [
             'title' => "Berita dan Artikel Premium - $siteName",
             'description' => "Baca Berita dan Artikel Premium di $siteName"
+        ];
+
+        $articleCollection = new CollectionPage(
+            name: $meta['title'],
+            description: $meta['description'],
+            url: url()->current(),
+            items: $articles->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])->toArray()
+        );
+
+        return view('premium', [
+            'articles' => $articles,
+            'title' => $meta['title'],
+            'description' => $meta['description'],
+            'structuredData' => $articleCollection
         ]);
     }
     
@@ -152,11 +192,30 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
+        $meta = [
+            'title' => "Berita dan Artikel Terbaru - $siteName",
+            'description' => "Baca Berita dan Artikel Terbaru di $siteName"
+        ];
+
+        $articleCollection = new CollectionPage(
+            name: $meta['title'],
+            description: $meta['description'],
+            url: url()->current(),
+            items: $latests
+                ->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])
+                ->merge(
+                    $articles
+                        ->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])
+                )
+                ->toArray()
+        );
+
         return view('news', [
             'latests' => $latests,
             'articles' => $articles,
-            'title' => "Berita dan Artikel Terbaru - $siteName",
-            'description' => "Baca Berita dan Artikel Terbaru di $siteName"
+            'title' => $meta['title'],
+            'description' => $meta['description'],
+            'structuredData' => $articleCollection
         ]);
     }
     
@@ -181,12 +240,25 @@ class HomeController extends Controller
 
         $siteName = setting('name');
 
+        $meta = [
+            'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . " - $siteName",
+            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . " Lengkap dan Terpercaya di $siteName"
+        ];
+
+        $articleCollection = new CollectionPage(
+            name: $meta['title'],
+            description: $meta['description'],
+            url: url()->current(),
+            items: $articles->map(fn ($article) => ['name' => $article->title, 'url' => route('article.detail', ['article' => $article])])->toArray()
+        );
+
         return view('tag', [
             'tag' => $tag,
             'highlights' => $highlights,
             'articles' => $articles,
-            'title' => 'Berita dan Artikel Terbaru Seputar ' . $tag->name . " - $siteName",
-            'description' => 'Baca Berita dan Artikel Terbaru Seputar ' . $tag->name . " Lengkap dan Terpercaya di $siteName"
+            'title' => $meta['title'],
+            'description' => $meta['description'],
+            'structuredData' => $articleCollection
         ]);
     }
     
@@ -204,7 +276,7 @@ class HomeController extends Controller
             'page' => $page,
             'title' => $page->title . " - $siteName",
             'description' => $page->description,
-            'structuredData' => $page
+            'structuredData' => $page->toSchema()
         ]);
     }
     
@@ -226,7 +298,7 @@ class HomeController extends Controller
             'articles' => $articles,
             'title' => 'Profil dan Tulisan dari ' . $author->name,
             'description' => 'Profil Penulis dan Berita Tulisan dari ' . $author->name . ' Terbaru',
-            'structuredData' => $author
+            'structuredData' => $author->toSchema()
         ]);
     }
     

@@ -28,7 +28,6 @@ class CreateSitemap extends Command
             ->add(Url::create('/pilihan-editor')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY))
             ->add(Url::create('/premium')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY))
             ->add(Url::create('/subscribe')->setPriority(0.1)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create('/subscribe')->setPriority(0.1)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
             ->add(Article::whereNotNull('published_at')->get())
             ->add(ArticleCategory::whereNotNull('published_at')->get())
             ->add(Page::whereNotNull('published_at')->get())
