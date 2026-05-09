@@ -30,13 +30,14 @@ function setting(string $key): ?string
  *
  * @param  mixed $date
  * @param  mixed $format
+ * @param  mixed $relative
  * @return string
  */
-function formatDate(string $date, string $format = 'l, d M Y'): string
+function formatDate(string $date, string $format = 'l, d M Y', bool $relative = true): string
 {
     $dateTime = Carbon::parse($date);
 
-    if ($dateTime->diffInDays() > 1) {
+    if ($dateTime->diffInDays() > 1 || !$relative) {
         return $dateTime->format($format);
     }
 

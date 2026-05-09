@@ -26,7 +26,7 @@
             <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
                 <div>
                     <h2 class="font-bold text-lg text-neutral-900">Premium {{ $user->subscription->period === 'month' ? 'Bulanan' : 'Tahunan' }}</h2>
-                    <p class="text-neutral-700 text-sm">Aktif sampai {{ formatDate($user->subscription->end_at, 'd F Y') }}</p>
+                    <p class="text-neutral-700 text-sm">Aktif sampai {{ formatDate($user->subscription->end_at, 'd F Y', false) }}</p>
                 </div>
                 <p class="text-red-700 font-bold text-xl sm:text-2xl">{{ number_format($user->subscription->price) }}/{{ $user->subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
             </div>
@@ -57,7 +57,7 @@
                         <h3 class="font-medium text-neutral-900 flex items-center">
                             Premium {{ $subscription->period === 'month' ? 'Bulanan' : 'Tahunan' }}
                         </h3>
-                        <p class="text-sm text-neutral-500">{{ formatDate($subscription->start_at, 'd F Y') }} s.d {{ $subscription->end_at ? formatDate($subscription->end_at, 'd F Y') : '-' }}</p>
+                        <p class="text-sm text-neutral-500">{{ formatDate($subscription->start_at, 'd F Y', false) }} s.d {{ $subscription->end_at ? formatDate($subscription->end_at, 'd F Y', false) : '-' }}</p>
                     </div>
                     <p class="font-bold text-lg text-red-700">{{ number_format($subscription->price) }}/{{ $subscription->period === 'month' ? 'bulan' : 'tahun' }}</p>
                 </div>
