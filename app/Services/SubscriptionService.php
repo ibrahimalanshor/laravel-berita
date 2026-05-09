@@ -52,6 +52,7 @@ class SubscriptionService
                 'description' => 'Pembayaran Langganan ' . setting('name') . ($period === 'month' ? ' Bulanan' : ' Tahunan'),
                 'currency' => 'IDR',
                 'invoice_duration' => 15 * 60 * 60,
+                'success_redirect_url' => route('home')
             ]));
 
         return $user->subscriptionPayments()
