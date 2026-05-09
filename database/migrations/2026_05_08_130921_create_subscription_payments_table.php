@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('package_period', ['month', 'year']);
             $table->decimal('amount', 8, 2);
             $table->string('invoice_url')->unique();
+            $table->timestamp('paid_at')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
