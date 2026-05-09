@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\SubscriptionPayment;
 use App\Models\SubscriptionPackage;
 use App\Models\User;
+use App\Notifications\SubscriptionCreated;
 use Illuminate\Support\Str;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\InvoiceApi;
@@ -23,12 +24,14 @@ class SubscriptionService
         $startAt = now();
         $package = SubscriptionPackage::first();
 
-        $user->subscription()->create([
+        $subscription = $user->subscription()->create([
             'price' => $period === 'month' ? $package->monthly_price : $package->yearly_price,
             'period' => $period,
             'start_at' => $startAt,
             'end_at' => $startAt->copy()->add(1, $period)->endOfDay()
         ]);
+
+        $user->notify(new SubscriptionCreated($subscription));
     }
     
     /**

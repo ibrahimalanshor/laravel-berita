@@ -18,12 +18,14 @@
             $icons = [
                 'App\Notifications\CommentReacted' => 'icon-[tabler--thumb-up-filled]',
                 'App\Notifications\CommentReplied' => 'icon-[tabler--bubble-text-filled]',
-                'App\Notifications\SubscriptionExpired' => 'icon-[tabler--credit-card-filled]'
+                'App\Notifications\SubscriptionExpired' => 'icon-[tabler--credit-card-filled]',
+                'App\Notifications\SubscriptionCreated' => 'icon-[tabler--credit-card-off-filled]'
             ];
             $iconColors = [
                 'App\Notifications\CommentReacted' => 'bg-blue-100 text-blue-600',
                 'App\Notifications\CommentReplied' => 'bg-green-100 text-green-600',
-                'App\Notifications\SubscriptionExpired' => 'bg-yellow-100 text-yellow-600'
+                'App\Notifications\SubscriptionExpired' => 'bg-yellow-100 text-yellow-600',
+                'App\Notifications\SubscriptionCreated' => 'bg-green-100 text-green-600'
             ];
         @endphp
         @forelse ($notifications as $notification)
@@ -59,6 +61,8 @@
                                     "{{ $notification->data['content'] }}".
                                 </span>
                             </{{ $notification->read() ? 'a' : 'p' }}>
+                        @elseif ($notification->type === 'App\Notifications\SubscriptionCreated')
+                            <{{ $notification->read() ? 'a href="' . $link . '"' : 'p' }} class="text-neutral-700">Langganan premium {{ $notification->data['period'] === 'month' ? 'bulanan' : 'tahunan' }} telah aktif, nikmati manfaatnya.</{{ $notification->read() ? 'a' : 'p' }}>
                         @else
                             <{{ $notification->read() ? 'a href="' . $link . '"' : 'p' }} class="text-neutral-700">Langganan premium {{ $notification->data['period'] === 'month' ? 'bulanan' : 'tahunan' }} anda akan habis besok. Segera perpanjang.</{{ $notification->read() ? 'a' : 'p' }}>
                         @endif
