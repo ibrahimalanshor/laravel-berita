@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             MenuSeeder::class,
             SocialLinkSeeder::class,
-            SubscriptionPackageSeeder::class
+            SubscriptionPackageSeeder::class,
+            UserSeeder::class
         ]);
     }
 }
