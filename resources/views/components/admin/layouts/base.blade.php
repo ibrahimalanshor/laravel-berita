@@ -26,6 +26,14 @@
                         confirmButtonText: 'Tutup'
                     })
                 @endif
+
+                @if (session('error'))
+                    Swal.fire({
+                        title: '{{ session('error') }}',
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    })
+                @endif
             })
         </script>
 

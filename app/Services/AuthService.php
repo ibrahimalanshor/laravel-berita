@@ -30,7 +30,8 @@ class AuthService
                 'name' => $socialUser->name,
                 'email' => $socialUser->email,
                 'email_verified_at' => now(),
-                'avatar_url' => $avatar
+                'avatar_url' => $avatar,
+                'role' => 'user'
             ]);
         }
         
