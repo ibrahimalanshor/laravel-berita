@@ -21,14 +21,6 @@ class Setting extends Model
     {
         static::saved(function (Setting $setting) {
             Cache::forget('setting');
-            Cache::rememberForever('setting', function () use ($setting) {
-                return [
-                    'logo_url' => $setting->logo_url,
-                    'icon_url' => $setting->icon_url,
-                    'banner_url' => $setting->banner_url,
-                    'name' => $setting->name
-                ];
-            });
         });
     }
 }
