@@ -19,7 +19,7 @@
                 'App\Notifications\CommentReacted' => 'icon-[tabler--thumb-up-filled]',
                 'App\Notifications\CommentReplied' => 'icon-[tabler--bubble-text-filled]',
                 'App\Notifications\SubscriptionExpired' => 'icon-[tabler--credit-card-filled]',
-                'App\Notifications\SubscriptionCreated' => 'icon-[tabler--credit-card-off-filled]'
+                'App\Notifications\SubscriptionCreated' => 'icon-[tabler--credit-card-off]'
             ];
             $iconColors = [
                 'App\Notifications\CommentReacted' => 'bg-blue-100 text-blue-600',
