@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? setting('name') }}</title>
+        <title>{{ setting('name') }} - {{ $title }}</title>
 
         <link rel="icon" type="image/png" sizes="16x16" href="{{ setting('icon_url') }}">
 
