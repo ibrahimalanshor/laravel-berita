@@ -1,5 +1,5 @@
-<aside class="bg-neutral-900 text-white w-72 h-screen">
-    <div class="border-b border-neutral-800 h-14 flex items-center justify-center">
+<aside id="sidebar" class="bg-neutral-900 text-white w-72 h-screen hidden fixed top-0 left-0 z-20 lg:block" data-click-outside-close="drawer" data-ignore=".open-sidebar">
+    <div class="border-b border-neutral-800 h-14 flex items-center justify-center lg:h-16">
         <img src="{{ setting('logo_url') }}" alt="{{ setting('name') }}" class="max-h-8">
     </div>
     <div class="p-4 space-y-1">
